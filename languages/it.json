@@ -1,0 +1,264 @@
+{
+  "Index": {
+    "title": "Salve, mondo!"
+  },
+  "dashboard": {
+    "title": "Pannello di controllo"
+  },
+  "Login": {
+    "title": "Salve, mondo!",
+    "Welcome": "Benvenuto/a!",
+    "Enter you details to acess the platform": " Inserisci i tuoi dati per iscriverti alla nostra piattaforma.",
+    "Email": "Inserisci qui la tua email",
+    "Password": "Password",
+    "Forgot Password?": "Password dimenticata?",
+    "Login": "Iscriviti",
+    "Don't have an account?": "Non hai ancora un account?",
+    "Don't have an account as doctor?": "Non hai ancora un account Dottore?",
+    "Sign up": "Iscriviti"
+  },
+  "SignUp": {
+    "First Name": "First Name",
+    "Last Name": "Last Name",
+    "Email": "E-mail",
+    "Password": "Password",
+    "Phone number": "Cellulare",
+    "Who you are?": "Come vuoi accedere?",
+    "We need to determine your role. This will help us to build a reliable system together.": "Questa scelta ti permetterà di usufruire delle funzionalità specifiche e dei servizi personalizzati offerti dalla nostra piattaforma.",
+    "Select User Type": "Seleziona il tipo di utente",
+    "Forget Password?": "Password dimenticata?",
+    "Cancel": "Annulla",
+    "Next": "Iscriviti",
+    "Patient": "Paziente",
+    "Doctor": "Dottore",
+    "Welcome": "Benvenuto/a!",
+    "Enter you details to acess the platform": " Inserisci i tuoi dati per iscriverti alla nostra piattaforma."
+  },
+  "Profile": {
+    "First Name": "First Name",
+    "Last Name": "Last Name",
+    "Email": "E-mail",
+    "Phone Number": "Cellulare",
+    "Location": "Indirizzo",
+    "Postal Code": "Codice postale",
+    "Date of birth": "Data di nascita",
+    "Sex": "Sesso",
+    "Change Photo": "Cambia foto",
+    "Delete Photo": "Rimuovi foto"
+  },
+  "Forget": {
+    "Forget Password": "Password dimenticata",
+    "Don't worry we can help out if you still remember your email address you can quickly reset your password.": "Non preoccuparti. Se non ricordi la tua password puoi resettarla tramite e-mail.",
+    "Request Password Change": "Cambia la tua password"
+  },
+  "VerifyOtp": {
+    "OTP Authentication": "Autenticazione OTP",
+    "Please enter the four digit verification code we have sent on your email.": "Inserisci qui le cifre del codice OTP che hai ricevuto nella tua casella di posta elettronica",
+    "Verify OTP": "Verifica con codice OTP",
+    "OTP verified successfully!": "Codice OTP verificato con successo",
+    "Error verifying OTP": "Errore di verifica codice OTP"
+  },
+  "ChangePassword": {
+    "Change password": "Cambia password",
+    "Input new desired password in the input fields below to create a new password.": "Inserisci la tua nuova password",
+    "Confirm password": "Conferma password",
+    "Passwords do not match!": "Le password che hai inserito non corrispondono",
+    "Password changed successfully!": "La tua password è stata cambiata con successo!"
+  },
+  "PatientNavBar": {
+    "Dashboard": "Dashboard",
+    "Favorite Doctors": "Preferiti",
+    "Appointments": "Appuntamenti",
+    "Payment": "Pagamenti",
+    "Profile": "Profilo",
+    "Settings": " Impostazioni",
+    "Sign out": "Log out"
+  },
+  "MedicalSection": {
+    "Search Now": "Cerca",
+    "Specialist": "Specializzazioni"
+  },
+  "DoctorCard": {
+    "Book Now": "Prenota"
+  },
+  "Payment": {
+    "Paid": "Pagato"
+  },
+  "ConfirmedDoctor": {
+    "Appointment date": "Data Appuntamento",
+    "Cancel": "Annulla",
+    "Consult Now": "Contattaci"
+  },
+  "AppointmentTabs": {
+    "Select Hour": "Seleziona l'ora"
+  },
+  "profileCard": {
+    "Book Appointment": "Prenota un appuntamento",
+    "Reviews about": "Recensioni about"
+  },
+  "DoctorDetailsPage": {
+    "Book Appointment": "Prenota un appuntamento",
+    "Overview": "Panoramica",
+    "Reviews": "Recensioni",
+    "About Me": "About Me",
+    "Education": "Educazione",
+    "Work & Experience": "Esperienze lavorative",
+    "Awards": "Premi"
+  },
+  "Setting": {
+    "Setting": "Impostazioni",
+    "My Profile": "Il mio profilo",
+    "Language": "Lingua",
+    "Terms & Condition": "Termini e condizioni",
+    "Privacy Policy": "Privacy Policy",
+    "Select Your Language": "Seleziona la tua lingua",
+    "Save Setting": "Salva Impostazioni"
+  },
+  "DoctorDashboard": {
+    "Slots": "Agenda",
+    "Appointments": "Appuntamenti",
+    "Search Patient": "Cerca paziente",
+    "Search Now": "Cerca",
+    "Total Patients": "Totale Pazienti",
+    "Total Doctors": "Totale Appuntamenti",
+    "Total Income": "Totale Fatture",
+    "Appointment Request": "Richieste di Appuntamenti",
+    "Declined": "Rifiuta",
+    "Confirmed": "Conferma",
+    "Today Appointments": "Appuntamenti Giornalieri",
+    "See all": "Visualizza tutti",
+    "OnGoing": "Ora",
+    "Recent Patients": "Lista Pazienti",
+    "Patient Name": "Nome Paziente",
+    "Visit ID": "ID Visita",
+    "Date": "Data",
+    "Gender": "Sesso",
+    "Disease": "Visita",
+    "Status": "Stato",
+    "Out Patient": "Effettuato",
+    "ID": "ID",
+    "Patient": "Paziente",
+    "Appointment Date": "Data Appuntamento",
+    "Booking date": "Data Prenotazione",
+    "Amount": "Pagamento",
+    "Upcoming": "Programmato",
+    "Done Appointments": "Appuntamenti effettuati",
+    "Appointments Scheduled": "In programma",
+    "Select Hour": "Agenda",
+    "Availale": "Tariffe Prestazioni",
+    "Visit": "Prima visita",
+    "Follow up": "Visita ddi controlleer",
+    "Currency": "Currenacy",
+    "Set Session & Payments": "Seleziona disponiilita",
+    "Save Changes": "Salva",
+    "No appointment found": "Nessun appuntamento trovato"
+  },
+  "Notifications": {
+    "Notifications": "Notifiche",
+    "Today": "Oggi",
+    "Video Call": "Televisita "
+  },
+  "DoctorProfile": {
+    "Change Photo": "Cambia foto",
+    "Delete Photo": "Elimina foto",
+    "Edit Profile": "Modifica profilo",
+    "Digital Signature": "Firma digitalizzata",
+    "FirstName": "Nome",
+    "LastName": "Cognome",
+    "Address": "Indirizzo",
+    "Location": "Città",
+    "PhoneNumber": "Cellulare",
+    "Dob": "Data di nascita",
+    "Sex": "Sesso",
+    "Signup as Doctor": "Iscriviti come Dottore",
+    "Fill the form to get started": "Riempi il Form per l’iscrizione.",
+    "Email Address": "E-mal",
+    "Postal Code": "Codice postale",
+    "Date Of Birth": "Data di nascita",
+    "Year Of Study": "Anni di studio",
+    "Special Recognition": "Riconoscimenti speciali",
+    "Office And Hospital Address": "ndirizzo Studio Medico/Ospedale",
+    "Specialties": "Specializzazioni",
+    "Upload Your CV": "Carica il tuo CV",
+    "Drag and drop files or Browse": "Trascina o Carica file dal tuo computer",
+    "Save Change": "Salva",
+    "Male": "Uomo",
+    "Female": "Donna",
+    "Select Option": " Seleziona specializzazione",
+    "View now": "Vedi ora"
+  },
+  "DoctorHomePage": {
+    "Appointment Request": "Richieste di appuntamenti ",
+    "See all": "Vedi tutto ",
+    "Declined": "Declina ",
+    "Confirmed": "Conferma",
+    "Today Appointments": "Appuntamenti del giorno ",
+    "Ongoing": "In corso ",
+    "Recent Patients": "Ultimi pazienti",
+    "Patient Name": "Nome Paziente",
+    "Visit ID": "ID Visita",
+    "Date": "Data",
+    "Gender": "Sesso",
+    "Disease": "Diagnosi",
+    "Status": "Status"
+  },
+  "Doctor-Dashboard": {
+    "Dashboard": "Dashboard",
+    "Slot": "Agenda",
+    "Appointments": "Appuntamenti",
+    "Search Patient": "Cerca paziente... ",
+    "Search Now": "Cerca",
+    "Total Patient": "Totale Pazienti",
+    "Total Appointments": "Totale Appuntamenti",
+    "Total Income": "Fatturato",
+    "Profile": "Profilo",
+    "signout": "Logout",
+    "Setting": "Impostazioni"
+  },
+  "Slots": {
+    "Slots": "Agenda",
+    "First visit": "Prima visita",
+    "Follow up": "Visita di controllo",
+    "Choose Slot": "Agenda",
+    "Select Hour": "Seleziona disponibilità",
+    "Set Session & Payment": "Listino",
+    "Currency": "Currency",
+    "Save Changes": "Salva"
+  },
+  "DoctorAppointments": {
+    "Appointment held": "Conclusi",
+    "Appointment scheduled": "In programma",
+    "Appointment date": "Data Appuntamento",
+    "View Profile": "Profilo",
+    "Address": "Indirizzo",
+    "Gender": "Sesso",
+    "Date of birth": "Data di nascita",
+    "City": "Città",
+    "Phone Number": "Cellulare",
+    "Cancel": "Annulla",
+    "Postal code": "Codice postale",
+    "Start a video call": "Televisita"
+  },
+  "Doctor Sign up": {
+    "Signup as Doctor": "Iscriviti come Dottore",
+    "Fill the form to get started": "Riempi il Form per l’iscrizione.",
+    "First Name": "Nome",
+    "Last Name": "Cognome",
+    "Email Address": "E-mal",
+    "Location": "Città",
+    "Phone Number": "Cellulare",
+    "Postal Code": "Codice postale",
+    "Sex": "Sesso",
+    "Date Of Birth": "Data di nascita",
+    "Year Of Study": "Anni di studio",
+    "Special Recognition": "Riconoscimenti speciali",
+    "Office And Hospital Address": "ndirizzo Studio Medico/Ospedale",
+    "Specialties": "Specializzazioni",
+    "Upload Your CV": "Carica il tuo CV",
+    "Drag and drop files or Browse": "Trascina o Carica file dal tuo computer",
+    "Save Change": "Salva",
+    "Male": "Uomo",
+    "Female": "Donna",
+    "Select Option": " Seleziona specializzazione"
+  }
+}

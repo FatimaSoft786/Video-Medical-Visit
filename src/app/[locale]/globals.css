@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply leading-[normal] m-0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.table-head:nth-child(2) {
+  text-align: center !important;
+}
+
+.custom-pagination {
+  position: absolute;
+  bottom: 10px;
+  right: 40px;
+}
+.custom-pagination > * {
+  height: 30px;
+  width: 30px;
+  padding: 6px;
+  background: transparent !important;
+  color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: all 0.3s ease-in-out;
+  @apply border-2 border-dark-blue;
+}
+.custom-pagination > *:hover {
+  background: #fff;
+}
+
+.custom-pagination .active {
+  background: #fff !important;
+}
+.border-rounded {
+  border-radius: 999px 12px 12px 999px !important;
+}
+
+.swiper-pagination-bullet-active {
+  @apply !bg-dark-blue;
+}
+
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.embla__slide {
+  flex: 0 0 auto;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  width: 80%;
+}
+
+/* styles.css */
+.slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px; /* Adjust width to match the design */
+  height: 60px; /* Adjust height to match the design */
+  border: 2px solid #d1d5db; /* Default border color */
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.slot-selected {
+  background-color: #1e3a8a; /* Dark blue background */
+  color: #ffffff; /* White text */
+  border-color: #1e3a8a; /* Dark blue border */
+}
+
+.slot-default {
+  background-color: #f9fafb;
+  color: #000000;
+  border-color: #d1d5db;
+}
+
+.slot-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+/*  */
+
+#home-grid-icons:nth-child(7) {
+  grid-column: span 1;
+}
