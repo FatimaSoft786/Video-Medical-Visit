@@ -1,12 +1,10 @@
 {
-  "Index": {
-    "title": "Salve, mondo!"
-  },
   "dashboard": {
     "title": "Pannello di controllo"
   },
   "Login": {
     "title": "Salve, mondo!",
+    "Login Successful": "Accesso riuscito",
     "Welcome": "Benvenuto/a!",
     "Enter you details to acess the platform": " Inserisci i tuoi dati per iscriverti alla nostra piattaforma.",
     "Email": "Inserisci qui la tua email",
@@ -15,16 +13,22 @@
     "Login": "Iscriviti",
     "Don't have an account?": "Non hai ancora un account?",
     "Don't have an account as doctor?": "Non hai ancora un account Dottore?",
-    "Sign up": "Iscriviti"
+    "Sign up": "Iscriviti",
+    "Unknown role": "Ruolo sconosciuto",
+    "Failed to log in.Please check your credentials.": " Accesso non riuscito. Controlla le tue credenziali.",
+    "Failed to fetch user details.": "Impossibile recuperare i dettagli dell'utente",
+    "An error occurred while trying to log in. Please try again.": "Si è verificato un errore durante il tentativo di accesso. Per favore, riprova."
   },
   "SignUp": {
-    "First Name": "First Name",
-    "Last Name": "Last Name",
+    "First Name": "Nome",
+    "Last Name": "Cognome",
     "Email": "E-mail",
     "Password": "Password",
+    "Sign up": "Registrazione",
     "Phone number": "Cellulare",
     "Who you are?": "Come vuoi accedere?",
-    "We need to determine your role. This will help us to build a reliable system together.": "Questa scelta ti permetterà di usufruire delle funzionalità specifiche e dei servizi personalizzati offerti dalla nostra piattaforma.",
+    "Enter your details to access the platform": "Inserisci i tuoi dati per accedere alla piattaforma",
+    "We need to determine your role This will help us to build a reliable system together": "Questa scelta ti permetterà di usufruire delle funzionalità specifiche e dei servizi personalizzati offerti dalla nostra piattaforma.",
     "Select User Type": "Seleziona il tipo di utente",
     "Forget Password?": "Password dimenticata?",
     "Cancel": "Annulla",
@@ -32,11 +36,15 @@
     "Patient": "Paziente",
     "Doctor": "Dottore",
     "Welcome": "Benvenuto/a!",
-    "Enter you details to acess the platform": " Inserisci i tuoi dati per iscriverti alla nostra piattaforma."
+    "Enter you details to acess the platform": " Inserisci i tuoi dati per iscriverti alla nostra piattaforma.",
+    "Sign up successful": "Registrazione avvenuta con successo",
+    "Failed to sign up": "Registrazione non riuscita",
+    "Error signing up": "Errore Registrazione",
+    "An error occurred while trying to sign up. Please try again": "Si è verificato un errore durante il tentativo di registrazione. Per favore, riprova."
   },
   "Profile": {
-    "First Name": "First Name",
-    "Last Name": "Last Name",
+    "First Name": "Nome",
+    "Last Name": "Cognome",
     "Email": "E-mail",
     "Phone Number": "Cellulare",
     "Location": "Indirizzo",
@@ -48,22 +56,32 @@
   },
   "Forget": {
     "Forget Password": "Password dimenticata",
-    "Don't worry we can help out if you still remember your email address you can quickly reset your password.": "Non preoccuparti. Se non ricordi la tua password puoi resettarla tramite e-mail.",
-    "Request Password Change": "Cambia la tua password"
+    "Dont worry we can help out if you still remember your email address you can quickly reset your password": "Non preoccuparti. Se non ricordi la tua password puoi resettarla tramite e-mail.",
+    "Request Password Change": "Cambia la tua password",
+    "Please check your email, a code has been sent": " Controlla la tua email, è stato inviato un codice.",
+    "Error verifying email": " Errore nella verifica dell'email",
+    "Error": "Errore"
   },
   "VerifyOtp": {
     "OTP Authentication": "Autenticazione OTP",
     "Please enter the four digit verification code we have sent on your email.": "Inserisci qui le cifre del codice OTP che hai ricevuto nella tua casella di posta elettronica",
     "Verify OTP": "Verifica con codice OTP",
-    "OTP verified successfully!": "Codice OTP verificato con successo",
-    "Error verifying OTP": "Errore di verifica codice OTP"
+    "OTP verified successfully": "Codice OTP verificato con successo",
+    "Error verifying OTP": "Errore di verifica codice OTP",
+    "Error": "Errore",
+    "on your email": "Sulla tua email",
+    "Please enter the four digit verification code we have sent on your email": "Per favore, inserisci il codice di verifica a quattro cifre che abbiamo inviato alla tua email."
   },
   "ChangePassword": {
     "Change password": "Cambia password",
     "Input new desired password in the input fields below to create a new password.": "Inserisci la tua nuova password",
     "Confirm password": "Conferma password",
     "Passwords do not match!": "Le password che hai inserito non corrispondono",
-    "Password changed successfully!": "La tua password è stata cambiata con successo!"
+    "Password changed successfully!": "La tua password è stata cambiata con successo!",
+    "Passwords does not match!": " Le password non corrispondono!",
+    "Now You Can Login": "Ora puoi effettuare il login",
+    "Error changing password": "Errore nel cambio della password",
+    "Error": "Errore"
   },
   "PatientNavBar": {
     "Dashboard": "Dashboard",
@@ -115,9 +133,11 @@
     "Save Setting": "Salva Impostazioni"
   },
   "DoctorDashboard": {
+    "Booking Date": "Data della prenotazione",
     "Slots": "Agenda",
     "Appointments": "Appuntamenti",
     "Search Patient": "Cerca paziente",
+    "Appointment Time": "Orario dell'appuntamento",
     "Search Now": "Cerca",
     "Total Patients": "Totale Pazienti",
     "Total Doctors": "Totale Appuntamenti",
@@ -131,6 +151,8 @@
     "Recent Patients": "Lista Pazienti",
     "Patient Name": "Nome Paziente",
     "Visit ID": "ID Visita",
+
+    "Failed to update appointment request": "Aggiornamento della richiesta di appuntamento non riuscito",
     "Date": "Data",
     "Gender": "Sesso",
     "Disease": "Visita",
@@ -158,6 +180,7 @@
     "Today": "Oggi",
     "Video Call": "Televisita "
   },
+
   "DoctorProfile": {
     "Change Photo": "Cambia foto",
     "Delete Photo": "Elimina foto",
@@ -177,7 +200,7 @@
     "Date Of Birth": "Data di nascita",
     "Year Of Study": "Anni di studio",
     "Special Recognition": "Riconoscimenti speciali",
-    "Office And Hospital Address": "ndirizzo Studio Medico/Ospedale",
+    "Office And Hospital Address": "indirizzo Studio Medico/Ospedale",
     "Specialties": "Specializzazioni",
     "Upload Your CV": "Carica il tuo CV",
     "Drag and drop files or Browse": "Trascina o Carica file dal tuo computer",
@@ -185,8 +208,25 @@
     "Male": "Uomo",
     "Female": "Donna",
     "Select Option": " Seleziona specializzazione",
-    "View now": "Vedi ora"
+    "View now": "Vedi ora",
+    "Error deleting profile picture": "Errore nell'eliminazione della foto del profilo",
+    "Failed to delete profile picture": "Eliminazione della foto del profilo non riuscita",
+    "Failed to fetch user details": "Impossibile recuperare i dettagli dell'utente",
+    "Profile picture deleted successfully": "Foto del profilo eliminata con successo!",
+    "Error updating profile": "Errore nell'aggiornamento del profilo",
+    "Failed to update profile": "Aggiornamento del profilo non riuscito",
+    "Please select a file": "Seleziona un file.",
+    "Signature uploaded successfully": "Firma caricata con successo!",
+    "Error uploading signature": "Errore nel caricamento della firma",
+    "Failed to update profile picture": "Aggiornamento della foto del profilo non riuscito",
+    "Error uploading profile picture": "Errore nel caricamento della foto del profilo",
+    "No User Image Found": "Nessuna immagine utente trovata",
+    "Failed to update appointment request": "Aggiornamento della richiesta di appuntamento non riuscito",
+    "Profile picture updated successfully": "Immagine del profilo aggiornata con successo",
+    "Failed to update Anamnes Please try again": "Aggiornamento di Anamnes non riuscito. Riprova",
+    "Anamnes updated successfully": "Anamnes aggiornato con successo!"
   },
+
   "DoctorHomePage": {
     "Appointment Request": "Richieste di appuntamenti ",
     "See all": "Vedi tutto ",
@@ -237,7 +277,9 @@
     "Phone Number": "Cellulare",
     "Cancel": "Annulla",
     "Postal code": "Codice postale",
-    "Start a video call": "Televisita"
+    "Start a video call": "Televisita",
+    "Failed to update appointment request": "Aggiornamento della richiesta di appuntamento non riuscito",
+    "Error cancelling appointment": "Errore nella cancellazione dell'appuntamento"
   },
   "Doctor Sign up": {
     "Signup as Doctor": "Iscriviti come Dottore",
@@ -259,6 +301,11 @@
     "Save Change": "Salva",
     "Male": "Uomo",
     "Female": "Donna",
-    "Select Option": " Seleziona specializzazione"
+    "Select Option": " Seleziona specializzazione",
+    "Please wait your information is uploading on the server": "Attendere, le informazioni sono in fase di caricamento sul server",
+    "Please select option from the sex": "Seleziona l'opzione dal sesso",
+    "Please select option from the specialist": "Seleziona l'opzione dallo specialista",
+    "Please check your email, a code has been sent": "Controlla la tua email, è stato inviato un codice.",
+    "Please select file": "Per favore, seleziona il file."
   }
 }

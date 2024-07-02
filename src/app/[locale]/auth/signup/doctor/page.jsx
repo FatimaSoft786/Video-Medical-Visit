@@ -54,13 +54,13 @@ const DoctorSignUp = () => {
 
   const onSubmit = (data) => {
     if (selectSex === "") {
-      toast.error("Please select option from the sex");
+      toast.error(`${t("Please select option from the sex")}`);
     } else if (selectSpecialist === "") {
-      toast.error("Please select option from the specialist");
+      toast.error(`${t("Please select option from the specialist")}`);
     } else if (fileName === "") {
-      toast.error("Please select file");
+      toast.error(`${t("Please select file")}`);
     } else {
-      toast.success("Please wait your information is uploading on the server");
+      toast.success(`${t("Please wait your information is uploading on the server")}`);
       const formData = new FormData();
       formData.append("cv", selectedFile);
       formData.append("firstName", data.firstName);

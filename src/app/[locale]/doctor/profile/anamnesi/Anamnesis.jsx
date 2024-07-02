@@ -6,12 +6,14 @@ import toast from "react-hot-toast";
 import { createUserSession, getUserSession } from "@/utils/session";
 import Link from "next/link";
 import { Skeleton } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 
 const Anamens = ({ isProfile }) => {
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(true);
   const path = getPath();
   const { user, token } = getUserSession();
+  const t = useTranslations("DoctorProfile");
   const [formState, setFormState] = useState({
     good_health: "",
     serious_illness: "",
@@ -203,11 +205,11 @@ const Anamens = ({ isProfile }) => {
       );
 
       if (response.status === 200) {
-        toast.success("Anamnes updated successfully!");
+        toast.success(`${t("Anamnes updated successfully")}`);
         localStorage.setItem("user", JSON.stringify(response.data));
       }
     } catch (error) {
-      toast.error("Failed to update Anamnes. Please try again.");
+      toast.error(`${t("Failed to update Anamnes Please try again")}`);
     }
   };
 

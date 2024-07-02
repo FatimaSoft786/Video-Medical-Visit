@@ -40,12 +40,12 @@ const ForgetPage = () => {
 
       if (response.ok) {
         setStep(2);
-        toast.success(t("Please check your email, a code has been sent."));
+        toast.success(t("Please check your email, a code has been sent"));
       } else {
         toast.error(t("Error verifying email"));
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error(`${t("Error")}`, error);
       toast.error(t("Error verifying email"));
     }
   };
@@ -71,8 +71,9 @@ const ForgetPage = () => {
             </h2>
             <p className="mb-8 text-center">
               {t(
-                "Don't worry we can help out if you still remember your email address you can quickly reset your password."
+                "Dont worry we can help out if you still remember your email address you can quickly reset your password"
               )}
+              .
             </p>
             <input
               type="email"
@@ -80,6 +81,7 @@ const ForgetPage = () => {
               className={inputClass}
               name="email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
             />
             <button type="submit" className={buttonClass}>

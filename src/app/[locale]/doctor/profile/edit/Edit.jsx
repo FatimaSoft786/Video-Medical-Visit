@@ -76,7 +76,7 @@ const EditProfile = () => {
     const file = event.target.files[0];
 
     if (!file) {
-      toast.error("Please select a file.");
+      toast.error(`${t("Please select a file")}`);
       return;
     }
 
@@ -97,7 +97,7 @@ const EditProfile = () => {
       );
 
       if (response.data.success) {
-        toast.success("Signature uploaded successfully!");
+        toast.success(`${t("Signature uploaded successfully")}`);
         const userDetails = response.data;
         createUserSession(token, userDetails);
         setSignatureUrl(userDetails.user_details.signature_url);
@@ -106,8 +106,8 @@ const EditProfile = () => {
         toast.error(response.data.message);
       }
     } catch (error) {
-      console.error("Error uploading signature:", error);
-      toast.error("Error uploading signature");
+      console.error(`${t("Error uploading signature")} :`, error);
+      toast.error(`${t("Error uploading signature")}`);
     }
   };
 
@@ -134,7 +134,7 @@ const EditProfile = () => {
       );
       console.log(formDataImg);
       if (response.data.success) {
-        toast.success("Profile picture updated successfully!");
+        toast.success(`${t("Profile picture updated successfully")}`);
         const userDetailsResponse = await fetch(
           "https://video-medical-backend-production.up.railway.app/api/user/userDetails",
           {
@@ -152,11 +152,11 @@ const EditProfile = () => {
           setProfileData(userDetails);
         }
       } else {
-        toast.error("Failed to update profile picture");
+        toast.error(`${t("Failed to update profile picture")}`);
       }
     } catch (error) {
-      console.error("Error uploading profile picture:", error);
-      toast.error("Error uploading profile picture");
+      console.error(`${t("Error uploading profile picture")} :`, error);
+      toast.error(`${t("Error uploading profile picture")}`);
     }
   };
 
@@ -207,18 +207,18 @@ const EditProfile = () => {
           setProfileData(userDetails);
         }
       } else {
-        toast.error("Failed to update profile");
+        toast.error(`${t("Failed to update profile")}`);
       }
     } catch (error) {
-      console.error("Error updating profile:", error);
-      toast.error("Error updating profile");
+      console.error(`${t("Error updating profile")} :`, error);
+      toast.error(`${t("Error updating profile")}`);
     }
   };
 
   const handleDeletePhoto = async () => {
     setProfileImg("");
     if (user.user_details.pic_public_id === "") {
-      toast.error("No User Image Found");
+      toast.error(`${t("No User Image Found")}`);
     } else {
       try {
         const response = await fetch(
@@ -238,7 +238,7 @@ const EditProfile = () => {
         if (response.ok) {
           const result = await response.json();
           if (result.success) {
-            toast.success("Profile picture deleted successfully!");
+            toast.success(`${t("Profile picture deleted successfully")}`);
 
             const userDetailsResponse = await fetch(
               "https://video-medical-backend-production.up.railway.app/api/user/userDetails",
@@ -256,17 +256,17 @@ const EditProfile = () => {
               createUserSession(token, userDetails);
               setProfileData(userDetails);
             } else {
-              toast.error("Failed to fetch user details");
+              toast.error(`${t("Failed to fetch user details")}`);
             }
           } else {
-            toast.error("Failed to delete profile picture");
+            toast.error(`${t("Failed to delete profile picture")}`);
           }
         } else {
-          toast.error("Failed to delete profile picture");
+          toast.error(`${t("Failed to delete profile picture")}`);
         }
       } catch (error) {
-        console.error("Error deleting profile picture:", error);
-        toast.error("Error deleting profile picture");
+        console.error(`${t(`${t("Error updating profile")}`)}`, error);
+        toast.error(`${t("Error deleting profile picture")}`);
       }
     }
   };

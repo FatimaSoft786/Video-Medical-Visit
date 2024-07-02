@@ -1,67 +1,71 @@
 "use client";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl"; // Import useTranslations hook
+
 const Appointments = ({ appointments, loading }) => {
   const getFirstFourDigits = (id) => {
     return id.substring(0, 4);
   };
-  const t = useTranslations("DoctorDashboard"); // Fetch translations
+
+  const t = useTranslations("DoctorDashboard");
 
   if (loading) {
     return (
-      <table className="min-w-full bg-white text-sm md:text-base">
-        <thead className="bg-light-gray">
-          <tr>
-            <th className="py-3">ID</th>
-            <th className="py-3">Patient</th>
-            <th className="py-3">Appointment Date</th>
-            <th className="py-3">Booking Date</th>
-            <th className="py-3">Amount</th>
-            <th className="py-3">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <tr key={index} className="text-center border-b text-light-gray">
-              <td className="py-6 text-[#7CB839]">
-                <Skeleton width={40} />
-              </td>
-              <td className="py-6 flex gap-2 items-center justify-center">
-                <Skeleton circle width={32} height={32} />
-                <Skeleton width={80} />
-              </td>
-              <td className="py-6">
-                <Skeleton width={120} />
-              </td>
-              <td className="py-6">
-                <Skeleton width={120} />
-              </td>
-              <td className="py-6">
-                <Skeleton width={60} />
-              </td>
-              <td className="py-6">
-                <Skeleton width={80} />
-              </td>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white text-sm md:text-base">
+          <thead className="bg-light-gray">
+            <tr>
+              <th className="py-3">{t("ID")}</th>
+              <th className="py-3">{t("Patient")}</th>
+              <th className="py-3">{t("Appointment Date")}</th>
+              <th className="py-3">{t("Booking Date")}</th>
+              <th className="py-3">{t("Amount")}</th>
+              <th className="py-3">{t("Status")}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <tr key={index} className="text-center border-b text-light-gray">
+                <td className="py-6 text-[#7CB839]">
+                  <Skeleton width={40} />
+                </td>
+                <td className="py-6 flex gap-2 items-center justify-center">
+                  <Skeleton circle width={32} height={32} />
+                  <Skeleton width={80} />
+                </td>
+                <td className="py-6">
+                  <Skeleton width={120} />
+                </td>
+                <td className="py-6">
+                  <Skeleton width={120} />
+                </td>
+                <td className="py-6">
+                  <Skeleton width={60} />
+                </td>
+                <td className="py-6">
+                  <Skeleton width={80} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
   }
 
   return (
-    <div className="max-sm:overflow-x-scroll">
+    <div className="overflow-x-auto">
       <table className="min-w-full bg-white text-sm md:text-base">
         <thead className="bg-light-gray">
           <tr>
-            <th className="py-3">ID</th>
-            <th className="py-3">Patient</th>
-            <th className="py-3">Appointment Date</th>
-            <th className="py-3">Booking Date</th>
-            <th className="py-3">Amount</th>
-            <th className="py-3">Status</th>
+            <th className="py-3">{t("ID")}</th>
+            <th className="py-3">{t("Patient")}</th>
+            <th className="py-3">{t("Appointment Date")}</th>
+            <th className="py-3">{t("Booking Date")}</th>
+            <th className="py-3">{t("Amount")}</th>
+            <th className="py-3">{t("Status")}</th>
           </tr>
         </thead>
         <tbody>
@@ -80,7 +84,7 @@ const Appointments = ({ appointments, loading }) => {
                       ? appointment.patient.picture_url
                       : appointment.patient.default_picture_url
                   }
-                  className="w-8 h-8 md:w-12 md:h-12 object-cover rounded-full"
+                  className="w-8 h-8 md:w-12 md:h-12 object-cover max-md:hidden rounded-full"
                   alt={`${appointment.patient.firstName} ${appointment.patient.lastName}`}
                 />
                 {`${appointment.patient.firstName} ${appointment.patient.lastName}`}
@@ -94,8 +98,8 @@ const Appointments = ({ appointments, loading }) => {
                 <span
                   className={`bg-${
                     appointment.appointment_status === "waiting"
-                      ? "[#7CB839]"
-                      : "[#FF0000]"
+                      ? "green-500"
+                      : "red-500"
                   } text-white px-2 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm`}
                 >
                   {appointment.appointment_status}

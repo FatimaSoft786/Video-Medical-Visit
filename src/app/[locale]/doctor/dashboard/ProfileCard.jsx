@@ -1,5 +1,4 @@
 "use client";
-import { AiFillMessage } from "react-icons/ai";
 import Appointments from "./Appointments";
 import { FaCheck } from "react-icons/fa";
 import { getUserSession } from "@/utils/session";
@@ -7,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useTranslations } from "next-intl";
+
 const ProfileCard = () => {
   const [activeTab, setActiveTab] = useState("appointments");
   const { user, token } = getUserSession();
@@ -15,6 +15,7 @@ const ProfileCard = () => {
   const [appointmentTime, setAppointmentTime] = useState("");
   const [loading, setLoading] = useState(true);
   const t = useTranslations("DoctorDashboard");
+
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -101,17 +102,19 @@ const ProfileCard = () => {
           </h1>
           <p className="text-light-gray text-lg">{doctor.specialist}</p>
           <p className="text-light-gray">
-            <span className="text-black font-semibold">Appointment Time:</span>{" "}
+            <span className="text-black font-semibold">
+              {t("Appointment Time")}:
+            </span>{" "}
             {loading ? (
               <Skeleton width={200} />
             ) : (
-              appointmentTime || "No upcoming appointments"
+              appointmentTime || t("No appointment found")
             )}
           </p>
           <p className="text-light-gray">{doctor.sex}</p>
         </div>
         {/* <button className="ml-auto max-md:mt-6 max-md:w-full bg-dark-blue max-md:justify-center text-white px-5 text-lg max-md:text-sm py-2 rounded-lg flex items-center gap-2">
-          <AiFillMessage className="text-white" /> Send Message
+          <AiFillMessage className="text-white" /> {t("Send Message")}
         </button> */}
       </div>
 

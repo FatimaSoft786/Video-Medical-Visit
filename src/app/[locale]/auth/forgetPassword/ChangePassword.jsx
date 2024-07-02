@@ -5,6 +5,7 @@ import { FaEye } from "react-icons/fa";
 import getPath from "@/utils/path";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const container = "flex flex-col items-center";
 const form = "w-full max-w-md";
@@ -17,11 +18,11 @@ const ChangePassword = ({ email, id }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [show, setShow] = useState(false);
   const path = getPath();
-
+  const t = useTranslations("ChangePassword");
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match!");
+      toast.error(`${t("Passwords does not match!")}`);
       return;
     }
 
@@ -38,21 +39,29 @@ const ChangePassword = ({ email, id }) => {
       );
       const data = await response.json();
       if (response) {
-        toast.success(data.message + " " + "Now You Can Login");
+        toast.success(
+          `${t("Password changed successfully!")} ${t("Now You Can Login")}`
+        );
         router.push("/");
       } else {
-        toast.error("Error changing password");
+        toast.error(`${t("Error changing password")}`);
       }
     } catch (error) {
-      toast.error("Error:", error);
+      toast.error(`${t("Error")} :`, error);
     }
   };
 
   return (
     <div className={container}>
       <form className={form} onSubmit={handleSubmit}>
-        <h2 className="text-3xl text-center font-bold mb-4">Change Password</h2>
-        <p className="text-center mb-4">Input your new password below.</p>
+        <h2 className="text-3xl text-center font-bold mb-4">
+          {t("Change password")}
+        </h2>
+        <p className="text-center mb-4">
+          {t(
+            "Input new desired password in the input fields below to create a new password."
+          )}
+        </p>
         <div className="flex relative">
           <input
             type={show ? "text" : "password"}
@@ -68,7 +77,7 @@ const ChangePassword = ({ email, id }) => {
         <div className="flex relative">
           <input
             type={show ? "text" : "password"}
-            placeholder="Confirm Password"
+            placeholder={t("Confirm password")}
             className={inputClass}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
@@ -78,7 +87,7 @@ const ChangePassword = ({ email, id }) => {
           />
         </div>
         <button type="submit" className={buttonClass}>
-          Change Password
+          {t("Change password")}
         </button>
       </form>
     </div>

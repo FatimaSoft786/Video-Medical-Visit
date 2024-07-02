@@ -25,7 +25,7 @@ const AppointmentRequest = ({ requestsData, setRequestsData, loading }) => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to update appointment request");
+        throw new Error(`${t("Failed to update appointment request")}`);
       }
 
       const updatedRequests = requestsData.filter(
@@ -36,11 +36,11 @@ const AppointmentRequest = ({ requestsData, setRequestsData, loading }) => {
       setRequestsData(updatedRequests);
       console.log(requestsData);
       toast.success(
-        ` ${status ? t("Confirmed") : t("Declined")} successfully. Email Sent`
+        ` ${status ? t("Confirmed") : t("Declined")} successfully. E-mail Sent`
       );
     } catch (error) {
       console.error("Error updating appointment request:", error);
-      toast.error("Failed to update appointment request");
+      toast.error(`${t("Failed to update appointment request")}`);
     }
   };
 

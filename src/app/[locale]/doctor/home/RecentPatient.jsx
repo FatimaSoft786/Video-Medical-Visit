@@ -82,9 +82,7 @@ const RecentPatients = ({ patients, loading }) => {
                   {patient.firstName} {patient.lastName || "N/A"}
                 </td>
                 <td className="py-3">{getShortId(patient._id)}</td>
-                <td className="py-3">
-                  {new Date(patient.date).toLocaleDateString() || "N/A"}
-                </td>
+                <td className="py-3">{patient.date || "N/A"}</td>
                 <td className="py-3">{patient.sex || "N/A"}</td>
                 <td className="py-3">{patient.disease || "N/A"}</td>
                 <td className="py-3">{patient.status || "N/A"}</td>

@@ -61,7 +61,7 @@ const VerifyOtp = () => {
         router.push(`/${path}/${data.role.toLowerCase()}`);
       }
     } catch (error) {
-      toast.error("Error: " + error.message);
+      toast.error(`${t("Error")}` + error.message);
     }
   };
 
@@ -75,7 +75,7 @@ const VerifyOtp = () => {
             </h2>
             <p className="mb-8 text-dark-gray text-center">
               {t(
-                "Please enter the four digit verification code we have sent on your email."
+                "Please enter the four digit verification code we have sent on your email"
               )}{" "}
               <span className="font-bold text-dark-blue">
                 {t("on your email")}

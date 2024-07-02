@@ -49,9 +49,9 @@ const VerifyOtp = ({ email, setId }) => {
 
       if (response.ok && data.success) {
         setId(data.message._id);
-        toast.success("OTP verified successfully!");
+        toast.success(`${t("OTP verified successfully")}!`);
       } else {
-        toast.error("Error verifying OTP");
+        toast.error(`${t("Error verifying OTP")}`);
       }
     } catch (error) {
       toast.error("Error: " + error.message);

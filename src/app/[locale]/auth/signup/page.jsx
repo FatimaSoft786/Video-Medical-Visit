@@ -83,18 +83,18 @@ const SignupPage = () => {
         if (data.success) {
           localStorage.setItem("token", data.token);
           console.log(data);
-          toast.success("Sign up successful");
+          toast.success(`${t("Sign up successful")}`);
           router.push(`/${path}/auth/otpVerify`);
         } else {
-          toast.error(data.message || "Failed to sign up");
+          toast.error(`${t("Failed to sign up")}`);
         }
       } else {
-        toast.error("Failed to sign up");
+        toast.error(`${t("Failed to sign up")}`);
       }
     } catch (error) {
-      console.error("Error signing up:", error);
+      console.error(`${t("Error signing up")} :`, error);
       toast.error(
-        "An error occurred while trying to sign up. Please try again."
+        `${t("An error occurred while trying to sign up. Please try again")}`
       );
     } finally {
       setIsSubmitting(false);
@@ -222,9 +222,7 @@ const SignupPage = () => {
                 {t("Who you are?")}
               </h1>
               <p className="text-center mb-6">
-                {t(
-                  "We need to determine your role. This will help us to build a reliable system together."
-                )}
+                {t("We need to determine your role This will help us to build a reliable system together")}
               </p>
               <label htmlFor="userType" className="!text-left text-light-gray">
                 {t("Select User Type")}
@@ -237,7 +235,6 @@ const SignupPage = () => {
                 onChange={handleUserTypeChange}
               >
                 <option value="patient">{t("Patient")}</option>
-                <option value="doctor">{t("Doctor")}</option>
               </select>
               <Link
                 href={`/${params.locale}/auth/forgetPassword`}
@@ -285,7 +282,7 @@ const SignupPage = () => {
             {t("Welcome")}
           </h2>
           <p className="mb-8 text-center">
-            {t("Enter your details to access the platform.")}
+            {t("Enter your details to access the platform")}.
           </p>
           <div className="flex gap-2">
             <div className="w-full">
@@ -341,7 +338,7 @@ const SignupPage = () => {
             />
             <FaEye
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-3 cursor-pointer"
+              className="absolute right-4 top-4 cursor-pointer"
             />
           </div>
           {errors.password && (

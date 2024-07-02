@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 
 const Tabs = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
-  const t = useTranslations("Doctor_Dashboard"); // Fetch translations
 
   return (
     <div className="container mx-auto py-8">
@@ -107,7 +106,7 @@ export default function AppointmentTabs() {
         setAppointmentsHeld(held);
         setAppointmentsScheduled(scheduled);
       } catch (error) {
-        console.error("Error fetching appointments:", error);
+        console.error(`${t("Error cancelling appointment")} :`, error);
       } finally {
         setIsLoading(false);
       }

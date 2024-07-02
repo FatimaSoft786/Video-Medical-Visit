@@ -61,7 +61,7 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
-          toast.success("Login successful");
+          toast.success(`${t("Login Successful")}`);
           const { accessToken, role, account_approved } = data;
           if (!account_approved) {
             router.push(`/${path}/auth/emailverify`);
@@ -92,21 +92,21 @@ const LoginPage = () => {
                 router.push(`/${path}/admin`);
                 break;
               default:
-                toast.error("Unknown role");
+                toast.error(`${t("Unknown role")}`);
             }
           } else {
-            toast.error("Failed to fetch user details.");
+            toast.error(`${t("Failed to fetch user details.")}`);
           }
         } else {
           toast.error(data.message);
         }
       } else {
-        toast.error("Failed to log in. Please check your credentials.");
+        toast.error(`${t("Failed to log in.Please check your credentials.")}`);
       }
     } catch (error) {
       console.error("Error logging in:", error);
       toast.error(
-        "An error occurred while trying to log in. Please try again."
+        `${t("An error occurred while trying to log in. Please try again.")}`
       );
     }
   };
