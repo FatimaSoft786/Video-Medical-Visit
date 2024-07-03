@@ -1,26 +1,39 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { format, addDays, startOfWeek, isBefore, isSameDay } from "date-fns";
+import { useRouter } from "next/navigation";
+import { enUS, fr, es, it } from "date-fns/locale";
 
 const DateTabs = ({ selectedDate, setSelectedDate }) => {
   const containerRef = useRef(null);
-
+  const router = useRouter();
+  const [locale, setLocale] = useState();
+  const localeMap = {
+    en: enUS,
+    fr: fr,
+    es: es,
+    it: it,
+  };
+  useEffect(() => {
+    const local = document.querySelector("html").lang;
+    setLocale(local);
+  }, [locale]);
   const currentDate = new Date();
-  const startDate = startOfWeek(new Date(), {
+  const startDate = startOfWeek(currentDate, {
     weekStartsOn: currentDate.getDay(),
   });
 
-  const dates = Array.from({ length: 14 }, (_, i) => addDays(startDate, i));
+  const dates = Array.from({ length: 30 }, (_, i) => addDays(startDate, i));
 
   const scrollLeft = () => {
     if (containerRef.current) {
-      containerRef.current.scrollLeft -= 100;
+      containerRef.current.scrollBy({ left: -100, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (containerRef.current) {
-      containerRef.current.scrollLeft += 100;
+      containerRef.current.scrollBy({ left: 100, behavior: "smooth" });
     }
   };
 
@@ -45,7 +58,7 @@ const DateTabs = ({ selectedDate, setSelectedDate }) => {
               }
             }}
           >
-            {format(date, "MMM dd")}
+            {format(date, "MMMM dd", { locale: localeMap[locale] })}
           </div>
         ))}
       </div>

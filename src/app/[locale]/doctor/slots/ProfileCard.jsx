@@ -6,6 +6,10 @@ import { useTranslations } from "next-intl";
 
 const ProfileCard = ({ doctor }) => {
   const t = useTranslations("Slots");
+  const prices = JSON.parse(localStorage.getItem("prices")) || {
+    firstVisit: "",
+    followUpVisit: "",
+  };
 
   return (
     <>
@@ -35,11 +39,11 @@ const ProfileCard = ({ doctor }) => {
           </div>
           <div className="flex gap-2 mt-2 text-sm">
             <button className="ml-auto max-md:mt-6 max-md:w-full bg-light-gray max-md:justify-center text-black px-5 max-md:text-sm py-2 rounded-lg flex items-center gap-2">
-              ${doctor.visit}/{t("First visit")}
+              {prices.firstVisit}/{t("First visit")}
             </button>
 
             <button className="ml-auto max-md:mt-6 max-md:w-full bg-dark-blue max-md:justify-center text-white px-5 max-md:text-sm py-2 rounded-lg flex items-center gap-2">
-              ${doctor.followUp}/{t("Follow up")}
+              {prices.followUpVisit}/{t("Follow up")}
             </button>
           </div>
         </div>

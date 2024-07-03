@@ -283,9 +283,8 @@ const DoctorSignUp = () => {
                 })}
                 value={selectSex}
                 onChange={handleSelectedSex}
-                className="w-full px-4 py-2 border rounded"
-              >
-                <option value="Option">{t("Select Option")}</option>
+                className="w-full px-4 py-2 border rounded">
+                <option value="Option">{t("Select option")}</option>
                 <option value="Male">{t("Male")}</option>
                 <option value="Female">{t("Female")}</option>
               </select>
@@ -407,7 +406,7 @@ const DoctorSignUp = () => {
                 onChange={handleSpecialistChange}
                 className="w-full px-4 py-2 border rounded"
               >
-                <option value="Option">Select option</option>
+                <option value="Option">{t("Select your specialist")}</option>
                 <option value="Dermatologia">Dermatologia</option>
                 <option value="Cardiologia">Cardiologia</option>
                 <option value="Psicologia">Psicologia</option>

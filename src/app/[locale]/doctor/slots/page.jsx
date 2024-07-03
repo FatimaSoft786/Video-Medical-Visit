@@ -132,9 +132,19 @@ const Agenda = () => {
               }
               className="p-2 border rounded w-full px-4"
             >
-              <option value="$30/Session">$30/Session</option>
-              <option value="$50/Session">$50/Session</option>
-              <option value="$70/Session">$70/Session</option>
+              <option value="$40">$40</option>
+              <option value="$50">$50</option>
+              <option value="$60">$60</option>
+               <option value="$70">$70</option>
+              <option value="$80">$80</option>
+              <option value="$90">$90</option>
+              <option value="$100">$100</option>
+              <option value="$110">$110</option>
+              <option value="$120">$120</option>
+               <option value="$130">$130</option>
+              <option value="$140">$140</option>
+              <option value="$150">$150</option>
+              
             </select>
           </div>
           <div>
@@ -146,9 +156,30 @@ const Agenda = () => {
               }
               className="p-2 border rounded w-full px-4"
             >
-              <option value="$30/Session">$30/Session</option>
-              <option value="$50/Session">$50/Session</option>
-              <option value="$70/Session">$70/Session</option>
+              <option value="$40">$40</option>
+              <option value="$50">$50</option>
+              <option value="$60">$60</option>
+               <option value="$70">$70</option>
+              <option value="$80">$80</option>
+              <option value="$90">$90</option>
+              <option value="$100">$100</option>
+              <option value="$110">$110</option>
+              <option value="$120">$120</option>
+               <option value="$130">$130</option>
+              <option value="$140">$140</option>
+              <option value="$150">$150</option>
+            </select>
+          </div>
+           <div>
+           
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              className="p-2 border rounded w-full px-4"
+            >
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
             </select>
           </div>
         

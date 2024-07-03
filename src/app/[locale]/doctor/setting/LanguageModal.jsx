@@ -20,7 +20,7 @@ export default function LanguageModal() {
   const t = useTranslations("Setting");
 
   useEffect(() => {
-    setSelectedLanguage(router.locale || "en");
+    setSelectedLanguage(router.locale || "it");
   }, [router.locale]);
 
   useEffect(() => {

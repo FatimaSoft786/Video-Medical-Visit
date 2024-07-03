@@ -2,7 +2,7 @@ import React from "react";
 import { format } from "date-fns";
 
 const SlotsTabs = ({ selectedDate, toggleSlot, selectedSlots, hours }) => {
-  const limitedHours = hours.slice(0, 8);
+  const limitedHours = hours.slice(0, 18);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
