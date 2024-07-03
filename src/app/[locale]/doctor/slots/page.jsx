@@ -76,14 +76,14 @@ const Agenda = () => {
       );
 
       const data = await response.json();
-      console.log(data.user_details);
+     
       if (data.success) {
         setCurrency(currency);
         localStorage.setItem("currency",currency)
         localStorage.setItem("selectedSlots", JSON.stringify(selectedSlots));
         setPrices({
           firstVisit:  `${currency}${data.user_details.visit}`, followUpVisit: `${currency}${data.user_details.followUp}`});
-          console.log(prices);
+        
         localStorage.setItem("prices", JSON.stringify(prices));
         toast(t("Data saved successfully!"));
 
