@@ -224,7 +224,8 @@
     "Choose Slot": "Choose Slot",
     "Select Hour": "Select Hour",
     "Set Session & Payment": "Set Session & Payment",
-    "Currency": "Currency"
+    "Currency": "Currency",
+    "Data saved successfully!":"Data saved successfully!"
   },
   "DoctorAppointments": {
     "Appointment held": "Appointment held",

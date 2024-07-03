@@ -263,7 +263,8 @@
     "Select Hour": "Seleziona disponibilità",
     "Set Session & Payment": "Listino",
     "Currency": "Currency",
-    "Save Changes": "Salva"
+    "Save Changes": "Salva",
+    "Data saved successfully!": "Dati salvati con successo!"
   },
   "DoctorAppointments": {
     "Appointment held": "Conclusi",

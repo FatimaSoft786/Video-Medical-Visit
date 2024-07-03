@@ -14,7 +14,7 @@ const Agenda = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [prices, setPrices] = useState({ firstVisit: "", followUpVisit: "" });
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("€");
   const { token, user } = getUserSession();
   const doctor = user.user_details;
   const hours = Array.from({ length: 18 }, (_, i) => i + 6);
@@ -25,9 +25,11 @@ const Agenda = () => {
       firstVisit: "",
       followUpVisit: "",
     };
-    const savedCurrency = localStorage.getItem("currency") || "USD";
+    const savedCurrency = localStorage.getItem("currency") || "€";
+    
 
     setSelectedSlots(savedSlots);
+    console.log(savedPrices);
     setPrices(savedPrices);
     setCurrency(savedCurrency);
   }, []);
@@ -43,6 +45,7 @@ const Agenda = () => {
 
   const handleSave = async () => {
     const doctorId = user.user_details._id;
+   
 
     const payload = {
       time: selectedSlots.map(
@@ -52,13 +55,13 @@ const Agenda = () => {
           (parseInt(slot.split("-")[1], 10) + 1).toString().padStart(2, "0") +
           ":00"
       ),
+      
       date: selectedDate.toDateString().slice(4),
-      visit: prices.firstVisit.replace("$", "").replace("/Session", ""),
-      followUp: prices.followUpVisit.replace("$", "").replace("/Session", ""),
+      visit: prices.firstVisit.replace("/Session", ""),
+      followUp: prices.followUpVisit.replace("/Session", ""),
       currency: currency,
       doctorId: doctorId,
     };
-
     try {
       const response = await fetch(
         "https://video-medical-backend-production.up.railway.app/api/user/addSlots",
@@ -73,17 +76,18 @@ const Agenda = () => {
       );
 
       const data = await response.json();
-      console.log(data, payload);
+      console.log(data.user_details);
       if (data.success) {
+        setCurrency(currency);
+        localStorage.setItem("currency",currency)
         localStorage.setItem("selectedSlots", JSON.stringify(selectedSlots));
+        setPrices({
+          firstVisit:  `${currency}${data.user_details.visit}`, followUpVisit: `${currency}${data.user_details.followUp}`});
+          console.log(prices);
         localStorage.setItem("prices", JSON.stringify(prices));
-        localStorage.setItem("currency", currency);
-
         toast(t("Data saved successfully!"));
 
         setSelectedSlots([]);
-        setPrices({ firstVisit: "", followUpVisit: "" });
-        setCurrency("USD");
       } else {
         console.error("Error saving slots:", data.message);
         toast.error(t("Failed to save slots."));
@@ -97,7 +101,7 @@ const Agenda = () => {
   return (
     <div className="container mx-auto p-6">
       <title>
-        {t("Slots")} | {t("A Doctor's Appointment")}
+        {t("Slots")}
       </title>
       <ProfileCard doctor={doctor} />
       <hr className="my-3 mt-9" />
@@ -132,18 +136,18 @@ const Agenda = () => {
               }
               className="p-2 border rounded w-full px-4"
             >
-              <option value="$40">$40</option>
-              <option value="$50">$50</option>
-              <option value="$60">$60</option>
-               <option value="$70">$70</option>
-              <option value="$80">$80</option>
-              <option value="$90">$90</option>
-              <option value="$100">$100</option>
-              <option value="$110">$110</option>
-              <option value="$120">$120</option>
-               <option value="$130">$130</option>
-              <option value="$140">$140</option>
-              <option value="$150">$150</option>
+              <option value="40">{currency}40</option>
+              <option value="50">{currency}50</option>
+              <option value="60">{currency}60</option>
+              <option value="70">{currency}70</option>
+              <option value="80">{currency}80</option>
+              <option value="90">{currency}90</option>
+              <option value="100">{currency}100</option>
+              <option value="110">{currency}110</option>
+              <option value="120">{currency}120</option>
+               <option value="130">{currency}130</option>
+              <option value="140">{currency}140</option>
+              <option value="150">{currency}150</option>
               
             </select>
           </div>
@@ -156,18 +160,18 @@ const Agenda = () => {
               }
               className="p-2 border rounded w-full px-4"
             >
-              <option value="$40">$40</option>
-              <option value="$50">$50</option>
-              <option value="$60">$60</option>
-               <option value="$70">$70</option>
-              <option value="$80">$80</option>
-              <option value="$90">$90</option>
-              <option value="$100">$100</option>
-              <option value="$110">$110</option>
-              <option value="$120">$120</option>
-               <option value="$130">$130</option>
-              <option value="$140">$140</option>
-              <option value="$150">$150</option>
+              <option value="40">{currency}40</option>
+              <option value="50">{currency}50</option>
+              <option value="60">{currency}60</option>
+               <option value="70">{currency}70</option>
+              <option value="80">{currency}80</option>
+              <option value="90">{currency}90</option>
+              <option value="100">{currency}100</option>
+              <option value="110">{currency}110</option>
+              <option value="120">{currency}120</option>
+               <option value="130">{currency}130</option>
+              <option value="140">{currency}140</option>
+              <option value="150">{currency}150</option>
             </select>
           </div>
            <div>
@@ -177,9 +181,9 @@ const Agenda = () => {
               onChange={(e) => setCurrency(e.target.value)}
               className="p-2 border rounded w-full px-4"
             >
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
-              <option value="GBP">GBP</option>
+              <option value="$">$</option>
+              <option value="€">€</option>
+              <option value="£">£</option>
             </select>
           </div>
         

@@ -10,6 +10,7 @@ const ProfileCard = ({ doctor }) => {
     firstVisit: "",
     followUpVisit: "",
   };
+  const currency =   localStorage.getItem("currency")
 
   return (
     <>
@@ -39,11 +40,11 @@ const ProfileCard = ({ doctor }) => {
           </div>
           <div className="flex gap-2 mt-2 text-sm">
             <button className="ml-auto max-md:mt-6 max-md:w-full bg-light-gray max-md:justify-center text-black px-5 max-md:text-sm py-2 rounded-lg flex items-center gap-2">
-              {prices.firstVisit}/{t("First visit")}
+              {currency}{prices.firstVisit}/{t("First visit")}
             </button>
 
             <button className="ml-auto max-md:mt-6 max-md:w-full bg-dark-blue max-md:justify-center text-white px-5 max-md:text-sm py-2 rounded-lg flex items-center gap-2">
-              {prices.followUpVisit}/{t("Follow up")}
+             {currency}{prices.followUpVisit}/{t("Follow up")}
             </button>
           </div>
         </div>
