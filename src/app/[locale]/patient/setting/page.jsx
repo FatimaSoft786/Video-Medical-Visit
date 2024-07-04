@@ -4,8 +4,9 @@ import Link from "next/link";
 import React from "react";
 import { FaChevronRight } from "react-icons/fa";
 import LanguageModal from "./LanguageModal";
-
+import { useTranslations } from "next-intl";
 const page = () => {
+  const t = useTranslations("Setting");
   const path = getPath();
   return (
     <div className="container mx-auto">
@@ -40,7 +41,7 @@ const page = () => {
           <div className=" flex flex-row">
             <img src={`/svg/privacy.svg`} alt="Privacy" />
             <p className=" font-abc font-medium text-[16px] mx-[15px] text-[#000]">
-              privacy policy
+            Privacy Policy
             </p>
           </div>
           <FaChevronRight className=" flex justify-end items-end my-1" />
@@ -55,7 +56,7 @@ const page = () => {
           <div className=" flex flex-row">
             <img src={`/svg/tems.svg`} alt="Terms&Condition" />
             <p className=" font-abc font-medium text-[16px] mx-[15px] text-[#000]">
-              Terms & Condition
+             Terms & Condition
             </p>
           </div>
           <FaChevronRight className=" flex justify-end items-end my-1" />

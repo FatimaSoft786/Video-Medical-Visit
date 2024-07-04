@@ -100,7 +100,8 @@
     "Book Now": "Prenota"
   },
   "Payment": {
-    "Paid": "Pagato"
+    "Paid": "Pagato",
+    "Payment status": "Status pagamento"
   },
   "ConfirmedDoctor": {
     "Appointment date": "Data Appuntamento",
@@ -197,9 +198,9 @@
     "Sex": "Sesso",
     "Signup as Doctor": "Iscriviti come Dottore",
     "Fill the form to get started": "Riempi il Form per l’iscrizione.",
-    "Email Address": "E-mal",
+    "Email Address": "E-mail",
     "Postal Code": "Codice postale",
-    "Date Of Birth": "Data di nascita",
+    "Date of birth": "Data di nascita",
     "Year Of Study": "Anni di studio",
     "Special Recognition": "Riconoscimenti speciali",
     "Office And Hospital Address": "Indiritto Studio Medico/Ospedale",
@@ -211,6 +212,7 @@
     "Female": "Donna",
     "Select option": "Seleziona la tua specializzazione",
     "View now": "Vedi ora",
+    "Edit medical": "Modifica anamnesi",
     "Error deleting profile picture": "Errore nell'eliminazione della foto del profilo",
     "Failed to delete profile picture": "Eliminazione della foto del profilo non riuscita",
     "Failed to fetch user details": "Impossibile recuperare i dettagli dell'utente",

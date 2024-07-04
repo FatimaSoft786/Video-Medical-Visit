@@ -81,7 +81,8 @@
     "Book Now": "Book Now"
   },
   "Payment": {
-    "Paid": "Paid"
+    "Paid": "Paid",
+    "Payment status": "Payment status"
   },
   "ConfirmedDoctor": {
     "Appointment date": "Appointment date",
@@ -170,7 +171,7 @@
     "Address": "Address",
     "Location": "Location",
     "PhoneNumber": "Phone Number",
-    "Dob": "Date Of Birth",
+    "Date of birth": "Date Of Birth",
     "Sex": "Sex",
     "Email Address": "Email Address",
     "Postal Code": "Postal Code",
@@ -184,7 +185,8 @@
     "Male": "Male",
     "Female": "Female",
     "Select Option": "Select Option",
-    "View now": "View now"
+    "View now": "View now",
+    "Edit medical": "Edit medical"
   },
   "Notifications": {
     "Notifications": "Notification",

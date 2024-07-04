@@ -5,11 +5,13 @@ import getPath from "@/utils/path";
 import { Avatar } from "@nextui-org/react";
 import { getUserSession } from "@/utils/session";
 import Anamens from "./anamnesi/Anamnesis";
+import { useTranslations } from "next-intl";
 
 const DoctorProfilePage = () => {
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(true);
   const path = getPath();
+   const t = useTranslations("DoctorProfile");
 
   useEffect(() => {
     const { user } = getUserSession();
@@ -24,14 +26,14 @@ const DoctorProfilePage = () => {
   }, []);
 
   const profileFields = [
-    { label: "First Name", key: "firstName", default: "John" },
-    { label: "Last Name", key: "lastName", default: "Doe" },
-    { label: "Email", key: "email", default: "w9JpS@example.com" },
-    { label: "Phone No", key: "phoneNumber", default: "1234567890" },
-    { label: "Postal Code", key: "postal_code", default: "123456" },
-    { label: "Location", key: "location", default: "Pakistan" },
-    { label: "Sex", key: "sex", default: "Male" },
-    { label: "DOB", key: "dob", default: "12 marzo 1993" },
+    { label: t('FirstName'), key: "firstName", default: "John" },
+    { label: t('LastName'), key: "lastName", default: "Doe" },
+    { label: t('Email Address'), key: "email", default: "w9JpS@example.com" },
+    { label: t('PhoneNumber'), key: "phoneNumber", default: "1234567890" },
+    { label: t('Postal Code'), key: "postal_code", default: "123456" },
+    { label: t('Location'), key: "location", default: "Pakistan" },
+    { label: t('Sex'), key: "sex", default: "Male" },
+    { label: t('Date of birth'), key: "dob", default: "12 marzo 1993" },
   ];
 
   return (
@@ -54,7 +56,7 @@ const DoctorProfilePage = () => {
           )}
           <Link href={`/${path}/patient/profile/edit`}>
             <button className="bg-dark-blue text-white px-6 py-2 rounded">
-              Edit Profile
+              {t('Edit Profile')}
             </button>
           </Link>
         </div>

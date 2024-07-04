@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useTranslations } from "next-intl";
 const PaymentCard = ({ appointment }) => {
+   const t = useTranslations("Payment");
   const {
     doctor,
     appointment_date,
@@ -21,7 +22,7 @@ const PaymentCard = ({ appointment }) => {
   return (
     <div className="border rounded-lg shadow-md p-3 flex flex-col gap-2">
       <img
-        src={doctor.picture_url}
+        src={doctor.picture_url ? doctor.picture_url : doctor.default_picture_url}
         alt={`${doctor.firstName} ${doctor.lastName}`}
         className="w-full h-40 object-cover rounded-md"
       />
@@ -36,11 +37,11 @@ const PaymentCard = ({ appointment }) => {
       </div>
       <div className="flex justify-between ">
         <p className="text-sm text-black font-bold">
-          Payment Status: {getFirstFourDigits(_id)}
+          {t('Payment status')}: {getFirstFourDigits(_id)}
         </p>
         <p className="text-sm text-gray-600">{appointment_date}</p>
       </div>
-      <p className="text-sm text-gray-600">Time: {appointment_time}</p>
+      {/* <p className="text-sm text-gray-600">Time: {appointment_time}</p> */}
       <button
         disabled={payment_status === "Paid" && true}
         className={`bg-dark-blue mt-4 w-full text-white py-2 px-4 rounded-lg ${
@@ -48,7 +49,7 @@ const PaymentCard = ({ appointment }) => {
           "disabled:bg-dark-blue/80 cursor-not-allowed"
         }`}
       >
-        {payment_status === "Paid" ? "Paid" : "Pay Now"}{" "}
+        {payment_status === "Paid" ? t('Paid') : "Pay Now"}{" "}
       </button>
     </div>
   );

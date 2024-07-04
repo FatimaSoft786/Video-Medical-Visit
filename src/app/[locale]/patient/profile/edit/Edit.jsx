@@ -15,8 +15,10 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Image } from "@nextui-org/react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const EditProfile = () => {
+  const t = useTranslations("DoctorProfile");
   const path = getPath();
   const { token, user } = getUserSession();
   const [profileData, setProfileData] = useState(null);
@@ -270,21 +272,21 @@ const EditProfile = () => {
                 document.querySelector("input[type='file']").click()
               }
             >
-              Change Photo
+              {t('Change Photo')}
             </button>
             <button
               type="button"
               className="px-6 py-2 bg-transparent border border-red-600 text-red-600 rounded"
               onClick={handleDeletePhoto}
             >
-              Delete Photo
+              {t('Delete Photo')}
             </button>
           </div>
         </div>
         <div className="flex space-x-4  max-sm:space-x-0 max-sm:gap-4 mb-1 pb-4 max-sm:flex-col">
           <div className="w-1/2 max-sm:w-full relative">
             <label className="block text-black font-bold mb-1">
-              First Name
+              {t('FirstName')}
             </label>
             <MdPerson className="absolute top-1/2 left-3 transform mt-3 -translate-y-1/2 text-black" />
             <input
@@ -297,7 +299,7 @@ const EditProfile = () => {
             />
           </div>
           <div className="w-1/2 relative max-sm:w-full">
-            <label className="block text-black font-bold mb-1">Last Name</label>
+            <label className="block text-black font-bold mb-1">{t('LastName')}</label>
             <MdPersonOutline className="absolute top-1/2 left-3 transform mt-3 -translate-y-1/2 text-black" />
             <input
               type="text"
@@ -311,7 +313,7 @@ const EditProfile = () => {
         </div>
         <div className="flex space-x-4  max-sm:space-x-0 max-sm:gap-4 mb-1 pb-4 max-sm:flex-col">
           <div className="w-1/2  max-sm:w-full relative">
-            <label className="block text-black font-bold mb-1">Email</label>
+            <label className="block text-black font-bold mb-1">{t('Email Address')}</label>
             <MdEmail className="absolute top-1/2 left-3 transform mt-3 -translate-y-1/2 text-black" />
             <input
               type="email"
@@ -323,7 +325,7 @@ const EditProfile = () => {
             />
           </div>
           <div className="w-1/2  max-sm:w-full relative">
-            <label className="block text-black font-bold mb-1">Phone</label>
+            <label className="block text-black font-bold mb-1">{t('PhoneNumber')}</label>
             <MdPhone className="absolute top-1/2 left-3 transform mt-3 -translate-y-1/2 text-black" />
             <input
               type="tel"
@@ -337,7 +339,7 @@ const EditProfile = () => {
         </div>
         <div className="flex space-x-4  max-sm:space-x-0 max-sm:gap-4 mb-1 pb-4 max-sm:flex-col">
           <div className="w-1/2  max-sm:w-full relative">
-            <label className="block text-black font-bold mb-1">Location</label>
+            <label className="block text-black font-bold mb-1">{t('Location')}</label>
             <MdLocationOn className="absolute top-1/2 left-3 transform mt-3 -translate-y-1/2 text-black" />
             <input
               type="text"
@@ -350,7 +352,7 @@ const EditProfile = () => {
           </div>
           <div className="w-1/2  max-sm:w-full relative">
             <label className="block text-black font-bold mb-1">
-              Postal Code
+              {t('Postal Code')}
             </label>
             <MdLocationOn className="absolute top-1/2 left-3 transform mt-3 -translate-y-1/2 text-black" />
             <input
@@ -366,7 +368,7 @@ const EditProfile = () => {
         <div className="flex space-x-4  max-sm:space-x-0 max-sm:gap-4 mb-1 pb-4 max-sm:flex-col">
           <div className="w-1/2  max-sm:w-full relative">
             <label className="block text-black font-bold mb-1">
-              Date of Birth
+              {t('Date of birth')}
             </label>
             <MdOutlineDateRange className="absolute top-1/2 left-3 transform mt-3 -translate-y-1/2 text-black" />
             <input
@@ -378,15 +380,15 @@ const EditProfile = () => {
             />
           </div>
           <div className="w-1/2  max-sm:w-full relative">
-            <label className="block text-black font-bold mb-1">Gender</label>
+            <label className="block text-black font-bold mb-1">{t('Sex')}</label>
             <select
               name="sex"
               value={formData.sex}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded"
             >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option value="Male">{t('Male')}</option>
+              <option value="Female">{t('Female')}</option>
             </select>
           </div>
         </div>
@@ -402,7 +404,7 @@ const EditProfile = () => {
             type="submit"
             className="w-fit py-2 px-4 bg-dark-blue text-white rounded"
           >
-            Save Changes
+            {t('Save Change')}
           </button>
         </div>
       </form>

@@ -6,8 +6,11 @@ import toast from "react-hot-toast";
 import { createUserSession, getUserSession } from "@/utils/session";
 import Link from "next/link";
 import { Skeleton } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 
 const Anamens = ({ isProfile }) => {
+   const t = useTranslations("MedicalHistory");
+   const t1 = useTranslations("DoctorProfile")
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(true);
   const path = getPath();
@@ -89,88 +92,88 @@ const Anamens = ({ isProfile }) => {
   }, []);
 
   const questions = [
-    { id: "good_health", text: "Are you currently in good health?" },
+    { id: "good_health", text: t('Are you currently in good health?') },
     {
       id: "serious_illness",
-      text: "Have you had any serious illnesses in the past?",
+      text: t('Have you had any serious illnesses in the past?')
     },
     {
       id: "serious_illness_description",
-      text: "If the answer is yes, which ones?",
+      text: t('If the answer is yes, which ones?'),
       type: "input",
     },
-    { id: "past_surgery", text: "Have you had surgery in the past?" },
+    { id: "past_surgery", text: t('Have you had surgery in the past?') },
     {
       id: "past_surgery_description",
-      text: "If the answer is yes, which ones?",
+      text: t('If the answer is yes, which ones?'),
       type: "input",
     },
     {
       id: "current_medication",
-      text: "Are you currently undergoing medical treatment?",
+      text: t('Are you currently undergoing medical treatment?'),
     },
     {
       id: "current_medication_description",
-      text: "If the answer is yes, which ones?",
+      text: t('If the answer is yes, which ones?'),
       type: "input",
     },
     {
       id: "heart_disease",
-      text: "Have you had or currently have heart disease?",
+      text:t('Have had or currently have heart disease?'),
     },
-    { id: "blood_pressure", text: "Do you have high or low blood pressure?" },
-    { id: "allergies", text: "Have you had or currently have allergies?" },
+    { id: "blood_pressure", text: t('Have you had or currently have high blood pressure?')},
+    { id: "allergies", text: t('Have you had or currently have allergies?') },
     {
       id: "allergies_description",
-      text: "If the answer is yes, which ones?",
+      text: t('If the answer is yes, which ones?'),
       type: "input",
     },
-    { id: "diabetes", text: "Have you had or currently have diabetes?" },
+    { id: "diabetes", text: t('Do you have diabetes?') },
     {
       id: "kidney_disease",
-      text: "Have you had or currently have kidney disease?",
+      text: t('Do you have kidney disease?'),
     },
-    { id: "thyroid", text: "Have you had or currently have thyroid disease?" },
+    { id: "thyroid", text: t('Do you have thyroid disease?') },
     {
       id: "stomach_disease",
-      text: "Have you had or currently have stomach issues?",
+      text: t('Do you have stomach diseases?'),
     },
     {
       id: "digestive_disease",
-      text: "Have you had or currently have digestive issues?",
+      text:  t('Do you have digestive tract diseases?'),
     },
     {
       id: "digestive_description",
-      text: "If the answer is yes, which ones?",
+      text: t('If the answer is yes, which ones?'),
       type: "input",
     },
     {
       id: "lung_disease",
-      text: "Have you had or currently have lung disease?",
+      text: t('Do you have lung disease?')
     },
     {
       id: "lungs_description",
-      text: "If the answer is yes, which ones?",
+      text: t('If the answer is yes, which ones?'),
       type: "input",
     },
     {
       id: "venereal",
-      text: "Have you had or currently have venereal disease?",
+      text:  t('Do you have venereal diseases?'),
     },
-    { id: "nervous", text: "Have you had or currently have nervous disease?" },
-    { id: "hormone", text: "Have you had or currently have hormone issues?" },
-    { id: "any_illness", text: "Have you had or currently have any illness?" },
+    { id: "nervous", text: t('Do you have nervous or depressive diseases?')},
+    { id: "hormone", text: t('Do you have blood or haemorrhagic diseases?') },
+    { id: "any_illness", text:  t('Do you have any other illnesses not listed above?') },
     {
       id: "any_illness_description",
-      text: "If the answer is yes, which ones?",
+      text:  t('If the answer is yes, which ones?'),
       type: "input",
     },
-    { id: "smoke", text: "Do you smoke?" },
-    { id: "alcohol", text: "Do you consume alcohol?" },
-    { id: "usual_medicine", text: "Do you usually take any medicine?" },
+    { id: "smoke", text:  t('Do you smoke?') },
+    { id: "alcohol", text: t('Do you drink alcohol regularly?') },
+    { id: "usual_medicine", text:  t('Do you usually take any medications?') },
     {
       id: "usual_medicine_description",
-      text: "If the answer is yes, which ones?",
+      text: t('If the answer is yes, which ones?'),
       type: "input",
     },
   ];
@@ -223,13 +226,13 @@ const Anamens = ({ isProfile }) => {
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-between">
-        <h1 className="font-bold text-2xl text-black">Anamnesi</h1>
+        <h1 className="font-bold text-2xl text-black">{t('medicalHistory')}</h1>
         {isProfile && (
           <Link
             href={`/${path}/patient/profile/anamnesi`}
             className="bg-dark-blue text-white py-2 hover:opacity-90 transition-all active:scale-95 px-6 rounded float-right my-5"
           >
-            Edit Anamnesi
+            {t1('Edit medical')}
           </Link>
         )}
       </div>
