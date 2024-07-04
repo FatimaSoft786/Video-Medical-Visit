@@ -20,11 +20,11 @@ const GridIcon = [
   },
   {
     icon: "/patient/home/gridicon4.svg",
-    title: "odontoiatria",
+    title: "Odontoiatria",
   },
   {
     icon: "/patient/home/gridicon5.svg",
-    title: "psicologia",
+    title: "Medicina del lavoro",
   },
   {
     icon: "/patient/home/gridicon6.svg",

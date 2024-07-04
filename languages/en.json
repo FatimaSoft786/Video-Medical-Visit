@@ -71,7 +71,7 @@
     "Payment": "Payment",
     "Profile": "Profile",
     "Settings": "Settings",
-    "Sign out": "Sign out"
+    "Signout": "Sign out"
   },
   "MedicalSection": {
     "Search Now": "Search Now",
@@ -86,7 +86,9 @@
   "ConfirmedDoctor": {
     "Appointment date": "Appointment date",
     "Cancel": "Cancel",
-    "Consult Now": "Consult Now"
+    "Consult Now": "Consult Now",
+    "Cancelled": "Cancelled",
+    "Payment date": "Payment date"
   },
   "AppointmentTabs": {
     "Select Hour": "Select Hour"
@@ -263,5 +265,37 @@
     "Select option": "Select option",
     "Select your specialist": "Select your specialist",
     "Drag and drop files or Browse": "Drag & drop files or Browse"
+  },
+   "MedicalHistory": {
+  "medicalHistory": "Consenso Informato - Anamnesi",
+  "Are you currently in good health?": "Are you currently in good health?",
+  "Have you had any serious illnesses in the past?":"Have you had any serious illnesses in the past?",
+  "If the answer is yes, which ones?": "If the answer is yes, which ones?",
+  "Have you had surgery in the past?": "Have you had surgery in the past?",
+  "Are you currently undergoing medical treatment?": "Are you currently undergoing medical treatment?",
+  "Have had or currently have heart disease?": "Have had or currently have heart disease?",
+  "Have you had or currently have high blood pressure?": "Have you had or currently have high blood pressure?",
+  "Have you had or currently have allergies?": "Have you had or currently have allergies?",
+  "Do you have diabetes?": "Do you have diabetes?",
+  "Do you have viral hepatitis?": "Do you have viral hepatitis?",
+  "Do you have other liver diseases?": "Do you have other liver diseases?",
+  "Do you have kidney disease?": "Do you have kidney disease?",
+  "Do you have thyroid disease?": "Do you have thyroid disease?",
+  "Do you have stomach diseases?": "Do you have stomach diseases?",
+  "Do you have digestive tract diseases?": "Do you have digestive tract diseases?",
+  "Do you have lung disease?": "Do you have lung disease?",
+  "Do you have venereal diseases?": "Do you have venereal diseases?",
+  "Do you have nervous or depressive diseases?": "Do you have nervous or depressive diseases?",
+  "Do you have blood or haemorrhagic diseases?": "Do you have blood or haemorrhagic diseases?",
+  "Do you have any other illnesses not listed above?": "Do you have any other illnesses not listed above?",
+  "Do you smoke?": "Do you smoke?",
+  "Do you drink alcohol regularly?": "Do you drink alcohol regularly?",
+  "Have you been in contact with groups at risk for AIDS in the past or recently?":"Have you been in contact with groups at risk for AIDS in the past or recently?",
+  "Do you usually take any medications?": "Do you usually take any medications?",
+  "Are you currently pregnant?":"Are you currently pregnant?",
+  "rule1": "*Il/La sottoscritto/a autorizza il trattamento dei dati personali nel rispetto della vigente normativa sulla protezione dei dati personali ed, in particolare, il Regolamento Europeo per la protezione dei dati personali 2016/679, il d.lgs. 30/06/2003 n. 196 e successive modifiche e integrazioni, come modificato da ultimo dal d.lgs. 10/08/2018 n. 101.",
+  "I agree": "I agree",
+  "Yes": "Yes",
+  "No": "No"
   }
 }

@@ -1,8 +1,27 @@
-import { useState } from "react";
+"use client";
+import { useState,useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { format, addDays, subDays, startOfWeek, isSameDay } from "date-fns";
+import { enUS, fr, es, it } from "date-fns/locale";
 
 const DateNavigation = ({ setSelectedDate, selectedDate }) => {
+  
+  const [locale, setLocale] = useState();
+  const localeMap = {
+    en: enUS,
+    fr: fr,
+    es: es,
+    it: it,
+  };
+
+    useEffect(() => {
+    const local = document.querySelector("html").lang;
+    setLocale(local);
+  }, [locale]);
+
+
+
+
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const startDate = startOfWeek(currentDate, { weekStartsOn: 1 });
@@ -16,7 +35,7 @@ const DateNavigation = ({ setSelectedDate, selectedDate }) => {
   };
 
   const handleDateClick = (date) => {
-    setSelectedDate(format(date, "dd MMMM yyyy"));
+    setSelectedDate(format(date, "dd MMMM yyyy",{ locale: localeMap[locale] }));
   };
 
   const getDayClass = (date) => {
@@ -32,13 +51,14 @@ const DateNavigation = ({ setSelectedDate, selectedDate }) => {
     }
   };
 
+  
   return (
     <div className="">
       <div className="flex justify-start items-center my-4">
         <div className="text-xl font-bold mx-4">
           <p>
             {format(startDate, "dd")} -{" "}
-            {format(addDays(startDate, 6), "dd MMMM, yyyy")}
+            {format(addDays(startDate, 6), "dd MMMM, yyyy",{ locale: localeMap[locale] })}
           </p>
         </div>
         <button onClick={handlePrevWeek} className="mr-4">
@@ -52,8 +72,8 @@ const DateNavigation = ({ setSelectedDate, selectedDate }) => {
         {[...Array(7)].map((_, index) => {
           const date = addDays(startDate, index);
           const isSelected = isSameDay(date, new Date(selectedDate));
-          const isToday = isSameDay(date, new Date());
-
+          const isToday = isSameDay(date, new Date(),{ locale: localeMap[locale] });
+          
           return (
             <div
               key={index}
@@ -62,7 +82,7 @@ const DateNavigation = ({ setSelectedDate, selectedDate }) => {
                 date
               )}`}
             >
-              <p className="mb-1">{format(date, "EEE")}</p>
+              <p className="mb-1">{format(date, "EEE",{ locale: localeMap[locale] })}</p>
               <p>{format(date, "d")}</p>
               {isSelected && (
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-[#7CB839]"></div>

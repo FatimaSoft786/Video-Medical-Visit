@@ -107,7 +107,7 @@ const MedicalSection = () => {
                 </select>
                 <input
                   type="text"
-                  placeholder="Specialist"
+                  placeholder={t('Specialist')}
                   className="appearance-none w-2/3 md:w-auto px-2 py-4 focus:outline-none"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}

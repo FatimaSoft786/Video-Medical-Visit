@@ -13,8 +13,10 @@ import { MdOutlineCancel } from "react-icons/md";
 import getPath from "@/utils/path";
 import { addFavorite, deleteFavorite } from "@/utils/favorite";
 import { cancelAppointment } from "@/utils/appointment";
+import { useTranslations } from "next-intl";
 
 const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
+    const t = useTranslations("ConfirmedDoctor");
   const path = getPath();
   const {
     doctor,
@@ -24,7 +26,7 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
     _id,
     doctor: { average_rating, picture_url, specialist, location, favorites },
   } = appointment;
-
+  console.log(doctor.specialist);
   const renderStars = (rating) => {
     const stars = [];
     rating = rating || 0;
@@ -112,7 +114,7 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
       </div>
       <p className="text-light-gray">Specialist: {specialist}</p>
       <div className="text-black flex justify-between">
-        <h1 className="text-base text-black font-bold">Payment Date :</h1>
+        <h1 className="text-base text-black font-bold">{t('Payment date')}:</h1>
         <p className="text-light-gray text-sm">{appointment_date}</p>
       </div>
 
@@ -133,7 +135,7 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
       </p>
       <div className="text-light-gray mt-2 text-sm flex">
         <img src="/patient/time.svg" className="size-4 mr-2 mt-1" alt="time" />
-        Appointment date is {appointment_date}, {appointment_time}
+        {t('Appointment date')}: {appointment_date}, {appointment_time}
       </div>
       {appointment_status === "cancelled" && (
         <button

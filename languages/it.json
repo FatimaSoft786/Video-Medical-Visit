@@ -90,7 +90,7 @@
     "Payment": "Pagamenti",
     "Profile": "Profilo",
     "Settings": " Impostazioni",
-    "Sign out": "Log out"
+    "Signout": "Log out"
   },
   "MedicalSection": {
     "Search Now": "Cerca",
@@ -105,7 +105,9 @@
   "ConfirmedDoctor": {
     "Appointment date": "Data Appuntamento",
     "Cancel": "Annulla",
-    "Consult Now": "Contattaci"
+    "Consult Now": "Contattaci",
+     "Cancelled": "Cancelled",
+     "Payment date": "Data pagamenti"
   },
   "AppointmentTabs": {
     "Select Hour": "Seleziona l'ora"
@@ -309,5 +311,37 @@
     "Please select option from the specialist": "Seleziona l'opzione dallo specialista",
     "Please check your email, a code has been sent": "Controlla la tua email, è stato inviato un codice.",
     "Please select file": "Per favore, seleziona il file."
+  },
+  "MedicalHistory": {
+    "medicalHistory": "Consenso Informato - Anamnesi",
+  "Are you currently in good health?": "Attualmente gode di buona salute?",
+  "Have you had any serious illnesses in the past?":"Ha avuto in passato malattie gravi?",
+  "If the answer is yes, which ones?": "Se è sì, quali?",
+  "Have you had surgery in the past?": "Ha subito interventi chirurgici?",
+  "Are you currently undergoing medical treatment?": "Attualmente è sottoposto a cure mediche?",
+  "Have had or currently have heart disease?": "Ha avuto o ha attualmente malattie cardiache?",
+  "Have you had or currently have high blood pressure?": "Ha avuto o ha attualmente la pressione alta?",
+  "Have you had or currently have allergies?": "Ha avuto o ha attualmente allergie?",
+  "Do you have diabetes?": "Ha il diabete?",
+  "Do you have viral hepatitis?": "Ha epatiti virali??",
+  "Do you have other liver diseases?": "Altre malattie del fegato?",
+  "Do you have kidney disease?": "Malattie renali?",
+  "Do you have thyroid disease?": "Malattie della tiroide?",
+  "Do you have stomach diseases?": "Malattie dello stomaco?",
+  "Do you have digestive tract diseases?": "Malattie del tubo digerente?",
+  "Do you have lung disease?": "Malattie polmonari?",
+  "Do you have venereal diseases?": "Malattie veneree?",
+  "Do you have nervous or depressive diseases?": "Malattie nervose o depressive?",
+  "Do you have blood or haemorrhagic diseases?": "Malattie del sangue o emorragiche?",
+  "Do you have any other illnesses not listed above?": "Altre malattie non elencate in precedenza?",
+  "Do you smoke?": "Fuma?",
+  "Do you drink alcohol regularly?": "Beve alcolici abitualmente?",
+  "Have you been in contact with groups at risk for AIDS in the past or recently?":"In passato o recentemente è stato in contatto con gruppi a rischio per l’AIDS?",
+  "Do you usually take any medications?": "Prende abitualmente dei farmaci?",
+  "Are you currently pregnant?":"Attualmente è in stato di gravidanza?",
+  "rule1": "*Il/La sottoscritto/a autorizza il trattamento dei dati personali nel rispetto della vigente normativa sulla protezione dei dati personali ed, in particolare, il Regolamento Europeo per la protezione dei dati personali 2016/679, il d.lgs. 30/06/2003 n. 196 e successive modifiche e integrazioni, come modificato da ultimo dal d.lgs. 10/08/2018 n. 101.",
+  "I agree": "Acconsento",
+  "Yes": "Sì",
+  "No": "No"
   }
 }

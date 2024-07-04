@@ -7,8 +7,10 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import Anamens from "./Anamnesis";
+import { useTranslations } from "next-intl";
 
 const Page = ({ params }) => {
+  const t = useTranslations("Profile");
   const [patientData, setPatientData] = useState(null);
   const [loading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -74,13 +76,13 @@ const Page = ({ params }) => {
   }
 
   const profileFields = [
-    { key: "firstName", label: "First Name" },
-    { key: "lastName", label: "Last Name" },
-    { key: "sex", label: "Sex" },
-    { key: "dob", label: "Date of Birth" },
-    { key: "phoneNumber", label: "Phone Number" },
-    { key: "location", label: "Location" },
-    { key: "postal_code", label: "Postal Code" },
+    { key: "firstName", label: t('First Name') },
+    { key: "lastName", label: t('Last Name') },
+    { key: "sex", label: t('Sex') },
+    { key: "dob", label: t('Date of birth') },
+    { key: "phoneNumber", label: t('Phone Number') },
+    { key: "location", label: t('Location') },
+    { key: "postal_code", label: t('Postal Code') },
   ];
 
   return (

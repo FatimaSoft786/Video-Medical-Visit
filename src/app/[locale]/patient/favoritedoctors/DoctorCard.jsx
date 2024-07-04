@@ -10,8 +10,10 @@ import {
   FaStarHalfAlt,
 } from "react-icons/fa";
 import { addFavorite, deleteFavorite } from "@/utils/favorite";
+import { useTranslations } from "next-intl";
 
 const DoctorCard = ({ doctor, patientId, token }) => {
+  const t = useTranslations("DoctorCard");
   const path = getPath();
   const [isFavorite, setIsFavorite] = useState(
     doctor.favorites.some((favorite) => favorite.patientId === patientId)
@@ -125,7 +127,7 @@ const DoctorCard = ({ doctor, patientId, token }) => {
         className="flex mt-4 space-x-2"
       >
         <button className="bg-dark-blue active:scale-85 transition-all group-hover:opacity-90 text-sm text-white py-2 px-2 rounded-lg flex-1">
-          Book Now
+          {t('Book Now')}
         </button>
       </Link>
     </div>

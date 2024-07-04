@@ -10,13 +10,14 @@ import {
 } from "react-icons/fa";
 import getPath from "@/utils/path";
 import { addFavorite, deleteFavorite } from "@/utils/favorite";
+import { useTranslations } from "next-intl";
 
 const DoctorCard = ({ doctor, patientId, token }) => {
   const path = getPath();
   const [isFavorite, setIsFavorite] = useState(
     doctor.favorites && doctor.favorites.length > 0
   );
-
+const t = useTranslations("DoctorCard");
   const handleFavoriteClick = async () => {
     if (isFavorite) {
       const result = await deleteFavorite(doctor._id, token);
@@ -127,7 +128,7 @@ const DoctorCard = ({ doctor, patientId, token }) => {
         className="flex mt-4 space-x-2"
       >
         <button className="bg-dark-blue active:scale-85 transition-all group-hover:opacity-90 text-sm text-white py-2 px-2 rounded-lg flex-1">
-          Book Now
+          {t('Book Now')}
         </button>
       </Link>
     </div>

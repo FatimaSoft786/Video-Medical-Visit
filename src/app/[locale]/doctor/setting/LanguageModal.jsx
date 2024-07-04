@@ -8,8 +8,8 @@ const buttonClass = "w-full bg-dark-blue text-white p-3 rounded";
 
 const languages = [
   { code: "en", name: "English" },
-  { code: "es", name: "Spanish" },
-  { code: "fr", name: "French" },
+  // { code: "es", name: "Spanish" },
+  // { code: "fr", name: "French" },
   { code: "it", name: "Italian" },
 ];
 
@@ -45,8 +45,8 @@ export default function LanguageModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsOpen(false);
-    router.push(`/${selectedLanguage}/doctor/setting`);
+     setIsOpen(false);
+     router.push(`/${selectedLanguage}/doctor/setting`);
   };
 
   return (

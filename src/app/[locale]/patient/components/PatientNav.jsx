@@ -7,23 +7,11 @@ import { useState, useEffect } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { clearUserSession, getUserSession } from "@/utils/session";
-const header = [
-  { title: "dashboard", link: "dashboard" },
-  {
-    title: "Favorite Doctors",
-    link: "favoritedoctors",
-  },
-  {
-    title: "Appointments",
-    link: "appointments",
-  },
-  {
-    title: "Payment",
-    link: "payment",
-  },
-];
+import { useTranslations } from "next-intl";
+
 
 const PatientNav = ({ className = "" }) => {
+    const t = useTranslations("PatientNavBar");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
@@ -31,6 +19,25 @@ const PatientNav = ({ className = "" }) => {
 
   const pathname = usePathname();
   const path = getPath();
+
+const header = [
+  { title: `${t("Dashboard")}`, link: "dashboard" },
+  {
+    title: `${t('Favorite Doctors')}`,
+    link: "favoritedoctors",
+  },
+  {
+    title: `${t('Appointments')}`,
+    link: "appointments",
+  },
+  {
+    title: `${t('Payment')}`,
+    link: "payment",
+  },
+];
+
+
+
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -151,13 +158,13 @@ const PatientNav = ({ className = "" }) => {
                     href={`/${path}/patient/profile`}
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-200 rounded-t-lg"
                   >
-                    Profile
+                   {t('Profile')}
                   </Link>
                   <Link
                     href={`/${path}/patient/setting`}
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                   >
-                    Settings
+                    {t('Settings')}
                   </Link>
                   <div
                     onClick={() => {
@@ -166,7 +173,7 @@ const PatientNav = ({ className = "" }) => {
                     }}
                     className="block transition-all hover:text-white px-4 py-2 text-gray-800 hover:bg-red-500 rounded-b-lg"
                   >
-                    Signout
+                   {t('Signout')}
                   </div>
                 </div>
               )}
