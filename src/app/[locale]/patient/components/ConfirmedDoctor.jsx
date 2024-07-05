@@ -143,7 +143,7 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
           disabled={true}
         >
           <MdOutlineCancel className="text-lg" size={16} />
-          Cancelled
+         {t('Cancelled')}
         </button>
       )}
       {appointment_status !== "cancelled" && (
@@ -153,14 +153,14 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
             onClick={handleCancelAppointment}
           >
             <MdOutlineCancel className="text-lg" size={16} />
-            Cancel
+            {t('Cancel')}
           </button>
           <Link
             href={`/${path}/session?id=${_id}`}
             className="flex items-center justify-center gap-2 bg-dark-blue text-xs text-white py-4 font-semibold px-2 rounded-lg flex-1"
           >
             <img src="/svg/videocall.svg" className="size-4" alt="video call" />{" "}
-            Consult Now
+            {t('Consult Now')}
           </Link>
         </div>
       )}

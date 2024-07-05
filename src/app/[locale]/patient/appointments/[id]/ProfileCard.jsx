@@ -1,6 +1,7 @@
 import { Image } from "@nextui-org/react";
 import React from "react";
 import { FaCheck, FaMapMarkerAlt, FaUser } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 const ProfileCard = ({
   doctor,
@@ -19,6 +20,8 @@ const ProfileCard = ({
     setSelectedFee(doctor.followUp);
     setAppointmentType("followUp");
   };
+
+    const t = useTranslations("DoctorDetailsPage");
 
   return (
     <div className="mx-auto max-md:p-2 rounded-lg">
@@ -56,7 +59,7 @@ const ProfileCard = ({
               }`}
             >
               {doctor.currency}
-              {doctor.visit}/visit
+              {doctor.visit}/{t('Visit')}
             </button>
             <button
               onClick={handleSelectFollowUp}
@@ -66,7 +69,7 @@ const ProfileCard = ({
               }`}
             >
               {doctor.currency}
-              {doctor.followUp}/Follow-up
+              {doctor.followUp}/{t('Follow up')}
             </button>
           </div>
         </div>
@@ -74,7 +77,7 @@ const ProfileCard = ({
           onClick={onBookAppointment}
           className="ml-auto max-md:mt-6 max-md:w-full max-sm:text-sm bg-dark-blue text-white px-4 py-2 rounded-lg"
         >
-          Book Appointment
+          {t('Book appointment')}
         </button>
       </div>
     </div>

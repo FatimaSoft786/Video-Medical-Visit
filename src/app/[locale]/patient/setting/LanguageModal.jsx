@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-
+import { useTranslations } from "next-intl";
 const buttonClass = "w-full bg-dark-blue text-white p-3 rounded";
 
 const languages = [
@@ -14,6 +14,7 @@ const languages = [
 ];
 
 export default function LanguageModal() {
+  const t = useTranslations("Setting");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const router = useRouter();
@@ -54,7 +55,7 @@ export default function LanguageModal() {
       <button onClick={() => setIsOpen(!isOpen)} className="flex flex-row">
         <img src={`/svg/language.svg`} alt="language" />
         <p className="font-abc font-medium text-[16px] mx-[15px] text-[#000]">
-          Language
+          {t('Language')}
         </p>
       </button>
       <motion.div>
@@ -69,7 +70,7 @@ export default function LanguageModal() {
             } w-[600px] max-sm:w-full h-fit py-8 rounded-lg bg-white p-4`}
           >
             <h1 className="text-2xl font-bold py-2 text-center">
-              Select Your Language
+              {t('Select Your Language')}
             </h1>
             <form
               className="flex flex-col gap-4 px-4 py-6"
@@ -96,7 +97,7 @@ export default function LanguageModal() {
                   type="submit"
                   className="bg-dark-blue text-white py-3 rounded mt-4 px-12"
                 >
-                  Save Setting
+                  {t('Save Setting')}
                 </button>
               </div>
             </form>

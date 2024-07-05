@@ -19,7 +19,7 @@ const page = () => {
           <div className=" flex flex-row">
             <img src={`/svg/profile.svg`} alt="profile" />
             <p className=" font-abc font-medium text-[16px] mx-[15px] text-[#000]">
-              My Profile
+              {t('My Profile')}
             </p>
           </div>
           <FaChevronRight className=" flex justify-end items-end my-1" />
@@ -41,7 +41,7 @@ const page = () => {
           <div className=" flex flex-row">
             <img src={`/svg/privacy.svg`} alt="Privacy" />
             <p className=" font-abc font-medium text-[16px] mx-[15px] text-[#000]">
-            Privacy Policy
+            {t('Privacy Policy')}
             </p>
           </div>
           <FaChevronRight className=" flex justify-end items-end my-1" />
@@ -56,7 +56,7 @@ const page = () => {
           <div className=" flex flex-row">
             <img src={`/svg/tems.svg`} alt="Terms&Condition" />
             <p className=" font-abc font-medium text-[16px] mx-[15px] text-[#000]">
-             Terms & Condition
+             {t('Terms & Condition')}
             </p>
           </div>
           <FaChevronRight className=" flex justify-end items-end my-1" />

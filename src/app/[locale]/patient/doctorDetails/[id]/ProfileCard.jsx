@@ -4,19 +4,21 @@ import getPath from "@/utils/path";
 import React, { useState } from "react";
 import { FaCheck, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 const ProfileCard = ({ doctor }) => {
   const [activeTab, setActiveTab] = useState("overview");
+  const t = useTranslations("DoctorDetailsPage");
   const path = getPath();
   const renderContent = () => {
     switch (activeTab) {
       case "overview":
-        return <Overview doctor={doctor} />;
+        return <Overview doctor={doctor} t={t} />;
       case "reviews":
         return <Reviews reviews={doctor.reviews} />;
       // case "businessHours":
       //   return <BusinessHours slots={doctor.slots} />;
       default:
-        return <Overview doctor={doctor} />;
+        return <Overview doctor={doctor} t={t} />;
     }
   };
 
@@ -51,10 +53,10 @@ const ProfileCard = ({ doctor }) => {
           </p>
           <div className="flex gap-4 mt-2 max-md:items-center max-md:justify-center">
             <button className="bg-light-gray hover:opacity-95 transition-all active:scale-95 text-black px-4 py-2 rounded-lg max-sm:text-sm max-md:w-full text-center">
-              {doctor.followUp + " " + doctor.currency}/FollowUp
+              {doctor.followUp + " " + doctor.currency}/{t('Follow up')}
             </button>
             <button className="bg-dark-blue hover:opacity-95 transition-all active:scale-95 text-white px-4 py-2 rounded-lg max-sm:text-sm max-md:w-full text-center">
-              {doctor.visit + " " + doctor.currency}/Session
+              {doctor.visit + " " + doctor.currency}/{t('Visit')}
             </button>
           </div>
         </div>
@@ -62,7 +64,7 @@ const ProfileCard = ({ doctor }) => {
           href={`/${path}/patient/appointments/${doctor._id}`}
           className="ml-auto max-md:mt-2 text-center hover:opacity-95 transition-all active:scale-95 max-md:w-full max-sm:text-sm bg-dark-blue text-white px-4 py-2 rounded-lg"
         >
-          Book Appointment
+          {t('Book appointment')}
         </Link>
       </div>
       <hr className="my-9" />
@@ -77,7 +79,7 @@ const ProfileCard = ({ doctor }) => {
                   : "text-gray-500"
               }`}
             >
-              Overview
+             {t('Overview')}
             </button>
             <button
               onClick={() => setActiveTab("reviews")}
@@ -87,7 +89,7 @@ const ProfileCard = ({ doctor }) => {
                   : "text-gray-500"
               }`}
             >
-              Reviews
+             {t('Reviews')}
             </button>
             {/* <button
               onClick={() => setActiveTab("businessHours")}
@@ -107,13 +109,13 @@ const ProfileCard = ({ doctor }) => {
   );
 };
 
-const Overview = ({ doctor }) => (
+const Overview = ({ doctor , t }) => (
   <div>
-    <h2 className="text-xl font-bold my-5">About Me</h2>
+    <h2 className="text-xl font-bold my-5">{t('About Me')}</h2>
     <p className="text-light-gray mb-6">
       {doctor.about_info || "No description available."}
     </p>
-    <h3 className="text-xl font-bold my-5">Education</h3>
+    <h3 className="text-xl font-bold my-5">{t('Education')}</h3>
     <ul className="list-none relative text-light-gray flex flex-col gap-4">
       <li className="relative flex flex-col pl-8">
         <div className="absolute bg-dark-blue left-2.5 top-[34%] w-1 h-[60%]"></div>
@@ -127,7 +129,7 @@ const Overview = ({ doctor }) => (
         </span>
       </li>
     </ul>
-    <h3 className="text-xl font-bold my-5">Work & Experience</h3>
+    <h3 className="text-xl font-bold my-5">{t('Work & Experience')}</h3>
     <ul className="list-none relative text-light-gray flex flex-col gap-4">
       <li className="relative flex flex-col pl-8">
         <div className="absolute bg-dark-blue left-2.5 top-[52%] w-1 h-1/3"></div>
@@ -140,7 +142,7 @@ const Overview = ({ doctor }) => (
         <span>{doctor.duration ? doctor.duration : "Not Available"}</span>
       </li>
     </ul>
-    <h3 className="text-lg font-semibold my-5">Awards</h3>
+    <h3 className="text-lg font-semibold my-5">{t('Awards')}</h3>
     <ul className="list-none relative text-light-gray flex flex-col gap-4">
       <li className="relative flex flex-col pl-8">
         <span className="absolute left-0 top-1 size-6 bg-dark-blue/10 border-2 border-dark-blue rounded-full"></span>

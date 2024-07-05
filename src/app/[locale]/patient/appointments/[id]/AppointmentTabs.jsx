@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 const AppointmentTabs = ({
   slots,
@@ -11,7 +12,7 @@ const AppointmentTabs = ({
   setSelectedHour,
 }) => {
   const scrollRef = useRef(null);
-
+  const t = useTranslations('DoctorDetailsPage')
   const dates = slots.map((slot) => slot.date);
   const hours = slots[selectedDate]?.time || [];
 
@@ -66,7 +67,7 @@ const AppointmentTabs = ({
         />
       </div>
       <div className="mt-4">
-        <h2 className="text-lg font-semibold">Select Hour</h2>
+        <h2 className="text-lg font-semibold">{t('Select Hour')}</h2>
         <div className="flex flex-wrap gap-4 mt-2 transition-all">
           {hours.length > 0 ? (
             hours.map((hour, index) => (

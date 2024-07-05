@@ -107,7 +107,7 @@
     "Appointment date": "Data Appuntamento",
     "Cancel": "Annulla",
     "Consult Now": "Contattaci",
-     "Cancelled": "Cancelled",
+     "Cancelled": "Cancellato",
      "Payment date": "Data pagamenti"
   },
   "AppointmentTabs": {
@@ -124,7 +124,11 @@
     "About Me": "About Me",
     "Education": "Educazione",
     "Work & Experience": "Esperienze lavorative",
-    "Awards": "Premi"
+    "Awards": "Premi",
+    "Visit": "Prima visita",
+    "Follow up": "Visita ddi controlleer",
+     "Book appointment": "Prenota un appuntamento",
+      "Select Hour": "Agenda"
   },
   "Setting": {
     "Setting": "Impostazioni",

@@ -1,7 +1,8 @@
 import { Image } from "@nextui-org/react";
 import React from "react";
-
+import { useTranslations } from "next-intl";
 const Notification = ({ item, older }) => {
+  const t = useTranslations('Notifications')
   const {
     doctor,
     patient,
@@ -39,8 +40,7 @@ const Notification = ({ item, older }) => {
             src={`/svg/videocall.svg`}
             className="size-5"
             alt="Video Call Icon"
-          />{" "}
-          Video Call
+          />{t('Video Call')}
         </button>
       )}
     </div>

@@ -11,8 +11,9 @@ import ProfileCardSkeleton from "./ProfileCardSkeleton";
 import { useRouter } from "next/navigation";
 import { getUserSession } from "@/utils/session";
 import { toast } from "react-hot-toast";
-
+import { useTranslations } from "next-intl";
 const Page = ({ params }) => {
+  const t = useTranslations('DoctorDetailsPage');
   const [doctor, setDoctor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -188,7 +189,7 @@ const Page = ({ params }) => {
       />
       <div className="mt-6">
         <h2 className="text-3xl font-bold my-6 mt-12">
-          Reviews About {doctor.firstName} {doctor.lastName}
+         {t('Reviews')} About {doctor.firstName} {doctor.lastName}
         </h2>
         {doctor.reviews && doctor.reviews.length > 0 ? (
           <div className="grid grid-cols-4 gap-4 max-md:grid-cols-2 max-sm:grid-cols-1">

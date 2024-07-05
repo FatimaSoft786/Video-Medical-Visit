@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { getUserSession } from "@/utils/session";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
   const [notificationsData, setNotificationData] = useState([]);
   const { token } = getUserSession();
+  const t = useTranslations('Notifications');
 
   useEffect(() => {
     async function fetchNotification() {
@@ -45,10 +47,10 @@ const Page = () => {
     <div className="mt-6 container mx-auto w-full">
       <title>Notifications | Medical Appointment</title>
       <h1 className="font-bold text-3xl max-md:text-2xl px-5 mt-6">
-        Notifications
+        {t('Notifications')}
       </h1>
       <div className="flex justify-between px-6 pt-8">
-        <p className="text-lg text-light-gray">TODAY</p>
+        <p className="text-lg text-light-gray">{t('Today')}</p>
       </div>
       <div className="gap-2 px-4">
         {notificationsData.map((item, index) => (
@@ -90,7 +92,7 @@ const Notification = ({ item }) => {
             className="size-5"
             alt="Video Call Icon"
           />{" "}
-          Video Call
+          {t('Video Call')}
         </button>
       )}
     </div>
