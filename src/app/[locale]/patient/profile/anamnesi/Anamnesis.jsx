@@ -330,7 +330,7 @@ const Anamens = ({ isProfile }) => {
           onClick={handleSubmit}
           className="bg-dark-blue text-white py-2 px-12 rounded float-right my-5"
         >
-          Submit
+         {t('Submit')}
         </button>
       )}
     </div>
