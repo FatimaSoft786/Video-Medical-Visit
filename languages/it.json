@@ -94,7 +94,7 @@
   },
   "MedicalSection": {
     "Search Now": "Cerca",
-    "Specialist": "Specializzazioni"
+    "Specialist": "Cerca per meddico o Specializzazione..."
   },
   "DoctorCard": {
     "Book Now": "Prenota"
@@ -126,7 +126,7 @@
     "Work & Experience": "Esperienze lavorative",
     "Awards": "Premi",
     "Visit": "Prima visita",
-    "Follow up": "Visita ddi controlleer",
+    "Follow up": "Visita di controllo",
      "Book appointment": "Prenota un appuntamento",
       "Select Hour": "Agenda"
   },
@@ -200,6 +200,7 @@
     "PhoneNumber": "Cellulare",
     "Dob": "Data di nascita",
     "Sex": "Sesso",
+    "Change anamnesi": "Modifica anamnesi",
     "Signup as Doctor": "Iscriviti come Dottore",
     "Fill the form to get started": "Riempi il Form per l’iscrizione.",
     "Email Address": "E-mail",
@@ -349,6 +350,8 @@
   "rule1": "*Il/La sottoscritto/a autorizza il trattamento dei dati personali nel rispetto della vigente normativa sulla protezione dei dati personali ed, in particolare, il Regolamento Europeo per la protezione dei dati personali 2016/679, il d.lgs. 30/06/2003 n. 196 e successive modifiche e integrazioni, come modificato da ultimo dal d.lgs. 10/08/2018 n. 101.",
   "I agree": "Acconsento",
   "Yes": "Sì",
-  "No": "No"
+  "No": "No",
+  "accept": "Accetto",
+  "decline": "Non accetto"
   }
 }

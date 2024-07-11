@@ -301,7 +301,7 @@ const Anamens = ({ isProfile }) => {
             }}
             className="size-4 accent-black rounded-xl border-2"
           />
-          <label className="text-black font-semibold mx-1">I accept</label>
+          <label className="text-black font-semibold mx-1">{t('accept')}</label>
           <input
             type="checkbox"
             checked={formState.VenerealChecked === "No"}
@@ -310,7 +310,7 @@ const Anamens = ({ isProfile }) => {
             }}
             className="size-4 accent-black rounded-xl border-2"
           />
-          <label className="text-black font-semibold mx-1">I decline</label>
+          <label className="text-black font-semibold mx-1">{t('decline')}</label>
         </div>
         <p className="my-6 text-light-gray">
           ** Si informa il paziente che il rifiuto al trattamento dei propri

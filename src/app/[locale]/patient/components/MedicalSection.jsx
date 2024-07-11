@@ -101,14 +101,14 @@ const MedicalSection = () => {
             </p>
             <div className="flex flex-wrap mt-20 items-center gap-2 bg-white  p-3 rounded-2xl justify-evenly">
               <div className="flex flex-1 rounded-lg border relative divide-x-1">
-                <select className="px-2 appearance-none py-4 w-1/3 md:w-auto">
+                {/* <select className="px-2 appearance-none py-4 w-1/3 md:w-auto">
                   <option>Lahore</option>
                   <option>Other Location</option>
-                </select>
+                </select> */}
                 <input
                   type="text"
                   placeholder={t('Specialist')}
-                  className="appearance-none w-2/3 md:w-auto px-2 py-4 focus:outline-none"
+                  className="appearance-none w-1/2 md:w-auto px-2 py-4 focus:outline-none"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />

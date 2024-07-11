@@ -398,7 +398,7 @@ const EditProfile = () => {
             href={`/${path}/patient/profile/anamnesi`}
             className="my-6 bg-light-gray px-4 py-2 rounded active:scale-90 transition-all duration-250 active:opacity-90 hover:bg-black/30"
           >
-            Change anamnesi
+            {t('Change anamnesi')}
           </Link>
           <button
             type="submit"
