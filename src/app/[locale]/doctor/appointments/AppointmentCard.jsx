@@ -101,7 +101,7 @@ const AppointmentCard = ({ appointment, isHeld, onCancel }) => {
             {isCancelling ? "Cancelling..." : t("Cancel")}
           </button>
           <Link
-            href={`/${path}/session?id=${appointment._id}`}
+            href={`/${path}/doctor/sessions`}
             className="bg-light-gray flex items-center gap-3 text-black py-2 px-4 rounded"
           >
             <img src="/svg/videocall.svg" className="invert" />{" "}
@@ -114,3 +114,12 @@ const AppointmentCard = ({ appointment, isHeld, onCancel }) => {
 };
 
 export default AppointmentCard;
+
+
+  // <Link
+  //           href={`/${path}/session?id=${appointment._id}`}
+  //           className="bg-light-gray flex items-center gap-3 text-black py-2 px-4 rounded"
+  //         >
+  //           <img src="/svg/videocall.svg" className="invert" />{" "}
+  //           {t("Start a video call")}
+  //         </Link>
