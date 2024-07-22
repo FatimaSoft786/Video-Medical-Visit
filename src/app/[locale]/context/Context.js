@@ -4,8 +4,8 @@ import { io } from 'socket.io-client';
 import Peer from 'simple-peer';
 import { getUserSession } from "@/utils/session";
 const SocketContext = createContext();
-const socket = io('https://video-medical-backend-production.up.railway.app/');
-console.log(socket);
+//const socket = io('https://video-medical-backend-production.up.railway.app/');
+//console.log(socket);
 const ContextProvider = ({ children }) => {
     const [callAccepted, setCallAccepted] = useState(false);
     const [isVideoEnabled, setIsVideoEnabled] = useState(true);
@@ -18,9 +18,6 @@ const ContextProvider = ({ children }) => {
     const myVideo = useRef();
     const userVideo = useRef();
     const connectionRef = useRef();
-
-    
-
 
     const [profileData, setProfileData] = useState({});
   useEffect(() => {
@@ -48,7 +45,7 @@ const ContextProvider = ({ children }) => {
     }
   }
   getDeviceMedia();
-        socket.on('me', (id) => setMe(id));
+      //  socket.on('me', (id) => setMe(id));
        
         // socket.on('callUser', ({ from, name: callerName, signal }) => {
         //     setCall({ isReceivingCall: true, from, name: callerName, signal });
@@ -139,9 +136,6 @@ const ContextProvider = ({ children }) => {
             setName,
             callEnded,
             me,
-            callUser,
-            leaveCall,
-            answerCall,
             toggleVideo,
             isVideoEnabled,
             isMuteEnabled,

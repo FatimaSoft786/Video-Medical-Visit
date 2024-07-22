@@ -8,19 +8,47 @@ import { SocketContext } from "../../context/Context";
 import { BiClipboard, BiPhoneCall, BiPhoneOff, BiVideoOff, BiVolumeMute } from "react-icons/bi";
 import io from "socket.io-client";
 
-const socket = io("https://video-medical-backend-production.up.railway.app/");
+
+ var socket = io('https://video-medical-backend-production.up.railway.app/');
+console.log(socket);
 
 function VideoSection() {
-   const { name, callAccepted, myVideo, userVideo, callEnded, stream, call,toggleVideo,isVideoEnabled, isMuteEnabled, muteUnmute } = useContext(SocketContext)
-   console.log(myVideo);
+ //  const { name, callAccepted, myVideo, userVideo, callEnded, stream, call,toggleVideo,isVideoEnabled, isMuteEnabled, muteUnmute } = useContext(SocketContext)
+
+    // const [users, setUsers] = useState({});
+    // const [username, setUsername] = useState('Test user');
+    // const [otherUserId, setOtherUserId] = useState('');
+
+    //  useEffect(() => {
+    //     // Join the room
+    //     socket.emit('join', username);
+
+    //     // Listen for updates to the users
+    //     socket.on('updateUsers', (users) => {
+    //         setUsers(users);
+    //         // Fetch other user's socket ID
+    //         const otherUserIds = Object.keys(users).filter(id => id !== socket.id);
+    //         if (otherUserIds.length > 0) {
+    //             setOtherUserId(otherUserIds[0]);
+    //         }
+    //     });
+    //      console.log(users);
+    //     // Cleanup on component unmount
+    //     return () => {
+    //         socket.disconnect();
+    //     };
+    // }, [username]);
+   
   return (
     <div className="flex flex-col w-[70%] max-md:w-full rounded-xl overflow-hidden">
       <div className="relative bg-gray-200/20 px-2">
-        <video autoPlay ref={myVideo} className="w-full"
+        {/* <video autoPlay ref={myVideo} className="w-full"
           // src="/doctor/frame/Frameimg.svg"
           // alt="Video call"
           
-        />
+        /> */}
+        <img  src="/doctor/frame/Frameimg.svg" className="w-full"
+           alt="Video call"/>
         <div className="absolute top-4 left-4 bg-gray-800/30 text-white rounded-2xl px-4 py-2 text-xs">
           24:01:45
         </div>
@@ -28,7 +56,7 @@ function VideoSection() {
           <img src="/doctor/frame/fullscreen.svg" alt="" className="size-4" />
         </div>
         <div className="absolute bottom-4 left-4 bg-gray-800/30 text-white rounded-2xl px-4 py-2 text-sm">
-        {name}
+        Test user
         </div>
         <div className="absolute bottom-4 right-4 bg-gray-800/30 text-white rounded-2xl p-2 text-sm">
           <img src="/doctor/frame/voice.svg" alt="" className="size-4" />
@@ -38,13 +66,15 @@ function VideoSection() {
       <div className="flex justify-center relative items-center p-4 space-x-4">
       <div className="relative gap-4 flex items-center max-md:mr-6">
          <button
-      className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-500"  onClick={muteUnmute}>
-       {isMuteEnabled ? <img className="size-10 p-2 rounded-full"  src='/doctor/frame/mic.svg'/> : <BiVolumeMute className="size-10 p-2 rounded-full text-white"/>}
+      className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-500"  >
+      <img className="size-10 p-2 rounded-full"  src='/doctor/frame/mic.svg'/>
+       {/* {isMuteEnabled ? <img className="size-10 p-2 rounded-full"  src='/doctor/frame/mic.svg'/> : <BiVolumeMute className="size-10 p-2 rounded-full text-white"/>} */}
     </button>
 
     <button
-      className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-500"  onClick={toggleVideo}>
-       {isVideoEnabled ? <img className="size-10 p-2 rounded-full"  src='/doctor/frame/videoicon.svg'/> : <BiVideoOff className="size-10 p-2 rounded-full text-white"/>}
+      className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-500"  >
+      <img className="size-10 p-2 rounded-full"  src='/doctor/frame/videoicon.svg'/> 
+       {/* {isVideoEnabled ? <img className="size-10 p-2 rounded-full"  src='/doctor/frame/videoicon.svg'/> : <BiVideoOff className="size-10 p-2 rounded-full text-white"/>} */}
     </button>
 
         
