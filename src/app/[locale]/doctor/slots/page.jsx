@@ -7,6 +7,8 @@ import ProfileCard from "./ProfileCard";
 import { getUserSession } from "@/utils/session";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { format} from "date-fns";
+import { enUS, fr, es, it } from "date-fns/locale";
 
 const Agenda = () => {
   const t = useTranslations("Slots");
@@ -27,12 +29,23 @@ const Agenda = () => {
     };
     const savedCurrency = localStorage.getItem("currency") || "€";
     
-
     setSelectedSlots(savedSlots);
     //console.log(savedPrices);
     setPrices(savedPrices);
     setCurrency(savedCurrency);
   }, []);
+
+  const [locale, setLocale] = useState();
+  const localeMap = {
+    en: enUS,
+    fr: fr,
+    es: es,
+    it: it,
+  };
+  useEffect(() => {
+    const local = document.querySelector("html").lang;
+    setLocale(local);
+  }, [locale]);
 
   const toggleSlot = (day, slot) => {
     const slotKey = `${day}-${slot}`;
@@ -46,6 +59,8 @@ const Agenda = () => {
   const handleSave = async () => {
     const doctorId = user.user_details._id;
    
+ const format1 = format(selectedDate, "MMMM dd yyyy", { locale: localeMap[locale] })
+ 
 
     const payload = {
       time: selectedSlots.map(
@@ -56,7 +71,7 @@ const Agenda = () => {
           ":00"
       ),
       
-      date: selectedDate.toDateString().slice(4),
+      date: format1,
       visit: prices.firstVisit.replace("/Session", ""),
       followUp: prices.followUpVisit.replace("/Session", ""),
       currency: currency,
