@@ -214,7 +214,7 @@ function VideoSection() {
            alt="Video call"/>)}
         
         <div className="absolute top-4 left-4 bg-gray-800/30 text-white rounded-2xl px-4 py-2 text-xs">
-          Recordings
+         
         </div>
         {/* <div className="absolute top-4 right-4 bg-gray-800/30 text-white rounded-2xl p-2 text-sm">
           <img src="/doctor/frame/fullscreen.svg" alt="" className="size-4" />

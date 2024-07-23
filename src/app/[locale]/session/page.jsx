@@ -166,7 +166,7 @@ const socket = useSocket();
               <ReactPlayer
                 playing
                 width="100%"
-                height="70vh"
+                height="80vh"
                 url={myStream}
               />
             </>
@@ -184,9 +184,9 @@ const socket = useSocket();
         <div className="absolute bottom-4 left-4 bg-gray-800/30 text-white rounded-2xl px-4 py-2 text-sm">
         {remoteSocketId ? "Connected" : "No one in room"}
         </div>
-        <div className="absolute bottom-4 right-4 bg-gray-800/30 text-white rounded-2xl p-2 text-sm">
+        {/* <div className="absolute bottom-4 right-4 bg-gray-800/30 text-white rounded-2xl p-2 text-sm">
           <img src="/doctor/frame/voice.svg" alt="" className="size-4" />
-        </div>
+        </div> */}
       </div>
       {/* <ParticipantsThumbnails /> */}
          <div className=" grid grid-cols-1 gap-4 rounded-xl my-2">
@@ -196,7 +196,7 @@ const socket = useSocket();
               <ReactPlayer
                 playing 
                 width="30%"
-                height="20vh"
+                height="17vh"
                 url={remoteStream}
               />
             </>
@@ -232,7 +232,7 @@ const socket = useSocket();
             <BiPhoneCall className="size-10 p-2 rounded-full text-white"/>
         </button>}
       </div>
-      <button onClick={handleRoomDisconnect} className="absolute flex items-center gap-2 px-6 right-4 py-3 rounded-3xl bg-red-500 text-white active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none">
+      <button onClick={handleRoomDisconnect} className="absolute mb-4 flex items-center gap-2 px-6 right-4 py-3 rounded-3xl bg-red-500 text-white active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none">
         <FaPhone className="size-4 max-lg:block hidden max-xl:hidden" />
         <div className="max-lg:hidden max-md:block">End Call</div>
       </button>
