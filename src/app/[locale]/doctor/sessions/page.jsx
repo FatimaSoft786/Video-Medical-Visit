@@ -1,89 +1,283 @@
 "use client";
 import { Button, Avatar, Input } from "@nextui-org/react";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useCallback,useRef } from "react";
 import { FaPhone } from "react-icons/fa";
 import { getUserSession } from "@/utils/session";
-import { useContext } from "react";
-import { SocketContext } from "../../context/Context";
 import { BiClipboard, BiPhoneCall, BiPhoneOff, BiVideoOff, BiVolumeMute } from "react-icons/bi";
-import io from "socket.io-client";
-
-
- var socket = io('https://video-medical-backend-production.up.railway.app/');
-console.log(socket);
+import { useSocket } from "../../../context/Context";
+import ReactPlayer from "react-player";
+import { CiStreamOn } from "react-icons/ci";
+import peer from "@/app/service/peer";
+  import RecordRTC from 'recordrtc';
+import { v4 as uuid } from 'uuid'
+import axios from "axios"
+import { TiMediaRecordOutline } from "react-icons/ti";
 
 function VideoSection() {
- //  const { name, callAccepted, myVideo, userVideo, callEnded, stream, call,toggleVideo,isVideoEnabled, isMuteEnabled, muteUnmute } = useContext(SocketContext)
+  const socket = useSocket();
 
-    // const [users, setUsers] = useState({});
-    // const [username, setUsername] = useState('Test user');
-    // const [otherUserId, setOtherUserId] = useState('');
+  const [remoteSocketId, setRemoteSocketId] = useState(null);
+  const [myStream, setMyStream] = useState();
+  const [remoteStream, setRemoteStream] = useState();
 
-    //  useEffect(() => {
-    //     // Join the room
-    //     socket.emit('join', username);
+    const [recording, setRecording] = useState(false);
+    const recorderRef = useRef(null);
+    const [file, setFile] = useState('');
 
-    //     // Listen for updates to the users
-    //     socket.on('updateUsers', (users) => {
-    //         setUsers(users);
-    //         // Fetch other user's socket ID
-    //         const otherUserIds = Object.keys(users).filter(id => id !== socket.id);
-    //         if (otherUserIds.length > 0) {
-    //             setOtherUserId(otherUserIds[0]);
-    //         }
-    //     });
-    //      console.log(users);
-    //     // Cleanup on component unmount
-    //     return () => {
-    //         socket.disconnect();
-    //     };
-    // }, [username]);
-   
-  return (
-    <div className="flex flex-col w-[70%] max-md:w-full rounded-xl overflow-hidden">
-      <div className="relative bg-gray-200/20 px-2">
-        {/* <video autoPlay ref={myVideo} className="w-full"
-          // src="/doctor/frame/Frameimg.svg"
-          // alt="Video call"
+
+
+  //Set the room id and console the user had joined
+  const handleUserJoined = useCallback(({ email, id }) => {
+    setRemoteSocketId(id);
+  }, []);
+
+  
+    const startRecording = async () => {
+    const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+    recorderRef.current = new RecordRTC(stream, { type: 'video' });
+    recorderRef.current.startRecording();
+    setRecording(true);
+  };
+
+  const stopRecording = () => {
+    recorderRef.current.stopRecording(async () => {
+      const blob = recorderRef.current.getBlob();
+    //   await uploadRecording(blob);
+    console.log(blob);
+    const newUuid = uuid()
+   // blobToFile(blob,"recordings.mp4");
+   const file = blobToFile(blob, newUuid);
+    setFile(file);
+   uploadRecording(file);
+      setRecording(false);
+    });
+  };
+
+  const blobToFile = (blob, fileName) => {
+  const file = new File([blob], fileName, { type: blob.type });
+  return file;
+};
+
+  const uploadRecording = async (file) => {
+    const formData = new FormData();
+    formData.append('recording',file);
+      const config = {
+        headers: { "content-type": "multipart/form-data" },
+      };
+      axios
+        .post(
+          "https://video-medical-backend-production.up.railway.app/api/recordings/uploadRecording",
+          formData,
+          config
+        )
+        .then((response) => {
+          if (response.data.success === true) {
+            console.log(response.data.message);
+            
+          } else {
+            console.log(response.data.message);
+        
+          }
+       
+        })
+        .catch((error) => {
+            console.log(error.message);
           
-        /> */}
-        <img  src="/doctor/frame/Frameimg.svg" className="w-full"
-           alt="Video call"/>
+        });
+  };
+
+
+  // After redirect to my room page first taking Permissions to user
+  const handleCallUser = useCallback(async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: true,
+    });
+    const offer = await peer.getOffer();
+    socket.emit("user:call", { to: remoteSocketId, offer });
+    setMyStream(stream);
+  }, [remoteSocketId, socket]);
+
+
+  const handleEndUser =  () => {
+    setMyStream(null);
+    setRemoteStream(null);
+  }
+
+  const handleRoomDisconnect = () => {
+    window.location.href = "/";
+    stopRecording();
+  }
+
+  //Device A Taking User Information then send to Device B through offerr
+  const handleIncommingCall = useCallback(
+    async ({ from, offer }) => {
+      setRemoteSocketId(from);
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true,
+      });
+      setMyStream(stream);
+      console.log(`Incoming Call`, from, offer);
+      const ans = await peer.getAnswer(offer);
+      socket.emit("call:accepted", { to: from, ans });
+    },
+    [socket]
+  );
+
+  //push The Audio and video to peer connection & Listen
+  const sendStreams = useCallback(() => {
+    for (const track of myStream.getTracks()) {
+      peer.peer.addTrack(track, myStream);
+    }
+  }, [myStream]);
+
+  const handleCallAccepted = useCallback(
+    ({ from, ans }) => {
+      peer.setLocalDescription(ans);
+      console.log("Call Accepted!");
+      sendStreams();
+    },
+    [sendStreams]
+  );
+
+  //Negotiation work on that time when connection are slow to reconnecting
+  const handleNegoNeeded = useCallback(async () => {
+    const offer = await peer.getOffer();
+    socket.emit("peer:nego:needed", { offer, to: remoteSocketId });
+  }, [remoteSocketId, socket]);
+
+  useEffect(() => {
+    peer.peer.addEventListener("negotiationneeded", handleNegoNeeded);
+    return () => {
+      peer.peer.removeEventListener("negotiationneeded", handleNegoNeeded);
+    };
+  }, [handleNegoNeeded]);
+
+  //Negotiation means establish the essential connection like create offer, accept answer to know the 
+  //capabilities of Device A send to B and Device B send to A
+  const handleNegoNeedIncomming = useCallback(
+    async ({ from, offer }) => {
+      const ans = await peer.getAnswer(offer);
+      socket.emit("peer:nego:done", { to: from, ans });
+    },
+    [socket]
+  );
+
+  const handleNegoNeedFinal = useCallback(async ({ ans }) => {
+    await peer.setLocalDescription(ans);
+  }, []);
+
+  useEffect(() => {
+    peer.peer.addEventListener("track", async (ev) => {
+      const remoteStream = ev.streams;
+      console.log("GOT TRACKS!!");
+      setRemoteStream(remoteStream[0]);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on("user:joined", handleUserJoined);
+    socket.on("incomming:call", handleIncommingCall);
+    socket.on("call:accepted", handleCallAccepted);
+    socket.on("peer:nego:needed", handleNegoNeedIncomming);
+    socket.on("peer:nego:final", handleNegoNeedFinal);
+
+    return () => {
+      socket.off("user:joined", handleUserJoined);
+      socket.off("incomming:call", handleIncommingCall);
+      socket.off("call:accepted", handleCallAccepted);
+      socket.off("peer:nego:needed", handleNegoNeedIncomming);
+      socket.off("peer:nego:final", handleNegoNeedFinal);
+    };
+  }, [
+    socket,
+    handleUserJoined,
+    handleIncommingCall,
+    handleCallAccepted,
+    handleNegoNeedIncomming,
+    handleNegoNeedFinal,
+  ]);
+  return (
+    <div className="flex flex-col w-[70%] h-full max-md:w-full rounded-xl overflow-hidden">
+      <div className="relative bg-gray-200/20 px-2">
+        {myStream ? (
+            <>
+              <ReactPlayer
+               playing     
+                width="100%"
+                height="70vh"
+                url={myStream}
+              />
+            </>
+          ):(<img  src="/doctor/frame/Frameimg.svg" className="w-full"
+           alt="Video call"/>)}
+        
         <div className="absolute top-4 left-4 bg-gray-800/30 text-white rounded-2xl px-4 py-2 text-xs">
-          24:01:45
+          Recordings
         </div>
-        <div className="absolute top-4 right-4 bg-gray-800/30 text-white rounded-2xl p-2 text-sm">
+        {/* <div className="absolute top-4 right-4 bg-gray-800/30 text-white rounded-2xl p-2 text-sm">
           <img src="/doctor/frame/fullscreen.svg" alt="" className="size-4" />
-        </div>
+        </div> */}
         <div className="absolute bottom-4 left-4 bg-gray-800/30 text-white rounded-2xl px-4 py-2 text-sm">
-        Test user
+        {remoteSocketId ? "Connected" : "No one in room"}
         </div>
-        <div className="absolute bottom-4 right-4 bg-gray-800/30 text-white rounded-2xl p-2 text-sm">
+        {/* <div className="absolute bottom-4 right-4 bg-gray-800/30 text-white rounded-2xl p-2 text-sm">
           <img src="/doctor/frame/voice.svg" alt="" className="size-4" />
-        </div>
+        </div> */}
       </div>
       {/* <ParticipantsThumbnails /> */}
+      <div className=" grid grid-cols-1 gap-4 rounded-xl my-2">
+          <div className=" flex rounded-2xl">
+               {remoteStream ? (
+            <>
+              <ReactPlayer
+                playing 
+                width="30%"
+                height="20vh"
+                url={remoteStream}
+              />
+            </>
+          ):(<img  src="/doctor/frame/Frameimg.svg" className=" w-[30%] h-[20vh]"
+           alt="Video call"/>)}
+          </div>
+
+      </div>
       <div className="flex justify-center relative items-center p-4 space-x-4">
       <div className="relative gap-4 flex items-center max-md:mr-6">
-         <button
+        {/* <button
       className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-500"  >
       <img className="size-10 p-2 rounded-full"  src='/doctor/frame/mic.svg'/>
-       {/* {isMuteEnabled ? <img className="size-10 p-2 rounded-full"  src='/doctor/frame/mic.svg'/> : <BiVolumeMute className="size-10 p-2 rounded-full text-white"/>} */}
-    </button>
+       {isMuteEnabled ? <img className="size-10 p-2 rounded-full"  src='/doctor/frame/mic.svg'/> : <BiVolumeMute className="size-10 p-2 rounded-full text-white"/>}
+    </button> */}
 
-    <button
+    {/* <button
       className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-500"  >
       <img className="size-10 p-2 rounded-full"  src='/doctor/frame/videoicon.svg'/> 
-       {/* {isVideoEnabled ? <img className="size-10 p-2 rounded-full"  src='/doctor/frame/videoicon.svg'/> : <BiVideoOff className="size-10 p-2 rounded-full text-white"/>} */}
-    </button>
+       {isVideoEnabled ? <img className="size-10 p-2 rounded-full"  src='/doctor/frame/videoicon.svg'/> : <BiVideoOff className="size-10 p-2 rounded-full text-white"/>}
+    </button> */}
 
         
-        <CallButton icon="/doctor/frame/share.svg" />
-        <CallButton icon="/doctor/frame/record.svg" bgColor="bg-red-500/20" />
-        <CallButton icon="/doctor/frame/message.svg" />
-        <CallButton icon="/doctor/frame/dots.svg" />
+        {/* <CallButton icon="/doctor/frame/share.svg" /> */}
+        {/* <button className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-red-500/20" >
+          {recording ?  : }
+        </button> */}
+         {recording ? (
+        <button  onClick={stopRecording}><TiMediaRecordOutline className="size-10 p-2 rounded-full text-red-500/200"/></button>
+      ) : (
+        <button onClick={startRecording}><img className="size-10 p-2 rounded-full text-white"  src="/doctor/frame/record.svg"/></button>
+      )}
+        {/* <CallButton /> */}
+        {/* <CallButton icon="/doctor/frame/message.svg" />
+        <CallButton icon="/doctor/frame/dots.svg" /> */}
+        {myStream && <button className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-500" onClick={sendStreams}>
+        <CiStreamOn className="size-10 p-2 rounded-full text-white"/>
+        </button>}
+        {remoteSocketId && <button className="relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-500"onClick={handleCallUser}>
+            <BiPhoneCall className="size-10 p-2 rounded-full text-white"/>
+        </button>}
       </div>
-      <button className="absolute flex items-center gap-2 px-6 right-4 py-3 rounded-3xl bg-red-500 text-white active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none">
+      <button onClick={handleRoomDisconnect} className="absolute flex items-center gap-2 px-6 right-4 py-3 rounded-3xl bg-red-500 text-white active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none">
         <FaPhone className="size-4 max-lg:block hidden max-xl:hidden" />
         <div className="max-lg:hidden max-md:block">End Call</div>
       </button>
@@ -211,6 +405,7 @@ function ParticipantItem({ participant }) {
   );
 }
 function ChatSection() {
+   const socket = useSocket();
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [file, setFile] = useState(null);
@@ -240,8 +435,8 @@ function ChatSection() {
   const sendMessage = ()=>{
       if (messageInput.trim() !== "") {
            const message = { content: messageInput, timestamp: new Date(), name: profileData.firstName +" "+ profileData.lastName, picture: profileData.picture_url ? profileData.picture_url : profileData.default_picture_url, type: "text" };
-             socket.emit("message", message);
-             setMessageInput('');
+           socket.emit("message", message);
+           setMessageInput('');
         }
   }
   return(
@@ -352,14 +547,10 @@ function ChatContent({ activeTab }) {
 
  // const messages = activeTab === "group" ? groupMessages : personalMessages;
 
-  
-
- 
-
   return (
      <div className="flex flex-col h-full">
 
-          <div className="flex h-[80%] bg-gray-200 p-2 overflow-y-auto">
+          <div className="flex h-[90%] bg-gray-200 p-2 overflow-y-auto">
            
           </div>
           <div className="p-2 border-t border-gray-300">

@@ -234,7 +234,9 @@
     "Select Hour": "Select Hour",
     "Set Session & Payment": "Set Session & Payment",
     "Currency": "Currency",
-    "Data saved successfully!":"Data saved successfully!"
+    "Data saved successfully!":"Data saved successfully!",
+    "Failed to save slots.": "Failed to save slots.",
+    "An error occurred while saving slots.": "An error occurred while saving slots."
   },
   "DoctorAppointments": {
     "Appointment held": "Appointment held",
@@ -271,7 +273,17 @@
     "Female": "Female",
     "Select option": "Select option",
     "Select your specialist": "Select your specialist",
-    "Drag and drop files or Browse": "Drag & drop files or Browse"
+    "Drag and drop files or Browse": "Drag & drop files or Browse",
+    "First name is required": "First name is required",
+    "Last name is required": "Last name is required",
+    "phone number is required": "Phone number is required",
+    "location is required": "Location is required",
+    "postal code is required": "Postal code is required",
+    "select the dob": "Select the dob",
+    "enter your start and last study year": "Enter your start and last study year",
+    "enter your special recognition": "Enter your special recognition",
+    "enter your hospital or clinic address": "Enter your hospital or clinic address",
+    "Supported formats: Any image format, pdf, doc, docx, txt": "Supported formats: Any image format, pdf, doc, docx, txt"
   },
    "MedicalHistory": {
     "Submit": "Submit",

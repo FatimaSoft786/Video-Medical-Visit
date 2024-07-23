@@ -156,7 +156,7 @@ const DoctorSignUp = () => {
                 type="text"
                 name="firstName"
                 {...register("firstName", {
-                  required: "First name is required",
+                  required: t('First name is required'),
                 })}
                 className="w-full pl-10 px-4 py-2 border rounded"
               />
@@ -176,7 +176,7 @@ const DoctorSignUp = () => {
                 type="text"
                 name="lastName"
                 {...register("lastName", {
-                  required: "Last name is required",
+                  required: t('Last name is required'),
                 })}
                 className="w-full pl-10 px-4 py-2 border rounded"
               />
@@ -198,10 +198,10 @@ const DoctorSignUp = () => {
                 type="email"
                 name="email"
                 {...register("email", {
-                  required: "email is required",
+                  required: "E-mail è obbligatoria",
                   pattern: {
                     value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
-                    message: "email is not valid",
+                    message: "Inserisci un'e-mail valida",
                   },
                 })}
                 className="w-full pl-10 px-4 py-2 border rounded"
@@ -221,7 +221,7 @@ const DoctorSignUp = () => {
                 type="text"
                 name="phone"
                 {...register("phoneNumber", {
-                  required: "phone number is required",
+                  required: t('phone number is required'),
                 })}
                 className="w-full pl-10 px-4 py-2 border rounded"
               />
@@ -243,7 +243,7 @@ const DoctorSignUp = () => {
                 type="text"
                 name="location"
                 {...register("location", {
-                  required: "location is required",
+                  required: t('location is required'),
                 })}
                 className="w-full pl-10 px-4 py-2 border rounded"
               />
@@ -260,7 +260,7 @@ const DoctorSignUp = () => {
               type="text"
               name="postalCode"
               {...register("postal_code", {
-                required: "postal code is required",
+                required: t('postal code is required'),
               })}
               className="w-full px-4 py-2 border rounded"
             />
@@ -279,7 +279,7 @@ const DoctorSignUp = () => {
               <select
                 name="gender"
                 {...register("sex", {
-                  required: "select sex",
+                  required: t('Select option'),
                 })}
                 value={selectSex}
                 onChange={handleSelectedSex}
@@ -304,7 +304,7 @@ const DoctorSignUp = () => {
                 type="date"
                 name="dob"
                 {...register("dob", {
-                  required: "select the dob",
+                  required: t('select the dob'),
                 })}
                 className="w-full pl-10 px-4 py-2 border rounded"
               />
@@ -326,7 +326,7 @@ const DoctorSignUp = () => {
                   type="date"
                   name="start"
                   {...register("studies_start_year", {
-                    required: "enter your start and last study year",
+                    required: t('enter your start and last study year'),
                   })}
                   className="w-full appearance-none border-none outline-none"
                 />
@@ -335,7 +335,7 @@ const DoctorSignUp = () => {
                   type="date"
                   name="dob"
                   {...register("studies_end_year", {
-                    required: "enter your last study year",
+                    required: t('enter your start and last study year'),
                   })}
                   className="w-full  appearance-none outline-none"
                 />
@@ -360,7 +360,7 @@ const DoctorSignUp = () => {
                 type="text"
                 name="special Recoginition"
                 {...register("special_recognition", {
-                  required: "enter your special recognition",
+                  required: t('enter your special recognition'),
                 })}
                 className="w-full px-4 py-2 border rounded"
               />
@@ -382,7 +382,7 @@ const DoctorSignUp = () => {
                 type="text"
                 name="address"
                 {...register("clinic_hospital_address", {
-                  required: "enter your hospital or clinic address",
+                  required: t('enter your hospital or clinic address'),
                 })}
                 className="w-full appearance-none border-none outline-none"
               />
@@ -446,7 +446,7 @@ const DoctorSignUp = () => {
             <p className="text-black/80 mb-8">
               {fileName
                 ? fileName
-                : "Supported formats: Any image format, pdf, doc, docx, txt"}
+                : t('Supported formats: Any image format, pdf, doc, docx, txt')}
             </p>
           </div>
         </div>

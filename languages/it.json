@@ -94,7 +94,7 @@
   },
   "MedicalSection": {
     "Search Now": "Cerca",
-    "Specialist": "Cerca per meddico o Specializzazione..."
+    "Specialist": "Cerca per medico o specializzazione..."
   },
   "DoctorCard": {
     "Book Now": "Prenota"
@@ -273,7 +273,9 @@
     "Set Session & Payment": "Listino",
     "Currency": "Currency",
     "Save Changes": "Salva",
-    "Data saved successfully!": "Dati salvati con successo!"
+    "Data saved successfully!": "Dati salvati con successo!",
+    "Failed to save slots.": "Impossibile salvare gli slot.",
+    "An error occurred while saving slots.": "Si è verificato un errore durante il salvataggio degli slot."
   },
   "DoctorAppointments": {
     "Appointment held": "Conclusi",
@@ -317,7 +319,17 @@
     "Please select option from the sex": "Seleziona l'opzione dal sesso",
     "Please select option from the specialist": "Seleziona l'opzione dallo specialista",
     "Please check your email, a code has been sent": "Controlla la tua email, è stato inviato un codice.",
-    "Please select file": "Per favore, seleziona il file."
+    "Please select file": "Per favore, seleziona il file.",
+     "First name is required": "II nome è obbligatorio",
+    "Last name is required": "II cognome è obbligatorio",
+    "phone number is required": "Inserire il numero di telefono",
+    "location is required": "Inserire città",
+    "postal code is required": "Inserire codice postale",
+    "select the dob": "Seleziona il dob",
+    "enter your start and last study year": "Inserisci le informazioni sui tuoi studi",
+    "enter your special recognition": "inserisci il tuo riconoscimento speciale",
+    "enter your hospital or clinic address": "Inserisci l'indirizzo del tuo studio medico o del luogo in cui operi",
+    "Supported formats: Any image format, pdf, doc, docx, txt": "Formati supportati: qualsiasi formato immagine, .pdf, .doc, .docx, .txt"
   },
   "MedicalHistory": {
     "Submit": "Invia",

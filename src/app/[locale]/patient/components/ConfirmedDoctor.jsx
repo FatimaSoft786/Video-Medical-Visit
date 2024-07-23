@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useCallback,useEffect } from "react";
 import Link from "next/link";
 import {
   FaCheckCircle,
@@ -14,10 +14,54 @@ import getPath from "@/utils/path";
 import { addFavorite, deleteFavorite } from "@/utils/favorite";
 import { cancelAppointment } from "@/utils/appointment";
 import { useTranslations } from "next-intl";
-
+import { useSocket } from "@/app/context/Context";
+import { getUserSession } from "@/utils/session";
+import { useRouter } from 'next/navigation';
 const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
+
+ const router = useRouter();
+  const socket = useSocket();
+
     const t = useTranslations("ConfirmedDoctor");
   const path = getPath();
+
+   const [email, setEmail] = useState("");
+  const [room, setRoom] = useState("Room1");
+
+ const [profileData, setProfileData] = useState({});
+  useEffect(() => {
+    const { user } = getUserSession();
+    if (user) {
+      setProfileData(user.user_details);
+      setEmail(profileData.email);
+    } else {
+      console.error("No user details found in session");
+    }
+  }, []);
+   const handleSubmitForm = useCallback(
+    () => {
+      
+      socket.emit("room:join", { email, room });
+    },
+    [email, room, socket]
+  );
+
+   const handleJoinRoom = useCallback(
+    (data) => {
+      const { room } = data;
+      router.push(`/${path}/session`)
+      //navigate(`/room/${room}`);
+    },
+    [router]
+  );
+
+   useEffect(() => {
+    socket.on("room:join", handleJoinRoom);
+    return () => {
+      socket.off("room:join", handleJoinRoom);
+    };
+  }, [socket, handleJoinRoom]);
+
   const {
     doctor,
     appointment_date,
@@ -155,13 +199,12 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
             <MdOutlineCancel className="text-lg" size={16} />
             {t('Cancel')}
           </button>
-          <Link
-            href={`/${path}/session?id=${_id}`}
-            className="flex items-center justify-center gap-2 bg-dark-blue text-xs text-white py-4 font-semibold px-2 rounded-lg flex-1"
+          <div onClick={handleSubmitForm}
+            className="flex items-center justify-center gap-2 bg-dark-blue text-xs text-white py-4 font-semibold px-2 rounded-lg flex-1 cursor-pointer"
           >
             <img src="/svg/videocall.svg" className="size-4" alt="video call" />{" "}
             {t('Consult Now')}
-          </Link>
+          </div>
         </div>
       )}
     </div>
@@ -169,3 +212,4 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
 };
 
 export default ConfirmDoctor;
+//href={`/${path}/session?id=${_id}`}

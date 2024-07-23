@@ -53,6 +53,8 @@ const DateTabs = ({ selectedDate, setSelectedDate }) => {
                 : "text-gray-500"
             }`}
             onClick={() => {
+             // const format1 = format(date, "MMMM dd yyyy", { locale: localeMap[locale] })
+             // console.log(format1)
               if (!isBefore(date, currentDate)) {
                 setSelectedDate(date);
               }

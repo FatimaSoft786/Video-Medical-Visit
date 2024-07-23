@@ -189,7 +189,7 @@ const Page = ({ params }) => {
       />
       <div className="mt-6">
         <h2 className="text-3xl font-bold my-6 mt-12">
-         {t('Reviews')} About {doctor.firstName} {doctor.lastName}
+         {t('Reviews')} Informazioni {doctor.firstName} {doctor.lastName}
         </h2>
         {doctor.reviews && doctor.reviews.length > 0 ? (
           <div className="grid grid-cols-4 gap-4 max-md:grid-cols-2 max-sm:grid-cols-1">
@@ -198,7 +198,7 @@ const Page = ({ params }) => {
             ))}
           </div>
         ) : (
-          <p className="text-center">No reviews available</p>
+          <p className="text-center">Nessuna recensione disponibile</p>
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { UiProviders } from "@/utils/UiProvider";
 import { Toaster } from "react-hot-toast";
-import { ContextProvider } from "./context/Context";
+import { SocketProvider } from "../context/Context";
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
@@ -33,12 +33,12 @@ const RootLayout = async (props) => {
     >
       <body className={"bg-white"} suppressHydrationWarning={false}>
         <NextIntlClientProvider messages={messages}>
-        <ContextProvider>
+        <SocketProvider>
           <UiProviders>
             <Toaster />
             {props.children}
           </UiProviders>
-          </ContextProvider>
+          </SocketProvider>
         </NextIntlClientProvider>
       </body>
     </html>

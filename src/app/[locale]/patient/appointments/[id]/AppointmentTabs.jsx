@@ -58,7 +58,7 @@ const AppointmentTabs = ({
               </button>
             ))
           ) : (
-            <p className="text-light-gray px-2 py-2">No dates available</p>
+            <p className="text-light-gray px-2 py-2">Non ci sono fasce orarie disponibili</p>
           )}
         </div>
         <FaChevronRight
@@ -84,7 +84,7 @@ const AppointmentTabs = ({
               </button>
             ))
           ) : (
-            <p className="text-light-gray">No time slots available</p>
+            <p className="text-light-gray">Non ci sono fasce orarie disponibili</p>
           )}
         </div>
       </div>

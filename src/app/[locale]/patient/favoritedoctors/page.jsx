@@ -94,7 +94,7 @@ const FavDoctors = () => {
         </div>
         {favDoctors.length === 0 && (
           <p className="text-center pb-12 font-bold text-3xl w-full">
-            No favorite doctors found
+           Nessun medico preferito trovato
           </p>
         )}
       </div>

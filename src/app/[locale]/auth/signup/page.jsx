@@ -45,12 +45,12 @@ const SignupPage = () => {
           key === "email" ? "email address" : key
         }.`;
       } else if (key === "email" && !/\S+@\S+\.\S+/.test(formData[key])) {
-        formErrors[key] = "Please enter a valid email address.";
+        formErrors[key] = "Inserisci un indirizzo email valido";
       } else if (
         key === "phoneNumber" &&
         (isNaN(formData[key]) || formData[key].length < 10)
       ) {
-        formErrors[key] = "Please enter a valid digit phone number.";
+        formErrors[key] = "Inserisci un numero di telefono valido";
       }
     }
     return formErrors;

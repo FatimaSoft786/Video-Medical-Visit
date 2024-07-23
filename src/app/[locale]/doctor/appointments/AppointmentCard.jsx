@@ -2,13 +2,21 @@ import getPath from "@/utils/path";
 import Link from "next/link";
 import { FaEye } from "react-icons/fa";
 import LoadingSkeleton from "./LoadingSkeleton";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTranslations } from "next-intl"; // Import useTranslations hook
+import { useSocket } from "@/app/context/Context";
+import { getUserSession } from "@/utils/session";
+import { useRouter } from 'next/navigation';
 
 const AppointmentCard = ({ appointment, isHeld, onCancel }) => {
+  const router = useRouter();
+  const socket = useSocket();
   const path = getPath();
   const [isCancelling, setIsCancelling] = useState(false);
   const t = useTranslations("DoctorAppointments"); // Fetch translations
+
+    const [email, setEmail] = useState("");
+  const [room, setRoom] = useState("Room1");
 
   const handleCancel = async () => {
     setIsCancelling(true);
@@ -20,6 +28,42 @@ const AppointmentCard = ({ appointment, isHeld, onCancel }) => {
       setIsCancelling(false);
     }
   };
+
+   const [profileData, setProfileData] = useState({});
+  useEffect(() => {
+    const { user } = getUserSession();
+    if (user) {
+      setProfileData(user.user_details);
+      setEmail(profileData.email);
+    } else {
+      console.error("No user details found in session");
+    }
+  }, []);
+
+  
+  const handleSubmitForm = useCallback(
+    () => {
+      
+      socket.emit("room:join", { email, room });
+    },
+    [email, room, socket]
+  );
+
+   const handleJoinRoom = useCallback(
+    (data) => {
+      const { room } = data;
+      router.push(`/${path}/doctor/sessions`)
+      //navigate(`/room/${room}`);
+    },
+    [router]
+  );
+
+   useEffect(() => {
+    socket.on("room:join", handleJoinRoom);
+    return () => {
+      socket.off("room:join", handleJoinRoom);
+    };
+  }, [socket, handleJoinRoom]);
 
   return (
     <div className="border rounded-lg p-3 shadow-md text-sm">
@@ -100,13 +144,13 @@ const AppointmentCard = ({ appointment, isHeld, onCancel }) => {
           >
             {isCancelling ? "Cancelling..." : t("Cancel")}
           </button>
-          <Link
-            href={`/${path}/doctor/sessions`}
-            className="bg-light-gray flex items-center gap-3 text-black py-2 px-4 rounded"
+          <div onClick={handleSubmitForm}
+            // href={`/${path}/doctor/sessions`}
+            className="bg-light-gray flex items-center gap-3 text-black py-2 px-4 rounded cursor-pointer"
           >
             <img src="/svg/videocall.svg" className="invert" />{" "}
             {t("Start a video call")}
-          </Link>
+          </div>
         </div>
       )}
     </div>

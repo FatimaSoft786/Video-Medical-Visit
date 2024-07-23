@@ -29,7 +29,7 @@ const Agenda = () => {
     
 
     setSelectedSlots(savedSlots);
-    console.log(savedPrices);
+    //console.log(savedPrices);
     setPrices(savedPrices);
     setCurrency(savedCurrency);
   }, []);
@@ -62,6 +62,8 @@ const Agenda = () => {
       currency: currency,
       doctorId: doctorId,
     };
+    console.log(payload);
+
     try {
       const response = await fetch(
         "https://video-medical-backend-production.up.railway.app/api/user/addSlots",
@@ -95,7 +97,7 @@ const Agenda = () => {
     } catch (error) {
       console.error("Error:", error);
       toast(t("An error occurred while saving slots."));
-    }
+   }
   };
 
   return (

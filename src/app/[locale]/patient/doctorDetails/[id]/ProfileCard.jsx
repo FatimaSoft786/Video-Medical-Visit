@@ -121,7 +121,7 @@ const Overview = ({ doctor , t }) => (
         <div className="absolute bg-dark-blue left-2.5 top-[34%] w-1 h-[60%]"></div>
         <span className="absolute left-0 top-1 size-6 bg-dark-blue/10 border-2 border-dark-blue rounded-full"></span>
         <span className="text-black">
-          {doctor.institution ? doctor.institution : "Not Provide"}
+          {doctor.institution ? doctor.institution : "Non fornito"}
         </span>
         <span>{doctor.specialist}</span>
         <span>
@@ -137,9 +137,9 @@ const Overview = ({ doctor , t }) => (
         <span className="text-black">
           {doctor.clinic_hospital_address
             ? doctor.clinic_hospital_address
-            : "Not Available"}
+            : "Non disponibile"}
         </span>
-        <span>{doctor.duration ? doctor.duration : "Not Available"}</span>
+        <span>{doctor.duration ? doctor.duration : "Non disponibile"}</span>
       </li>
     </ul>
     <h3 className="text-lg font-semibold my-5">{t('Awards')}</h3>
@@ -148,7 +148,7 @@ const Overview = ({ doctor , t }) => (
         <span className="absolute left-0 top-1 size-6 bg-dark-blue/10 border-2 border-dark-blue rounded-full"></span>
         <div className="absolute bg-dark-blue left-2.5 top-[60%] w-1 h-1/3"></div>
         <span className="text-sm text-dark-blue">
-          {doctor.date || "Not Provided"}
+          {doctor.date || "Non fornito"}
         </span>
         <span className="text-black">{doctor.special_recognition}</span>
         <span>{doctor.about_info}</span>
@@ -159,24 +159,24 @@ const Overview = ({ doctor , t }) => (
 
 const Reviews = ({ reviews }) => (
   <div className="bg-gray-500/10 px-6 py-3 rounded-xl">
-    <h2 className="text-xl font-bold mb-4">Reviews</h2>
+    <h2 className="text-xl font-bold mb-4">Recensioni</h2>
     {reviews && reviews.length > 0 ? (
       reviews.map((review, index) => (
         <div key={index} className="mb-4">
           <p className="">
-            <span className="font-bold">Total Review: {reviews.length}</span>
+            <span className="font-bold">Recensioni: {reviews.length}</span>
           </p>
           <p className="">
-            <span className="font-bold">Patient Review: </span> {review.review}
+            <span className="font-bold">Recensioni dei pazienti: </span> {review.review}
           </p>
           <p className="">
-            <span className="font-bold">Patient Rating: </span>
+            <span className="font-bold">Punteggio: </span>
             <span className="text-yellow-500">({review.rating})</span>
           </p>
         </div>
       ))
     ) : (
-      <p className="">No reviews available.</p>
+      <p className="">Nessuna recensione disponibile</p>
     )}
   </div>
 );

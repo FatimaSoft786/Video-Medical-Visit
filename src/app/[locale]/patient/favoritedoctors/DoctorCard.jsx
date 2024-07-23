@@ -89,7 +89,7 @@ const DoctorCard = ({ doctor, patientId, token }) => {
         )}
       </div>
       <p className="text-sm text-gray-600">
-        {doctor.education || "Not Mentioned"}
+        {doctor.education || "Non disponibile"}
       </p>
       <div className="flex items-center mt-2">
         {doctor.total_reviews > 0 ? (
@@ -110,7 +110,7 @@ const DoctorCard = ({ doctor, patientId, token }) => {
       </div>
       <div className="flex gap-1 items-center text-light-gray mt-2">
         <img src="/patient/location.svg" alt="location-icon" />{" "}
-        {doctor.location || "Location: not Mentioned"}
+        {doctor.location || "Non disponibile"}
       </div>
       <div className="flex gap-1 items-center text-light-gray mt-1">
         <img src="/patient/time.svg" alt="time-icon" /> Available on:{" "}

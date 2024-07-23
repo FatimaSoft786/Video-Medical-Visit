@@ -117,11 +117,11 @@ const t = useTranslations("DoctorCard");
         <img src="/patient/time.svg" alt="time-icon" /> Available on:{" "}
         {doctor.slots && doctor.slots.length > 0
           ? doctor.slots[0].date
-          : "Not Mentioned"}
+          : "Non fornito"}
       </div>
       <div className="flex items-center gap-1 text-light-gray mt-1">
         <img src="/patient/card.svg" alt="card-icon" /> Fee: {doctor.currency}{" "}
-        {doctor.visit || "Not Mentioned"} - {doctor.followUp}
+        {doctor.visit || "Non fornito"} - {doctor.followUp}
       </div>
       <Link
         href={`/${path}/patient/appointments/${doctor._id}`}

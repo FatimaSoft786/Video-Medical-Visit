@@ -87,7 +87,7 @@ const PaymentPage = () => {
       </div>
       {payments.length === 0 && (
         <p className="text-center pb-12 font-bold text-3xl w-full mx-auto">
-          No payment history
+          Nessun pagamento trovato
         </p>
       )}
     </div>

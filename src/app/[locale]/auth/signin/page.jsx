@@ -25,10 +25,10 @@ const LoginPage = () => {
   const validateForm = () => {
     const errors = {};
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Please enter a valid email address.";
+      errors.email = "Inserisci un indirizzo email valido";
     }
     if (!password) {
-      errors.password = "Please enter your password.";
+      errors.password = "nserisci la tua password";
     }
     return errors;
   };

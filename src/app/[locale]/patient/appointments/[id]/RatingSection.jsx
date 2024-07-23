@@ -52,7 +52,7 @@ const RatingSection = ({ review }) => {
       )}
       <div className="mt-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">
-          {review.patientId.firstName || "Name Not Found"}{" "}
+          {review.patientId.firstName || "Nome non trovato"}{" "}
           {review.patientId.account_approved && (
             <FaCheckCircle className="text-green-500 inline ml-1 " />
           )}
