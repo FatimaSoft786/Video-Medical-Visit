@@ -5,9 +5,11 @@ import MedicalSection from "../components/MedicalSection";
 import ConfirmDoctor from "../components/ConfirmedDoctor";
 import { getUserSession } from "@/utils/session";
 import LoadingSkeleton from "../../doctor/appointments/LoadingSkeleton";
+import { useTranslations } from "next-intl";
 
 const Tabs = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const t = useTranslations("DoctorAppointments")
 
   return (
     <div className="container mx-auto py-8">
@@ -78,7 +80,7 @@ const AppointmentTabsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { user } = getUserSession();
   const patientId = user.user_details._id;
-
+  const t = useTranslations("DoctorAppointments")
   const fetchAppointments = async () => {
     try {
       const response = await fetch(
@@ -94,7 +96,7 @@ const AppointmentTabsPage = () => {
       );
       const data = await response.json();
       const done = data.appointments.filter(
-        (appointment) => appointment.payment_status === "Paid"
+        (appointment) => appointment.appointment_status === "cancelled"
       );
       const scheduled = data.appointments.filter(
         (appointment) => appointment.appointment_status === "waiting"
@@ -113,13 +115,13 @@ const AppointmentTabsPage = () => {
 
   const tabsData = [
     {
-      label: "Scheduled Appointments",
+      label:t("Appointment scheduled"),
       content: (
         <ScheduledAppointments appointments={appointmentsScheduled} isLoading={isLoading} />
       ),
     },
     {
-      label: "Done Appointments",
+      label: t("Appointment held"),
       content: (
         <DoneAppointments appointments={appointmentsDone} isLoading={isLoading} />
       ),
