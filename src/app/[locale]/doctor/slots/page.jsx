@@ -17,11 +17,13 @@ const Agenda = () => {
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [prices, setPrices] = useState({ firstVisit: "", followUpVisit: "" });
   const [currency, setCurrency] = useState("€");
+  const [doctor,setDoctor]= useState({})
   const { token, user } = getUserSession();
-  const doctor = user.user_details;
   const hours = Array.from({ length: 18 }, (_, i) => i + 6);
-
+  
   useEffect(() => {
+    const doctor = user.user_details;
+    setDoctor(doctor);
     const savedSlots = JSON.parse(localStorage.getItem("selectedSlots")) || [];
     const savedPrices = JSON.parse(localStorage.getItem("prices")) || {
       firstVisit: "",
@@ -30,7 +32,6 @@ const Agenda = () => {
     const savedCurrency = localStorage.getItem("currency") || "€";
     
     setSelectedSlots(savedSlots);
-    //console.log(savedPrices);
     setPrices(savedPrices);
     setCurrency(savedCurrency);
   }, []);
@@ -72,8 +73,8 @@ const Agenda = () => {
       ),
       
       date: format1,
-      visit: prices.firstVisit.replace("/Session", ""),
-      followUp: prices.followUpVisit.replace("/Session", ""),
+      visit: Number(prices.firstVisit),
+      followUp: Number(prices.followUpVisit),
       currency: currency,
       doctorId: doctorId,
     };
@@ -102,7 +103,7 @@ const Agenda = () => {
           firstVisit:  `${currency}${data.user_details.visit}`, followUpVisit: `${currency}${data.user_details.followUp}`});
         
         localStorage.setItem("prices", JSON.stringify(prices));
-        toast(t("Data saved successfully!"));
+        toast.success(t("Data saved successfully!"));
 
         setSelectedSlots([]);
       } else {
