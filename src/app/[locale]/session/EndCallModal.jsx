@@ -4,11 +4,14 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import getPath from '@/utils/path';
+import { useSearchParams } from "next/navigation";
 
 const EndCallModal = ({ isOpen, onClose }) => {
   const [appointment, setAppointment] = useState("");
   const { user, token } = getUserSession();
-  const appointmentId = localStorage.getItem("room");
+  const searchParams = useSearchParams();
+  const appointmentId = searchParams.get("room");
+
   const role = user?.user_details;
   const router = useRouter();
 
@@ -22,16 +25,16 @@ const EndCallModal = ({ isOpen, onClose }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ appointmentId,status }),
+          body: JSON.stringify({appointmentId }),
         }
       );
 
-      if (!response.ok) {
+      if (response.success === true) {
+        
+              const path = getPath();
+              router.push(`/${path}/${role}`);
         throw new Error("Failed to change appointment status");
       }
-
-      const path = getPath();
-      router.push(`/${path}/${role}`);
     } catch (error) {
       console.error("Error changing appointment status:", error);
     }
