@@ -87,7 +87,7 @@ const TodayAppointments = ({
               </li>
             ))
           ) : (
-            <p>{t("No appointment found")}</p>
+            <p className="px-4 py-2">{t("No appointment found")}</p>
           )}
         </ul>
       )}

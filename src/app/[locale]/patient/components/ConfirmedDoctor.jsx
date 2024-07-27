@@ -19,48 +19,12 @@ import { getUserSession } from "@/utils/session";
 import { useRouter } from 'next/navigation';
 const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
 
- const router = useRouter();
-  const socket = useSocket();
+
 
     const t = useTranslations("ConfirmedDoctor");
   const path = getPath();
 
-   const [email, setEmail] = useState("");
-  const [room, setRoom] = useState("Room1");
-
- const [profileData, setProfileData] = useState({});
-  useEffect(() => {
-    const { user } = getUserSession();
-    if (user) {
-      setProfileData(user.user_details);
-      setEmail(profileData.email);
-    } else {
-      console.error("No user details found in session");
-    }
-  }, []);
-   const handleSubmitForm = useCallback(
-    () => {
-      
-      socket.emit("room:join", { email, room });
-    },
-    [email, room, socket]
-  );
-
-   const handleJoinRoom = useCallback(
-    (data) => {
-      const { room } = data;
-      router.push(`/${path}/session`)
-      //navigate(`/room/${room}`);
-    },
-    [router]
-  );
-
-   useEffect(() => {
-    socket.on("room:join", handleJoinRoom);
-    return () => {
-      socket.off("room:join", handleJoinRoom);
-    };
-  }, [socket, handleJoinRoom]);
+  
 
   const {
     doctor,
@@ -68,9 +32,10 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
     appointment_time,
     appointment_status,
     _id,
-    doctor: { average_rating, picture_url, specialist, location, favorites },
+    doctor: { average_rating, picture_url, specialist, location, meeting, favorites },
   } = appointment;
-  console.log(doctor.specialist);
+
+     const meetingId = doctor.meeting
   const renderStars = (rating) => {
     const stars = [];
     rating = rating || 0;
@@ -125,10 +90,10 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
       onAppointmentChange();
     }
   };
-
+  // href={`/${getPath()}/patient/appointments/${appointment._id}`}
   return (
     <div className="border rounded-lg shadow-md p-3 flex flex-col">
-      <Link href={`/${getPath()}/patient/appointments/${appointment._id}`}>
+      <div>
         {picture_url ? (
           <img
             src={picture_url}
@@ -138,7 +103,7 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
         ) : (
           <FaUser className="w-full h-36 object-cover py-2 rounded-md bg-light-gray/50" />
         )}
-      </Link>
+      </div>
       <div className="mt-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">
           {doctor.firstName} {doctor.lastName}{" "}
@@ -199,12 +164,12 @@ const ConfirmDoctor = ({ appointment, patientId, onAppointmentChange }) => {
             <MdOutlineCancel className="text-lg" size={16} />
             {t('Cancel')}
           </button>
-          <div onClick={handleSubmitForm}
+          <Link href={{ pathname: `/${path}/session`, query: { room: meetingId }}}
             className="flex items-center justify-center gap-2 bg-dark-blue text-xs text-white py-4 font-semibold px-2 rounded-lg flex-1 cursor-pointer"
           >
             <img src="/svg/videocall.svg" className="size-4" alt="video call" />{" "}
             {t('Consult Now')}
-          </div>
+          </Link>
         </div>
       )}
     </div>

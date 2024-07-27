@@ -19,7 +19,7 @@ export default function ParticipantList() {
   ];
 
   return (
-    <div className={`fixed backdrop-blur-3xl top-0 right-[30%] w-[30%] max-md:mt-12 max-md:right-3/4 max-md:w-fit min-h-fit bg-gray-200/20 rounded-lg shadow-xl transition-transform translate-x-full ${showList && "!border-xl"}`}>
+    <div className={`fixed backdrop-blur-3xl top-4 right-[31%] w-[30%] max-md:mt-12 max-md:right-[90%] max-md:w-fit min-h-fit bg-white rounded-lg shadow-xl transition-transform translate-x-full ${showList && "!border-xl"}`}>
       <div className={`flex items-center justify-between bg-white/50 backdrop-blur-3xl px-6 py-3 rounded-t-xl ${!showList && "!rounded-b-xl"}`}>
         <h3 className="text-lg font-semibold">Participants</h3>
         <Button

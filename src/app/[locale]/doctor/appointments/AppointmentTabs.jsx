@@ -15,7 +15,7 @@ const Tabs = ({ tabs }) => {
         {tabs.map((tab, index) => (
           <button
             key={index}
-            className={`items-center text-center px-8 py-3 focus:outline-none ${
+            className={`items-center text-center px-6 py-2 focus:outline-none ${
               activeTab === index
                 ? "border-b-3 font-bold border-dark-blue text-dark-blue"
                 : "text-black"
@@ -157,7 +157,7 @@ export default function AppointmentTabs() {
   ];
 
   return (
-    <div>
+    <div className="max-w-full">
       <Tabs tabs={tabsData} />
     </div>
   );

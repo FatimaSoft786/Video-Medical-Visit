@@ -16,7 +16,9 @@ const MedicalSection = ({ placeholder }) => {
   const [showModal, setShowModal] = useState(false);
   const { user, token } = getUserSession();
   const t = useTranslations("MedicalSection");
-  const doctorId = user.user_details._id;
+
+   const doctorId = user.user_details._id
+ 
 
   useEffect(() => {
     if (searchTerm) {

@@ -1,12 +1,13 @@
 "use client";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { format, addDays, subDays, startOfWeek, isSameDay } from "date-fns";
 import { enUS, fr, es, it } from "date-fns/locale";
 
 const DateNavigation = ({ setSelectedDate, selectedDate }) => {
-  
-  const [locale, setLocale] = useState();
+  const [locale, setLocale] = useState(enUS);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
   const localeMap = {
     en: enUS,
     fr: fr,
@@ -14,15 +15,10 @@ const DateNavigation = ({ setSelectedDate, selectedDate }) => {
     it: it,
   };
 
-    useEffect(() => {
-    const local = document.querySelector("html").lang;
-    setLocale(local);
-  }, [locale]);
-
-
-
-
-  const [currentDate, setCurrentDate] = useState(new Date());
+  useEffect(() => {
+    const local = document.querySelector("html").lang || 'en';
+    setLocale(localeMap[local] || enUS);
+  }, []);
 
   const startDate = startOfWeek(currentDate, { weekStartsOn: 1 });
 
@@ -35,7 +31,7 @@ const DateNavigation = ({ setSelectedDate, selectedDate }) => {
   };
 
   const handleDateClick = (date) => {
-    setSelectedDate(format(date, "dd MMMM yyyy",{ locale: localeMap[locale] }));
+    setSelectedDate(date);
   };
 
   const getDayClass = (date) => {
@@ -51,16 +47,13 @@ const DateNavigation = ({ setSelectedDate, selectedDate }) => {
     }
   };
 
-  
   return (
-    <div className="">
+    <div suppressHydrationWarning>
       <div className="flex justify-start items-center my-4">
-        <div className="text-xl font-bold mx-4">
-          <p>
-            {format(startDate, "dd")} -{" "}
-            {format(addDays(startDate, 6), "dd MMMM, yyyy",{ locale: localeMap[locale] })}
-          </p>
-        </div>
+        <p className="text-xl font-bold mx-4">
+          {format(startDate, "dd", { locale })} -{" "}
+          {format(addDays(startDate, 6), "dd MMMM, yyyy", { locale })}
+        </p>
         <button onClick={handlePrevWeek} className="mr-4">
           <FaAngleLeft size={24} className="text-[#7CB839]" />
         </button>
@@ -72,25 +65,25 @@ const DateNavigation = ({ setSelectedDate, selectedDate }) => {
         {[...Array(7)].map((_, index) => {
           const date = addDays(startDate, index);
           const isSelected = isSameDay(date, new Date(selectedDate));
-          const isToday = isSameDay(date, new Date(),{ locale: localeMap[locale] });
-          
+          const isToday = isSameDay(date, new Date());
+
           return (
-            <div
+            <button
               key={index}
               onClick={() => handleDateClick(date)}
               className={`cursor-pointer p-2 w-full text-center ${getDayClass(
                 date
               )}`}
             >
-              <p className="mb-1">{format(date, "EEE",{ locale: localeMap[locale] })}</p>
-              <p>{format(date, "d")}</p>
+              <p className="mb-1">{format(date, "EEE", { locale })}</p>
+              <p>{format(date, "d", { locale })}</p>
               {isSelected && (
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-[#7CB839]"></div>
               )}
               {isToday && (
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-green"></div>
+                <div title="Today" className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-green"></div>
               )}
-            </div>
+            </button>
           );
         })}
       </div>

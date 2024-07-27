@@ -8,6 +8,7 @@ import MedicalSection from "./components/MedicalSection";
 import Counter from "./home/Counter";
 import AppointmentRequest from "./home/AppointementRequest";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
   const [appointments, setAppointments] = useState([]);
@@ -24,8 +25,8 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [requestsData, setRequestsData] = useState([]);
   const { user, token } = getUserSession();
-  const doctorId = user.user_details._id;
-
+  const doctorId = user?.user_details?._id;
+  const router = useRouter()
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -66,8 +67,10 @@ const Home = () => {
   }, [doctorId, token, selectedDate]);
   const t = useTranslations("DoctorDashboard");
 
+if(user){
+
   return (
-    <div className="overflow-hidden">
+    <section className="overflow-hidden">
       <title>Home | A Doctor's Appointment</title>
       <MedicalSection placeholder={t("Search Patient")} />
       <div className="p-4 py-12 space-y-8 container mx-auto">
@@ -92,8 +95,12 @@ const Home = () => {
         </div>
         <RecentPatients patients={patients} loading={loading} />
       </div>
-    </div>
+    </section>
   );
+}else{
+  router.push(`/it/auth/sigin`)
+  return null;
+}
 };
 
 export default Home;

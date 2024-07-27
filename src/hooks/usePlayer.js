@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { cloneDeep } from 'lodash'
 import { useRouter } from 'next/navigation'
-import { useSocket } from '@/app/context/SocketContext'
+import { useSocket } from '@/app/context/Context'
 
 const usePlayer = (myId, roomId, peer) => {
     const socket = useSocket()
@@ -37,7 +37,7 @@ const usePlayer = (myId, roomId, peer) => {
             const copy = cloneDeep(prev)
             copy[myId].playing = !copy[myId].playing
             return {...copy}
-        })
+        });
         socket.emit('user-toggle-video', myId, roomId)
     }
 

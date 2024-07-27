@@ -85,20 +85,33 @@ const AppointmentTabs = ({
       </div>
       <div className="mt-4">
         <h2 className="text-lg font-semibold">{t('Select Hour')}</h2>
-        <div className="flex flex-wrap gap-4 mt-2 transition-all">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
           {hours.length > 0 ? (
             hours.map((hour, index) => (
-              <button
-                key={index}
-                className={`px-4 py-2 rounded-lg ${
-                  selectedHour === index
-                    ? "border-2 border-dark-blue bg-dark-blue/20 text-black"
-                    : "bg-white"
-                }`}
-                onClick={() => setSelectedHour(index)}
-              >
-                {hour}
-              </button>
+              
+            <div
+            className={`flex flex-col border rounded-2xl overflow-hidden cursor-pointer ${
+              selectedHour === index
+                ? "border-dark-blue text-dark-blue"
+                : "border-light-gray text-black"
+            }`}
+             onClick={() => setSelectedHour(index)}
+          >
+            <div
+              className={`p-4 text-center flex items-center justify-center ${
+                selectedHour === index
+                  ? "bg-dark-blue text-white"
+                  : "bg-light-gray text-black"
+              }`}
+            ></div>
+            <div
+              className={`p-2 text-center ${
+                selectedHour === index ? "bg-dark-blue/30" : "bg-white"
+              }`}
+            >
+              {hour}
+            </div>
+          </div>
             ))
           ) : (
             <p className="text-">{t('No slots available')}</p>
@@ -110,3 +123,5 @@ const AppointmentTabs = ({
 };
 
 export default AppointmentTabs;
+
+

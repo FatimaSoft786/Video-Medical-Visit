@@ -6,17 +6,16 @@ import { useState, useCallback, useEffect } from "react";
 import { useTranslations } from "next-intl"; // Import useTranslations hook
 import { useSocket } from "@/app/context/Context";
 import { getUserSession } from "@/utils/session";
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
+import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 
 const AppointmentCard = ({ appointment, isHeld, onCancel }) => {
-  const router = useRouter();
-  const socket = useSocket();
   const path = getPath();
   const [isCancelling, setIsCancelling] = useState(false);
   const t = useTranslations("DoctorAppointments"); // Fetch translations
 
-    const [email, setEmail] = useState("");
-  const [room, setRoom] = useState("Room1");
+   const {user} = getUserSession();
 
   const handleCancel = async () => {
     setIsCancelling(true);
@@ -29,41 +28,44 @@ const AppointmentCard = ({ appointment, isHeld, onCancel }) => {
     }
   };
 
-   const [profileData, setProfileData] = useState({});
+
+  const [roomId, setRoomId] = useState('')
+   const router = useRouter();
   useEffect(() => {
     const { user } = getUserSession();
     if (user) {
-      setProfileData(user.user_details);
-      setEmail(profileData.email);
+      addMeeting(user.user_details._id)
     } else {
       console.error("No user details found in session");
+     
     }
   }, []);
 
-  
-  const handleSubmitForm = useCallback(
-    () => {
-      
-      socket.emit("room:join", { email, room });
-    },
-    [email, room, socket]
-  );
+  const addMeeting = (doctorId)=>{
+      const roomId = appointment._id;
+      setRoomId(roomId);
+      console.log("before api call =>",roomId)
+    const data = {
+      doctorId: doctorId,
+      roomId: roomId
+    }
+    axios
+        .post(
+          "https://video-medical-backend-production.up.railway.app/api/user/addRoomId",
+          data
+        )
+        .then((response) => {
+          if (response.data.success === true) {
+          } else {
+            console.log(response.data.message);
+          }
+        })
+        .catch((error) => {
+            console.log(error.message);
+        });
+  }
 
-   const handleJoinRoom = useCallback(
-    (data) => {
-      const { room } = data;
-      router.push(`/${path}/doctor/sessions`)
-      //navigate(`/room/${room}`);
-    },
-    [router]
-  );
 
-   useEffect(() => {
-    socket.on("room:join", handleJoinRoom);
-    return () => {
-      socket.off("room:join", handleJoinRoom);
-    };
-  }, [socket, handleJoinRoom]);
 
   return (
     <div className="border rounded-lg p-3 shadow-md text-sm">
@@ -144,13 +146,19 @@ const AppointmentCard = ({ appointment, isHeld, onCancel }) => {
           >
             {isCancelling ? "Cancelling..." : t("Cancel")}
           </button>
-          <div onClick={handleSubmitForm}
-            // href={`/${path}/doctor/sessions`}
-            className="bg-light-gray flex items-center gap-3 text-black py-2 px-4 rounded cursor-pointer"
-          >
+          {
+            roomId && (
+ <Link href={{ pathname: `/${path}/session`, query: { room: roomId }}}
+            className="bg-light-gray flex items-center gap-3 text-black py-2 px-4 rounded cursor-pointer">
             <img src="/svg/videocall.svg" className="invert" />{" "}
             {t("Start a video call")}
-          </div>
+          </Link>
+            )
+          }
+       
+
+             
+            
         </div>
       )}
     </div>
