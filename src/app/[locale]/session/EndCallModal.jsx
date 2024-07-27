@@ -1,10 +1,9 @@
 "use client";
 import { getUserSession } from '@/utils/session';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import getPath from '@/utils/path';
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from 'next/navigation';
 
 const EndCallModal = ({ isOpen, onClose }) => {
   const [appointment, setAppointment] = useState("");
@@ -14,6 +13,12 @@ const EndCallModal = ({ isOpen, onClose }) => {
 
   const role = user?.user_details;
   const router = useRouter();
+
+  useEffect(() => {
+    if (appointment) {
+      handleStatusChange(appointment);
+    }
+  }, [appointment]);
 
   const handleStatusChange = async (status) => {
     try {
@@ -25,16 +30,15 @@ const EndCallModal = ({ isOpen, onClose }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({appointmentId }),
+          body: JSON.stringify({ appointmentId, status }),
         }
       );
 
-      if (response.success === true) {
-        
-              const path = getPath();
-              router.push(`/${path}/${role}`);
+      if (!response.ok) {
         throw new Error("Failed to change appointment status");
       }
+
+      router.push(`/it/${role}`);
     } catch (error) {
       console.error("Error changing appointment status:", error);
     }
@@ -73,7 +77,7 @@ const EndCallModal = ({ isOpen, onClose }) => {
         <div className="flex justify-end gap-2">
           <button
             className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg"
-            onClick={() => handleStatusChange(appointment)}
+            onClick={() => setAppointment("complete")}
           >
             Leave
           </button>
