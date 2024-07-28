@@ -1,5 +1,6 @@
-// useRecorder.js
 import { useState, useRef } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const useRecorder = (stream) => {
   const [recording, setRecording] = useState(false);
@@ -18,11 +19,11 @@ const useRecorder = (stream) => {
         }
       };
 
-      recorder.onstop = () => {
-        const blob = new Blob(chunks.current, { type: 'video/webm' });
+      recorder.onstop = async () => {
+        const blob = new Blob(chunks.current, { type: 'video/mp4' });
         chunks.current = [];
-        const url = URL.createObjectURL(blob);
-        downloadRecording(url);
+        const file = blobToFile(blob, "recording.mp4");
+        await uploadRecording(file);
         setStatus("stopped");
       };
 
@@ -40,14 +41,31 @@ const useRecorder = (stream) => {
     }
   };
 
-  const downloadRecording = (url) => {
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-    a.style = 'display: block';
-    a.href = url;
-    a.download = 'recording.mp4';
-    a.click();
-    window.URL.revokeObjectURL(url);
+  const blobToFile = (blob, fileName) => {
+    const file = new File([blob], fileName, { type: blob.type });
+    return file;
+  };
+
+  const uploadRecording = async (file) => {
+    const formData = new FormData();
+    formData.append('recording', file);
+
+    try {
+      const response = await axios.post(
+        "https://video-medical-backend-production.up.railway.app/api/recordings/uploadRecording",
+        formData,
+        {
+          headers: { "content-type": "multipart/form-data" }
+        }
+      );
+      if (response.data.success === true) {
+        toast.success(`Uplaod Stream video`);
+      } else {
+        toast.error(`Error Uploading Video`);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return { recording, startRecording, stopRecording, status };
