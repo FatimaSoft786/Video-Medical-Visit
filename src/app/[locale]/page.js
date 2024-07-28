@@ -10,10 +10,11 @@ export default function Index() {
   const {user} =getUserSession();
   const path = getPath()
   useEffect(() => {
+    const role = user?.user_details.role.toLowerCase();
     if(!user){
       router.push(`/it/auth/signin`);
     }else{
-      router.push(`/${path}/dashboard`)
+      router.push(`/${path}/${role}`)
     }
   }, []);
   return <></>;

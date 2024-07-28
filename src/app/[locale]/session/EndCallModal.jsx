@@ -1,26 +1,19 @@
 "use client";
-import { getUserSession } from '@/utils/session';
+import { useEffect, useState, useCallback } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
+import { getUserSession } from '@/utils/session';
 
 const EndCallModal = ({ isOpen, onClose }) => {
-  const [appointment, setAppointment] = useState("");
+  const [appointment, setAppointment] = useState("completed");
   const { user, token } = getUserSession();
   const searchParams = useSearchParams();
   const appointmentId = searchParams.get("room");
-
-  const role = user?.user_details;
   const router = useRouter();
 
-  useEffect(() => {
-    if (appointment) {
-      handleStatusChange(appointment);
-    }
-  }, [appointment]);
+  const changeAppointmentStatus = useCallback(async (appointmentStatus) => {
+    const role = user?.user_details.role.toLowerCase();
 
-  const handleStatusChange = async (status) => {
     try {
       const response = await fetch(
         "https://video-medical-backend-production.up.railway.app/api/appointment/changeAppointmentStatus",
@@ -30,7 +23,7 @@ const EndCallModal = ({ isOpen, onClose }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ appointmentId, status }),
+          body: JSON.stringify({ appointmentId, appointment_status: appointmentStatus }),
         }
       );
 
@@ -42,7 +35,7 @@ const EndCallModal = ({ isOpen, onClose }) => {
     } catch (error) {
       console.error("Error changing appointment status:", error);
     }
-  };
+  }, [appointmentId, token, user, router]);
 
   if (!isOpen) return null;
 
@@ -54,32 +47,28 @@ const EndCallModal = ({ isOpen, onClose }) => {
         exit={{ opacity: 0, y: 50 }}
         className="bg-white rounded-lg shadow-lg p-6 w-1/3 max-md:w-[90%]"
       >
-        <h2 className="text-lg font-bold mb-4">Appointment Options</h2>
-        <p className="mb-4">Please select an option below:</p>
-        <div className="flex justify-between gap-2">
+        <h2 className="text-lg font-bold mb-4">Please Confirm</h2>
+        {/* <p className="mb-4">Please select an option below:</p> */}
+        {/* <div className="flex justify-center items-center gap-2">
           <button
-            className={`border px-2.5 py-0.5 rounded-lg ${
-              appointment === "complete" && "bg-gray-200/70"
-            }`}
-            onClick={() => setAppointment("complete")}
+            className={`border px-2.5 py-0.5 rounded-lg ${appointment === "completed" && "bg-gray-200/70"}`}
+            onClick={() => setAppointment("completed")}
           >
             Appointment Complete
           </button>
           <button
-            className={`border px-2.5 py-0.5 rounded-lg ${
-              appointment === "waiting" && "bg-gray-200/70"
-            }`}
+            className={`border px-2.5 py-0.5 rounded-lg ${appointment === "waiting" && "bg-gray-200/70"}`}
             onClick={() => setAppointment("waiting")}
           >
             Waiting Appointment
           </button>
-        </div>
+        </div> */}
         <div className="flex justify-end gap-2">
           <button
             className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg"
-            onClick={() => setAppointment("complete")}
+            onClick={() => changeAppointmentStatus(appointment)}
           >
-            Leave
+            Leave Meeting
           </button>
           <button
             className="mt-4 bg-black/80 text-white px-4 py-2 rounded-lg"

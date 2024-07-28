@@ -1,42 +1,31 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { io } from "socket.io-client";
-import { FaPhone, FaUsers } from "react-icons/fa";
-import { BiVolumeMute, BiVideoOff } from "react-icons/bi";
+import { useSocket } from "@/app/context/Context";
+import Player from "@/app/Player";
 import useMediaStream from "@/hooks/useMediaStream";
 import usePeer from "@/hooks/usePeer";
 import usePlayer from "@/hooks/usePlayer";
-import { useSocket } from "@/app/context/Context";
-import { cloneDeep } from "lodash";
-import Player from "@/app/Player";
+import useRecorder from "@/hooks/useRecorder";
+import { useEffect, useState } from "react";
+import { BiVideoOff, BiVolumeMute, BiMicrophone, BiMicrophoneOff, BiVideo, BiStopCircle } from "react-icons/bi";
+import { FaPhone, FaUsers } from "react-icons/fa";
 import EndCallModal from "./EndCallModal";
+import { BsRecordCircle } from "react-icons/bs";
 
-
-// Initialize Socket.IO client
-//const socket = io("https://video-medical-backend-production.up.railway.app/");
-
-export default function VideoSection({ onChatToggle, onParticipantsToggle,roomId }) {
+export default function VideoSection({ onChatToggle, onParticipantsToggle, roomId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   const socket = useSocket();
- 
- useEffect(()=>{
-  localStorage.setItem('roomId',roomId);
- },[])
+
+  useEffect(() => {
+    localStorage.setItem('roomId', roomId);
+  }, [roomId]);
 
   const { peer, myId } = usePeer();
   const { stream } = useMediaStream();
 
-  const [users, setUsers] = useState([])
-
-   const {
+  const [users, setUsers] = useState([]);
+  const {
     players,
     setPlayers,
     playerHighlighted,
@@ -46,16 +35,13 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle,roomId
     leaveRoom
   } = usePlayer(myId, roomId, peer);
 
+  const { recording, startRecording, stopRecording, status } = useRecorder(stream);
 
   useEffect(() => {
     if (!socket || !peer || !stream) return;
     const handleUserConnected = (newUser) => {
-      console.log(`user connected in room with userId ${newUser}`);
-
       const call = peer.call(newUser, stream);
-
       call.on("stream", (incomingStream) => {
-        console.log(`incoming stream from ${newUser}`);
         setPlayers((prev) => ({
           ...prev,
           [newUser]: {
@@ -64,48 +50,41 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle,roomId
             playing: true,
           },
         }));
-
         setUsers((prev) => ({
           ...prev,
           [newUser]: call
-        }))
+        }));
       });
     };
     socket.on("user-connected", handleUserConnected);
-
-    return () => {
-      socket.off("user-connected", handleUserConnected);
-    };
+    return () => socket.off("user-connected", handleUserConnected);
   }, [peer, setPlayers, socket, stream]);
 
   useEffect(() => {
     if (!socket) return;
     const handleToggleAudio = (userId) => {
-      console.log(`user with id ${userId} toggled audio`);
       setPlayers((prev) => {
-        const copy = cloneDeep(prev);
+        const copy = { ...prev };
         copy[userId].muted = !copy[userId].muted;
-        return { ...copy };
+        return copy;
       });
     };
 
     const handleToggleVideo = (userId) => {
-      console.log(`user with id ${userId} toggled video`);
       setPlayers((prev) => {
-        const copy = cloneDeep(prev);
+        const copy = { ...prev };
         copy[userId].playing = !copy[userId].playing;
-        
-        return { ...copy };
+        return copy;
       });
     };
 
     const handleUserLeave = (userId) => {
-      console.log(`user ${userId} is leaving the room`);
-      users[userId]?.close()
-      const playersCopy = cloneDeep(players);
+      users[userId]?.close();
+      const playersCopy = { ...players };
       delete playersCopy[userId];
       setPlayers(playersCopy);
-    }
+    };
+
     socket.on("user-toggle-audio", handleToggleAudio);
     socket.on("user-toggle-video", handleToggleVideo);
     socket.on("user-leave", handleUserLeave);
@@ -121,9 +100,7 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle,roomId
     peer.on("call", (call) => {
       const { peer: callerId } = call;
       call.answer(stream);
-
       call.on("stream", (incomingStream) => {
-        console.log(`incoming stream from ${callerId}`);
         setPlayers((prev) => ({
           ...prev,
           [callerId]: {
@@ -132,18 +109,16 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle,roomId
             playing: true,
           },
         }));
-
         setUsers((prev) => ({
           ...prev,
           [callerId]: call
-        }))
+        }));
       });
     });
   }, [peer, setPlayers, stream]);
 
   useEffect(() => {
     if (!stream || !myId) return;
-    console.log(`setting my stream ${myId}`);
     setPlayers((prev) => ({
       ...prev,
       [myId]: {
@@ -153,66 +128,82 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle,roomId
       },
     }));
   }, [myId, setPlayers, stream]);
-  
+
   return (
     <div className="relative w-full h-full flex flex-col overflow-hidden">
       <div className="relative w-full h-full bg-black backdrop-blur-2xl">
-      
-       <>
-       {playerHighlighted && (
-        <div className=" flex h-full w-full bg-black object-contain">
-         <Player 
-            url={playerHighlighted.url}
-            muted={playerHighlighted.muted}
-            playing={playerHighlighted.playing}
-            isActive
-          />
-        </div>
-        )}
-       </>
-
-  {
-    nonHighlightedPlayers && (
- <div className=" bottom-20 absolute z-10 w-1/4 h-1/4 rounded-xl">
-         {Object.keys(nonHighlightedPlayers).map((playerId) => {
-          const { url, muted, playing } = nonHighlightedPlayers[playerId];
-          return (
+        {playerHighlighted && (
+          <div className="flex h-full w-full bg-black object-contain">
             <Player
-              key={playerId}
-              url={url}
-              muted={muted}
-              playing={playing}
-              isActive={false}
+              url={playerHighlighted.url}
+              muted={playerHighlighted.muted}
+              playing={playerHighlighted.playing}
+              isActive
             />
-          );
-        })}
-       </div>
-    )
-  }
-      
-      
+          </div>
+        )}
+        {nonHighlightedPlayers && (
+          <div className="bottom-20 absolute z-10 w-1/4 h-1/4 rounded-xl">
+            {Object.keys(nonHighlightedPlayers).map((playerId) => {
+              const { url, muted, playing } = nonHighlightedPlayers[playerId];
+              return (
+                <Player
+                  key={playerId}
+                  url={url}
+                  muted={muted}
+                  playing={playing}
+                  isActive={false}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
       <div className="absolute bottom-0 backdrop-blur-2xl left-0 w-full p-4 flex justify-center space-x-4 bg-white">
         <button
           className="relative rounded-full"
-          onClick={toggleAudio}>
-          {playerHighlighted?.muted ? <BiVolumeMute className="size-10 p-2 rounded-full active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none bg-red-600 text-white" /> : <img className="size-10 p-2 rounded-full bg-blue-600 active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none" src='/doctor/frame/mic.svg' /> }
+          onClick={toggleAudio}
+        >
+          {playerHighlighted?.muted ? (
+            <BiVolumeMute className="size-10 p-2 rounded-full text-white active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none bg-red-600" />
+          ) : (
+            <BiMicrophone className="size-10 p-2 text-blue-500 rounded-full bg-blue-600/20 active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none " />
+          )}
         </button>
         <button
           className="relative rounded-full size-10"
           onClick={toggleVideo}
         >
-          {playerHighlighted?.playing ? <img className="size-10 p-2 rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none bg-blue-600" src='/doctor/frame/videoicon.svg' /> : <BiVideoOff className="size-10 p-2 rounded-full text-white active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none bg-red-600" />}
+          {playerHighlighted?.playing ? (
+            <BiVideo className="size-10 p-2 rounded-full text-blue-500 bg-blue-600/20 active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none" />
+          ) : (
+            <BiVideoOff className="size-10 p-2 rounded-full text-white active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none bg-red-600" />
+          )}
         </button>
-        <CallButton icon="/doctor/frame/record.svg" bgColor="bg-red-500/20" />
-        <CallButton icon="/doctor/frame/message.svg" onClick={() => onChatToggle()} />
+        <CallButton
+          icon={recording ? BiStopCircle : BsRecordCircle}
+          onClick={recording ? stopRecording : startRecording}
+          bgColor={recording ? "bg-red-500/20 " : "bg-blue-600/20 "}
+          className={recording ? "animate-ping text-red-500" : "text-blue-500"}
+        />
+        
         <button
-          className="relative rounded-full active:ring-4 bg-blue-500/20 ring-blue-500/30 focus-within:ring-4 outline-none"
-          onClick={() => onParticipantsToggle()}
+          className="relative rounded-full size-10 bg-blue-600/20 active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none "
+        onClick={onChatToggle}
         >
-          <FaUsers className="size-10 p-2 text-blue-600"/>
-        </button>  
-        <button onClick={openModal} className="top-4 right-4 px-6 py-3 rounded-full bg-red-500 text-white active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none">
+          <img src="/doctor/frame/message.svg" alt="chat icon" className="size-10 p-2" />
+        </button>
+      
+        <button
+          className="relative rounded-full active:ring-4 text-white bg-blue-600/20 ring-blue-500/30 focus-within:ring-4 outline-none"
+          onClick={onParticipantsToggle}
+        >
+          <FaUsers className="size-10 p-2 " />
+          </button>
+        <button
+          onClick={openModal}
+          className="top-4 right-4 px-6 py-3 rounded-full text-white bg-red-500 active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none"
+        >
           <FaPhone className="size-4" />
         </button>
       </div>
@@ -221,13 +212,13 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle,roomId
   );
 }
 
-export function CallButton({ icon, bgColor = "bg-blue-500/20", onClick }) {
+export function CallButton({ icon: Icon, bgColor = "bg-blue-600/20", onClick, className = "" }) {
   return (
     <button
-      className={`relative rounded-full active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none ${bgColor}`}
+      className={`relative rounded-full active:ring-4 ring-blue-600/30 focus-within:ring-4 outline-none ${bgColor} ${className}`}
       onClick={onClick}
     >
-      <img src={icon} className="size-10 p-2 rounded-full" />
+      <Icon className="size-10 p-2 rounded-full " />
     </button>
   );
 }

@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { cloneDeep } from 'lodash'
 import { useRouter } from 'next/navigation'
 import { useSocket } from '@/app/context/Context'
+import { useReactMediaRecorder } from 'react-media-recorder'
 
 const usePlayer = (myId, roomId, peer) => {
     const socket = useSocket()
@@ -41,7 +42,7 @@ const usePlayer = (myId, roomId, peer) => {
         socket.emit('user-toggle-video', myId, roomId)
     }
 
-    return {players, setPlayers, playerHighlighted, nonHighlightedPlayers, toggleAudio, toggleVideo, leaveRoom}
+    return {players, setPlayers, playerHighlighted, nonHighlightedPlayers,toggleAudio, toggleVideo, leaveRoom}
 }
 
 export default usePlayer;
