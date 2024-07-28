@@ -195,7 +195,7 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
         </button>
       
         <button
-          className="relative rounded-full active:ring-4 text-white bg-blue-600/20 ring-blue-500/30 focus-within:ring-4 outline-none"
+          className="relative rounded-full active:ring-4 text-blue-500 bg-blue-600/20 ring-blue-500/30 focus-within:ring-4 outline-none"
           onClick={onParticipantsToggle}
         >
           <FaUsers className="size-10 p-2 " />
