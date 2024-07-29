@@ -16,13 +16,14 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const [modalTxt,setModalTxt] =useState("Please Allow Camera or Microhone From Browser");
   const socket = useSocket();
-  const ModalText = "Please Allow Camera or Microhone From Browser"
   useEffect(() => {
     localStorage.setItem('roomId', roomId);
   }, [roomId]);
-
+  
   const { peer, myId } = usePeer();
+  const ModalText = "Please Allow Camera or Microhone From Browser";
   const { stream } = useMediaStream(openModal,ModalText);
 
   const [users, setUsers] = useState([]);
@@ -202,14 +203,14 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
           <FaUsers className="size-10 p-2 " />
           </button>
         <button
-          onClick={openModal}
+          onClick={() => {openModal(); setModalTxt("Are You Sure?")}}
           className="top-4 right-4 px-6 py-3 rounded-full text-white bg-red-500 active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none"
         >
           <FaPhone />
         </button>
       </div>
       <Toaster />
-      <EndCallModal ModalText={ModalText} isOpen={isModalOpen} onClose={closeModal} />
+      <EndCallModal ModalText={modalTxt} isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }

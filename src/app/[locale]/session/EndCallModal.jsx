@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { getUserSession } from '@/utils/session';
 
-const EndCallModal = ({ isOpen, onClose,ModalText }) => {
+const EndCallModal = ({ isOpen, onClose, ModalText }) => {
   const [appointment, setAppointment] = useState("completed");
   const { user, token } = getUserSession();
   const searchParams = useSearchParams();
@@ -47,22 +47,27 @@ const EndCallModal = ({ isOpen, onClose,ModalText }) => {
         exit={{ opacity: 0, y: 50 }}
         className="bg-white rounded-lg shadow-lg p-6 w-1/3 max-md:w-[90%]"
       >
-        {ModalText && <p>{ModalText}</p>}
-        {/* <p className="mb-4">Please select an option below:</p> */}
-        {/* <div className="flex justify-center items-center gap-2">
-          <button
-            className={`border px-2.5 py-0.5 rounded-lg ${appointment === "completed" && "bg-gray-200/70"}`}
-            onClick={() => setAppointment("completed")}
-          >
-            Appointment Complete
-          </button>
-          <button
-            className={`border px-2.5 py-0.5 rounded-lg ${appointment === "waiting" && "bg-gray-200/70"}`}
-            onClick={() => setAppointment("waiting")}
-          >
-            Waiting Appointment
-          </button>
-        </div> */}
+        {ModalText ? (
+          <p>{ModalText}</p>
+        ) : (
+          <>
+            <p className="mb-4">Please select an option </p>
+            {/* <div className="flex justify-center items-center gap-2">
+              <button
+                className={`border px-2.5 py-0.5 rounded-lg ${appointment === "completed" && "bg-gray-200/70"}`}
+                onClick={() => setAppointment("completed")}
+              >
+                Appointment Complete
+              </button>
+              <button
+                className={`border px-2.5 py-0.5 rounded-lg ${appointment === "waiting" && "bg-gray-200/70"}`}
+                onClick={() => setAppointment("waiting")}
+              >
+                Waiting Appointment
+              </button>
+            </div> */}
+          </>
+        )}
         <div className="flex justify-end gap-2">
           <button
             className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg"
@@ -70,12 +75,14 @@ const EndCallModal = ({ isOpen, onClose,ModalText }) => {
           >
             Leave Meeting
           </button>
-          {!ModalText && <button
-            className="mt-4 bg-black/80 text-white px-4 py-2 rounded-lg"
-            onClick={onClose}
-          >
-            Close
-          </button>}
+          {ModalText && (
+            <button
+              className="mt-4 bg-black/80 text-white px-4 py-2 rounded-lg"
+              onClick={onClose}
+            >
+              Back to Meeting
+            </button>
+          )}
         </div>
       </motion.div>
     </div>

@@ -13,7 +13,7 @@ const usePlayer = (myId, roomId, peer) => {
     const playerHighlighted = playersCopy[myId]
     delete playersCopy[myId]
 
-    const nonHighlightedPlayers = playersCopy
+    const nonHighlightedPlayers = playersCopy[myId]
 
     const leaveRoom = () => {
         socket.emit('user-leave', myId, roomId)

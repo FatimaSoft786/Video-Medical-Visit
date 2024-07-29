@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
 
-const useMediaStream = (openModal,ModalText="Please Allow Audio or Video From Browser") => {
+const useMediaStream = (openModal, ModalText = "Permission denied for audio or video. Please enable them to continue.") => {
   const [state, setState] = useState(null);
   const isStreamSet = useRef(false);
   useEffect(() => {
