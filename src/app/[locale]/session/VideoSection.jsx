@@ -10,19 +10,20 @@ import { BiVideoOff, BiVolumeMute, BiMicrophone, BiMicrophoneOff, BiVideo, BiSto
 import { FaPhone, FaUsers } from "react-icons/fa";
 import EndCallModal from "./EndCallModal";
 import { BsRecordCircle } from "react-icons/bs";
+import { Toaster } from 'react-hot-toast';
 
 export default function VideoSection({ onChatToggle, onParticipantsToggle, roomId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const socket = useSocket();
-
+  const ModalText = "Please Allow Camera or Microhone From Browser"
   useEffect(() => {
     localStorage.setItem('roomId', roomId);
   }, [roomId]);
 
   const { peer, myId } = usePeer();
-  const { stream } = useMediaStream();
+  const { stream } = useMediaStream(openModal,ModalText);
 
   const [users, setUsers] = useState([]);
   const {
@@ -204,21 +205,22 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
           onClick={openModal}
           className="top-4 right-4 px-6 py-3 rounded-full text-white bg-red-500 active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none"
         >
-          <FaPhone className="size-4" />
+          <FaPhone />
         </button>
       </div>
-      <EndCallModal isOpen={isModalOpen} onClose={closeModal} />
+      <Toaster />
+      <EndCallModal ModalText={ModalText} isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }
 
-export function CallButton({ icon: Icon, bgColor = "bg-blue-600/20", onClick, className = "" }) {
+function CallButton({ icon: Icon, onClick, bgColor, className }) {
   return (
     <button
-      className={`relative rounded-full active:ring-4 ring-blue-600/30 focus-within:ring-4 outline-none ${bgColor} ${className}`}
+      className={`relative size-10 rounded-full ${bgColor} active:ring-4 ring-blue-500/30 focus-within:ring-4 outline-none`}
       onClick={onClick}
     >
-      <Icon className="size-10 p-2 rounded-full " />
+      <Icon className={`size-10 p-2 ${className}`} />
     </button>
   );
 }

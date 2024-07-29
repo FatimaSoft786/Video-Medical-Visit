@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { getUserSession } from '@/utils/session';
 
-const EndCallModal = ({ isOpen, onClose }) => {
+const EndCallModal = ({ isOpen, onClose,ModalText }) => {
   const [appointment, setAppointment] = useState("completed");
   const { user, token } = getUserSession();
   const searchParams = useSearchParams();
@@ -47,7 +47,7 @@ const EndCallModal = ({ isOpen, onClose }) => {
         exit={{ opacity: 0, y: 50 }}
         className="bg-white rounded-lg shadow-lg p-6 w-1/3 max-md:w-[90%]"
       >
-        <h2 className="text-lg font-bold mb-4">Please Confirm</h2>
+        {ModalText && <p>{ModalText}</p>}
         {/* <p className="mb-4">Please select an option below:</p> */}
         {/* <div className="flex justify-center items-center gap-2">
           <button
@@ -70,12 +70,12 @@ const EndCallModal = ({ isOpen, onClose }) => {
           >
             Leave Meeting
           </button>
-          <button
+          {!ModalText && <button
             className="mt-4 bg-black/80 text-white px-4 py-2 rounded-lg"
             onClick={onClose}
           >
             Close
-          </button>
+          </button>}
         </div>
       </motion.div>
     </div>
