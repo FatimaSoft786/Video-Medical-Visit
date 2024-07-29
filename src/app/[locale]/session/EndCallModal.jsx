@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { getUserSession } from '@/utils/session';
 
-const EndCallModal = ({ isOpen, onClose, ModalText }) => {
+const EndCallModal = ({ isOpen, onClose, ModalText ,stopRecording}) => {
   const [appointment, setAppointment] = useState("completed");
   const { user, token } = getUserSession();
   const searchParams = useSearchParams();
@@ -13,7 +13,7 @@ const EndCallModal = ({ isOpen, onClose, ModalText }) => {
 
   const changeAppointmentStatus = useCallback(async (appointmentStatus) => {
     const role = user?.user_details.role.toLowerCase();
-
+    stopRecording()
     try {
       const response = await fetch(
         "https://video-medical-backend-production.up.railway.app/api/appointment/changeAppointmentStatus",

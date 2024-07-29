@@ -98,6 +98,9 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
   }, [players, setPlayers, socket, users]);
 
   useEffect(() => {
+    if(peer){
+      startRecording();
+    }
     if (!peer || !stream) return;
     peer.on("call", (call) => {
       const { peer: callerId } = call;
@@ -144,7 +147,7 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
             />
           </div>
         )}
-        {nonHighlightedPlayers && (
+        {/* {nonHighlightedPlayers && (
           <div className="bottom-20 absolute z-10 w-1/4 h-1/4 rounded-xl">
             {Object.keys(nonHighlightedPlayers).map((playerId) => {
               const { url, muted, playing } = nonHighlightedPlayers[playerId];
@@ -159,7 +162,7 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
               );
             })}
           </div>
-        )}
+        )} */}
       </div>
       <div className="absolute bottom-0 backdrop-blur-2xl left-0 w-full p-4 flex justify-center space-x-4 bg-white">
         <button
@@ -184,7 +187,7 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
         </button>
         <CallButton
           icon={recording ? BiStopCircle : BsRecordCircle}
-          onClick={recording ? stopRecording : startRecording}
+          onClick={recording}
           bgColor={recording ? "bg-red-500/20 " : "bg-blue-600/20 "}
           className={recording ? "animate-ping text-red-500" : "text-blue-500"}
         />
@@ -203,14 +206,14 @@ export default function VideoSection({ onChatToggle, onParticipantsToggle, roomI
           <FaUsers className="size-10 p-2 " />
           </button>
         <button
-          onClick={() => {openModal(); setModalTxt("Are You Sure?")}}
+          onClick={() => {openModal(); setModalTxt("Are You Sure ?")}}
           className="top-4 right-4 px-6 py-3 rounded-full text-white bg-red-500 active:ring-4 ring-red-500/30 focus-within:ring-4 outline-none"
         >
           <FaPhone />
         </button>
       </div>
       <Toaster />
-      <EndCallModal ModalText={modalTxt} isOpen={isModalOpen} onClose={closeModal} />
+      <EndCallModal ModalText={modalTxt} stopRecording={stopRecording} isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 }
