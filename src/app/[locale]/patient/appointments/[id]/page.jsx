@@ -120,7 +120,7 @@ const Page = ({ params }) => {
 
     try {
       const res = await fetch(
-        "https://video-medical-backend-production.up.railway.app/api/appointment/BookAppointment",
+        "https://video-medico-backend-production.up.railway.app/api/appointment/BookAppointment",
         {
           method: "POST",
           headers: {
